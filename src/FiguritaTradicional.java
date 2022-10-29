@@ -10,6 +10,18 @@ public class FiguritaTradicional extends Figurita {
 		super(numeroIdentificador, nombrejugador);
 		// TODO Auto-generated constructor stub
 	}
+	@Override
+	public String mostrarNombreJugador() {
+		// TODO Auto-generated method stub
+		return super.mostrarNombreJugador();
+	}
+	@Override
+	public String mostrarPais() {
+		// TODO Auto-generated method stub
+		return super.mostrarPais();
+	}
+	
+	
 	List<Figurita> generarSobre(int cantidadFiguritas){
 		cantidadFiguritas=4;
 		this.sobre = new LinkedList<Figurita>();
@@ -26,6 +38,11 @@ public class FiguritaTradicional extends Figurita {
 			}
 		}
 		return figurita;
+	}
+	@Override
+	public Integer codigo() {
+		// TODO Auto-generated method stub
+		return super.codigo();
 	}
 	
 

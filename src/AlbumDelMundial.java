@@ -10,12 +10,13 @@ public class AlbumDelMundial  {
 	private Album album;
 	private Figurita figurita;
 	private FiguritaTradicional figuritaTradicional;
-	private Map <Integer, Album> participantes;
+
+	private Map <Integer, Participante> participantes;
 	private List <Figurita> figuritas;
 	
 	public AlbumDelMundial() {
 		fabrica = new Fabrica();
-		participantes=new HashMap<Integer,Album>();
+		participantes=new HashMap<>();
 		
 	}
 	
@@ -36,7 +37,7 @@ public class AlbumDelMundial  {
 				album =fabrica.crearAlbumExtendido();
 			}
 			participante=new Participante(dni,nombre,album);
-			participantes.put(participante.dni,participante.album);
+			participantes.put(dni,participante);
 		}
 		
 		return album.codigo();
@@ -48,7 +49,14 @@ public class AlbumDelMundial  {
 
 	public void comprarFiguritas(int dni) {
 		if(estaRegistrado(dni)) {
-			participante.figuritas.put(dni,fabrica.generarSobre(4));
+			List<Figurita> sobre = new LinkedList<>();
+			for (Map.Entry<Integer, Participante> p : participantes.entrySet()) {
+			    if(p.getKey()== dni)
+			    	sobre=fabrica.generarSobre(4);
+			    for(int i =0; i < sobre.size(); i++) {
+			    	p.getValue().figuritas.put(dni, sobre.get(i));
+			    }
+			}
 		}else {
 			throw new RuntimeException("Participante No esta registrado");
 		}
@@ -60,9 +68,16 @@ public class AlbumDelMundial  {
 		
 	}
 
-	public String darNombre(int i) {
-		// TODO Auto-generated method stub
-		return null;
+	public String darNombre(int dni) {
+		String nombre="";
+		if(!estaRegistrado(dni)) {
+			throw new RuntimeException("No esta registrado!");
+		}
+		for (Map.Entry<Integer, Participante> p : participantes.entrySet()) {
+		    if(p.getKey()== dni)
+		    	nombre= p.getValue().darNombre();
+		}
+		return "Nombre: "+nombre;
 	}
 
 	public String aplicarSorteoInstantaneo(int i) {

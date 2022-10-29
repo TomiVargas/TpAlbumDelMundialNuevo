@@ -1,6 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
-//comentario
+
 public abstract class Album  {
 	private int codigo;
 	private String tipoAlbum;
@@ -63,4 +63,29 @@ public abstract class Album  {
 		}
 		return resultado.toString();
 	}
+
+	protected String nombre() {
+		return this.tipoAlbum;
+	};
 } 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
