@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -8,11 +9,8 @@ public class AlbumDelMundial  {
 	private Fabrica fabrica;
 	private Participante participante;
 	private Album album;
-	private Figurita figurita;
-	private FiguritaTradicional figuritaTradicional;
 
 	private Map <Integer, Participante> participantes;
-	private List <Figurita> figuritas;
 	
 	public AlbumDelMundial() {
 		fabrica = new Fabrica();
@@ -61,6 +59,36 @@ public class AlbumDelMundial  {
 			throw new RuntimeException("Participante No esta registrado");
 		}
 		
+	}
+	
+	//Nuevo metodo
+	public void comprarFiguritas2(int dni) {
+		if(estaRegistrado(dni)) {
+			List<Figurita> sobre =fabrica.generarSobre(4);
+			for (Map.Entry<Integer, Participante> p : participantes.entrySet()) {
+			    if(p.getKey()== dni)
+			    for(int i =0; i < sobre.size(); i++) {
+			    	p.getValue().agregarFigurita(sobre.get(i));
+			    }
+			}
+		}else {
+			throw new RuntimeException("Participante No esta registrado");
+		}
+		
+	}
+	//Nuevo metodo auxiliar devuelve el participante del sistema
+	private Participante participante(int dni) {
+		if(estaRegistrado(dni))
+		for (Map.Entry<Integer, Participante> p : participantes.entrySet()) {
+		    if(p.getKey()== dni)
+		    	return p.getValue();
+		}
+		throw new RuntimeException("No esta Registrado");
+	}
+	
+	//Nuevo metodo devuelve la coleccion de un participante
+	public List<Figurita> figuritasAsociadas(int dni){
+		return participante(dni).figus;
 	}
 
 	public void comprarFiguritasConCodigoPromocional(int i) {

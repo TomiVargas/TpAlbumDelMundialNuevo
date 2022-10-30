@@ -21,8 +21,14 @@ public class CodigoCliente {
 		// El participante 111111 tiene album Web entonces tiene un codigo 
 		// promocional para solicitar 4 figuritas sin consto.
 		sistema.comprarFiguritasConCodigoPromocional(111111);
-		sistema.comprarFiguritas(222222);
+		sistema.comprarFiguritas2(222222);
 		sistema.comprarFiguritas(333333);
+		
+		//Mostrar las figuritas
+
+		for(Figurita c: sistema.figuritasAsociadas(222222)) {
+		    System.out.println(c.mostrarNombreJugador() + c.mostrarPais());
+		 }
 		
 		
 		// El participante 333333 tiene un album tradicional y por eso puede 

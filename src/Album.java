@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public abstract class Album  {
@@ -8,6 +10,9 @@ public abstract class Album  {
 	private String[] paisesParticipantes;
 	private Map<String, Integer[]> paisParticipante; // Album
 	
+	//Nueva estructura
+	private Map<String, List<Figurita>> album;
+	
 
 	public Album(Integer lugaresPorPais, String[] paisesParticipantes, int codigo) {
 		this.codigo=codigo;
@@ -16,10 +21,15 @@ public abstract class Album  {
 		this.paisParticipante = new HashMap<>(); // crea el album
 		
 		Integer[] cantidadLugares= new Integer[lugaresPorPais];	
-		
-		
 		for(int i = 0; i < paisesParticipantes.length; i++) {			
 			paisParticipante.put(paisesParticipantes[i], cantidadLugares);
+		}
+		
+		//Nueva estructura 
+		album = new HashMap<String, List<Figurita>>();
+		List<Figurita> lugares = new ArrayList<Figurita>(11);
+		for(int pais = 0; pais < paisesParticipantes.length; pais++) {	
+			album.put(paisesParticipantes[pais], lugares);
 		}
 	}
 	

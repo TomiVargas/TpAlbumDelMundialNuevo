@@ -6,8 +6,8 @@ public class FiguritaTradicional extends Figurita {
 	FiguritaTradicional figurita  ;
 	Fabrica fabrica;
 
-	FiguritaTradicional(int numeroIdentificador, String nombrejugador) {
-		super(numeroIdentificador, nombrejugador);
+	FiguritaTradicional(int numeroIdentificador, String nombrejugador, String pais) {
+		super(numeroIdentificador, nombrejugador, pais);
 		// TODO Auto-generated constructor stub
 	}
 	@Override
@@ -22,7 +22,8 @@ public class FiguritaTradicional extends Figurita {
 	}
 	
 	
-	List<Figurita> generarSobre(int cantidadFiguritas){
+	
+	/*List<Figurita> generarSobre(int cantidadFiguritas){
 		cantidadFiguritas=4;
 		this.sobre = new LinkedList<Figurita>();
 		for(int cantidad =0 ; cantidad < cantidadFiguritas ; cantidad++) {
@@ -38,7 +39,7 @@ public class FiguritaTradicional extends Figurita {
 			}
 		}
 		return figurita;
-	}
+	}*/
 	@Override
 	public Integer codigo() {
 		// TODO Auto-generated method stub

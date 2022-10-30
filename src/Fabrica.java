@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,10 +54,14 @@ public class Fabrica {
 		return albumTradicional;
 	}
 
+	//Modificacion metodo
 	List<Figurita> generarSobre(int cantFigus) {
-		FiguritaTradicional figus = new FiguritaTradicional(10, "Messi");
-		return figus.generarSobre(cantFigus);
-		
+		List<Figurita> sobre = new ArrayList<Figurita>(cantFigus);
+		FiguritaTradicional figurita = new FiguritaTradicional(10, "Messi", "Argentina");
+		for (int i=0; i<sobre.size(); i++) {
+			sobre.add(figurita);
+		}
+		return sobre;
 	}		
 
 	List<Figurita> generarSobreTop10(int cantFigus) {
