@@ -7,26 +7,21 @@ public class Participante {
 	protected Integer dni;
 	private String nombreUsuario;
 	protected Album album;
-	protected Map<Integer,Figurita> figuritas;
 	
 	//Nueva estructura
 	protected List<Figurita> figus;
+	
 	
 	public Participante(Integer dni,String nombreUsuario,Album album) {
 			this.dni=dni;
 			this.nombreUsuario=nombreUsuario;
 			this.album=album;
-			this.figuritas=new HashMap<>();
 			
 			//Nueva estructura
 			this.figus=new ArrayList<Figurita>();
 		}
 	
-	void agregarFigurita(Figurita figurita) {
-		if(estaAsociadaFigurita(figurita.codigo()))
-			throw new RuntimeException("Figurita ya pegada!");
-		figuritas.put(figurita.codigo(), figurita );
-	}
+	
 	//Nuevo metodo
 	void agregarFigus(Figurita figurita) {
 		if(estaAsociadaFigu(figurita.codigo()))
@@ -34,9 +29,6 @@ public class Participante {
 		figus.add(figurita);
 	}
 	
-	boolean estaAsociadaFigurita(int codigo) {
-		return figuritas.containsKey(codigo);
-	}
 	
 	//Nuevo metodo
 	boolean estaAsociadaFigu(int codigo) {

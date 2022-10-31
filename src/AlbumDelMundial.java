@@ -1,6 +1,4 @@
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -10,14 +8,11 @@ public class AlbumDelMundial  {
 	private Fabrica  fabrica;
 	private Album album;
 	private Participante participante;
-
 	private Map <Integer, Participante> participantes;
 	
 	public AlbumDelMundial() {
-				participantes=new HashMap<>();
-				fabrica=new Fabrica();
-				
-		
+				this.participantes=new HashMap<>();
+				this.fabrica=new Fabrica();
 	}
 	
 	int registrarParticipante(Integer dni, String nombre, String tipoAlbum) {
@@ -35,7 +30,10 @@ public class AlbumDelMundial  {
 			if(tipoAlbum=="Extendido") {
 				album =fabrica.crearAlbumExtendido();
 			}
+			//Crea un nuevo Participante
 			participante=new Participante(dni,nombre,album);
+			
+			//Agrega Participante al Sistema
 			participantes.put(dni,participante);
 		}
 		
@@ -54,7 +52,7 @@ public class AlbumDelMundial  {
 				for (Map.Entry<Integer, Participante> p : participantes.entrySet()) {
 				    if(p.getKey()== dni)
 				    for(int i =0; i < sobre.size(); i++) {
-				    	p.getValue().agregarFigurita(sobre.get(i));
+				    	p.getValue().agregarFigus(sobre.get(i));
 				    }
 				}
 			}else {
@@ -62,7 +60,7 @@ public class AlbumDelMundial  {
 			}
 			
 		}
-	//Nuevo metodo auxiliar devuelve el participante del sistema
+	//Nuevo metodo auxiliar devuelve el el objeto Participante 
 	private Participante participante(int dni) {
 		if(estaRegistrado(dni))
 		for (Map.Entry<Integer, Participante> p : participantes.entrySet()) {
@@ -72,16 +70,15 @@ public class AlbumDelMundial  {
 		throw new RuntimeException("No esta Registrado");
 	}
 	
-	//Nuevo metodo devuelve la coleccion de un participante
+	//Devuelve la coleccion de Figuritas del Participante
 	public List<Figurita> figuritasAsociadas(int dni){
 		return participante(dni).figus;
 	}
 
 	public void comprarFiguritasConCodigoPromocional(int i) {
-		// TODO Auto-generated method stub
-		
 	}
 
+	//Devuelve nombre Participante
 	public String darNombre(int dni) {
 		String nombre="";
 		if(!estaRegistrado(dni)) {
@@ -91,7 +88,7 @@ public class AlbumDelMundial  {
 		    if(p.getKey()== dni)
 		    	nombre= p.getValue().darNombre();
 		}
-		return "Nombre: "+nombre;
+		return "Nombre participante: "+nombre;
 	}
 
 
