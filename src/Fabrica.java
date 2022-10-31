@@ -6,6 +6,7 @@ import java.util.Random;
 
 
 public class Fabrica {
+	
 
 
 	private Random random;
@@ -79,7 +80,7 @@ public class Fabrica {
 		return ranking.get(pais) + numero;
 	}
 
-	private String[] generarPremiosParaSorteoInstantaneo() {
+	public String[] generarPremiosParaSorteoInstantaneo() {
 		return new String[]{
 				"Una pelota","1 Sobre Gratis", "Una camiseta"
 			};

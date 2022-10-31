@@ -1,5 +1,6 @@
 
 public class AlbumTradicional extends Album{
+	
 
 	public AlbumTradicional(Integer lugaresPorPais, String[] paisesParticipantes, int codigo) {
 		super(lugaresPorPais, paisesParticipantes, codigo);
@@ -8,8 +9,7 @@ public class AlbumTradicional extends Album{
 	
 	@Override
 	public String nombre() {
-		// TODO Auto-generated method stub
-		return super.nombre();
+		return "Tradicional";
 	}
 
 }

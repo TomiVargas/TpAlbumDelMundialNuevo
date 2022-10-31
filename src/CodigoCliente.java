@@ -8,8 +8,8 @@ public class CodigoCliente {
 		AlbumDelMundial sistema = new AlbumDelMundial();
 		
 		
-		System.out.println("Codigo Album : "+sistema.registrarParticipante(222222, "Christian", "Tradicional"));
-		System.out.println("Codigo Album : "+sistema.registrarParticipante(333333, "Mariana", "Extendido"));
+		System.out.println("Codigo Album : " + sistema.registrarParticipante(222222, "Christian", "Tradicional"));
+		System.out.println("Codigo Album : " + sistema.registrarParticipante(333333, "Mariana", "Extendido"));
 		System.out.println(sistema.darNombre(333333));
 		//sistema.registrarParticipante(333333, "Mariana", "Extendido");
 		sistema.registrarParticipante(111111, "Jose", "Web");
@@ -22,7 +22,7 @@ public class CodigoCliente {
 		// promocional para solicitar 4 figuritas sin consto.
 		sistema.comprarFiguritasConCodigoPromocional(111111);
 		sistema.comprarFiguritas2(222222);
-		sistema.comprarFiguritas(333333);
+		sistema.comprarFiguritas2(333333);
 		
 		//Mostrar las figuritas
 
@@ -34,6 +34,11 @@ public class CodigoCliente {
 		// El participante 333333 tiene un album tradicional y por eso puede 
 		// participar en un sortepo por un premio instantaneo.
 		System.out.println(
+				sistema.darNombre(222222) + 
+				" recibio por sorteo instantaneo: " + 
+				sistema.aplicarSorteoInstantaneo(222222)
+			);
+		System.out.println(
 				sistema.darNombre(333333) + 
 				" recibio por sorteo instantaneo: " + 
 				sistema.aplicarSorteoInstantaneo(333333)
@@ -43,7 +48,7 @@ public class CodigoCliente {
 		List<String> pegadas = sistema.pegarFiguritas(222222);
 		
 		if(pegadas.isEmpty()) { //o sea... no pego ninguna
-			sistema.comprarFiguritas(222222);
+			sistema.comprarFiguritas2(222222);
 			sistema.intercambiar(
 					222222,
 					sistema.buscarFiguritaRepetida(222222)
@@ -54,15 +59,15 @@ public class CodigoCliente {
 		
 		// Simulamos un uso prolongado del sistema.
 		for (int i =0;i<2000;i++) {
-			sistema.comprarFiguritas(222222);
+			sistema.comprarFiguritas2(222222);
 			sistema.pegarFiguritas(222222);
-			sistema.comprarFiguritas(555555);
+			sistema.comprarFiguritas2(555555);
 			sistema.pegarFiguritas(555555);
 		}
 		for (int i =0;i<500;i++) {
-			sistema.comprarFiguritas(666666);
+			sistema.comprarFiguritas2(666666);
 			sistema.pegarFiguritas(666666);
-			sistema.comprarFiguritas(777777);
+			sistema.comprarFiguritas2(777777);
 			sistema.pegarFiguritas(777777);
 		}
 		

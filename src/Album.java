@@ -73,10 +73,8 @@ public abstract class Album  {
 		}
 		return resultado.toString();
 	}
-
-	protected String nombre() {
-		return this.tipoAlbum;
-	};
+	//Este metodo esta implementado en los 3 album, que devuelve el nombre de cada uno. 
+	protected abstract String nombre();
 } 	
 
 

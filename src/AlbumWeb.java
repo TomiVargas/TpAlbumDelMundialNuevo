@@ -5,5 +5,8 @@ public class AlbumWeb extends Album{
 		super(lugaresPorPais, paisesParticipantes, codigo);
 		// TODO Auto-generated constructor stub
 	}
-
+	@Override
+	public String nombre() {
+		return "Web";
+	}
 }

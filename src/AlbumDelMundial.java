@@ -3,18 +3,20 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class AlbumDelMundial  {
 	
-	private Fabrica fabrica;
-	private Participante participante;
+	private Fabrica  fabrica;
 	private Album album;
+	private Participante participante;
 
 	private Map <Integer, Participante> participantes;
 	
 	public AlbumDelMundial() {
-		fabrica = new Fabrica();
-		participantes=new HashMap<>();
+				participantes=new HashMap<>();
+				fabrica=new Fabrica();
+				
 		
 	}
 	
@@ -29,8 +31,7 @@ public class AlbumDelMundial  {
 				album=fabrica.crearAlbumTradicional();
 			}
 			if(tipoAlbum=="Web") {
-				album =fabrica.crearAlbumWeb();
-			}
+				album =fabrica.crearAlbumWeb();			}
 			if(tipoAlbum=="Extendido") {
 				album =fabrica.crearAlbumExtendido();
 			}
@@ -45,37 +46,22 @@ public class AlbumDelMundial  {
 		return participantes.containsKey(dni);
 	}
 
-	public void comprarFiguritas(int dni) {
-		if(estaRegistrado(dni)) {
-			List<Figurita> sobre = new LinkedList<>();
-			for (Map.Entry<Integer, Participante> p : participantes.entrySet()) {
-			    if(p.getKey()== dni)
-			    	sobre=fabrica.generarSobre(4);
-			    for(int i =0; i < sobre.size(); i++) {
-			    	p.getValue().figuritas.put(dni, sobre.get(i));
-			    }
-			}
-		}else {
-			throw new RuntimeException("Participante No esta registrado");
-		}
-		
-	}
 	
 	//Nuevo metodo
-	public void comprarFiguritas2(int dni) {
-		if(estaRegistrado(dni)) {
-			List<Figurita> sobre =fabrica.generarSobre(4);
-			for (Map.Entry<Integer, Participante> p : participantes.entrySet()) {
-			    if(p.getKey()== dni)
-			    for(int i =0; i < sobre.size(); i++) {
-			    	p.getValue().agregarFigurita(sobre.get(i));
-			    }
+		public void comprarFiguritas2(int dni) {
+			if(estaRegistrado(dni)) {
+				List<Figurita> sobre =fabrica.generarSobre(4);
+				for (Map.Entry<Integer, Participante> p : participantes.entrySet()) {
+				    if(p.getKey()== dni)
+				    for(int i =0; i < sobre.size(); i++) {
+				    	p.getValue().agregarFigurita(sobre.get(i));
+				    }
+				}
+			}else {
+				throw new RuntimeException("Participante No esta registrado");
 			}
-		}else {
-			throw new RuntimeException("Participante No esta registrado");
+			
 		}
-		
-	}
 	//Nuevo metodo auxiliar devuelve el participante del sistema
 	private Participante participante(int dni) {
 		if(estaRegistrado(dni))
@@ -108,18 +94,27 @@ public class AlbumDelMundial  {
 		return "Nombre: "+nombre;
 	}
 
-	public String aplicarSorteoInstantaneo(int i) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
+	public String aplicarSorteoInstantaneo(int dni) {
+		String sorteo[] = fabrica.generarPremiosParaSorteoInstantaneo();
+		Random aleatorio = new Random(System.currentTimeMillis());
+		
+		if(!estaRegistrado(dni)|| participante(dni).album.nombre() != "Tradicional") {
+			throw new RuntimeException("Participante no registrado o Codigo inexistente");
+		}
+		
+		
+		int intAletorio = aleatorio.nextInt(3);
+		return sorteo[intAletorio];	
+	}
+	
 	public List<String> pegarFiguritas(int i) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public Object buscarFiguritaRepetida(int i) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

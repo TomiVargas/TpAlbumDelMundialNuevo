@@ -10,5 +10,9 @@ public class AlbumExtendido extends Album{
 		this.listadoDeMundialesTop10=listadoDeMundialesTop10;
 		this.balonYPaisPorMundialTop10 = new HashMap<>();
 	}
-
+	
+	@Override
+	public String nombre() {
+		return "Extendido";
+	}
 }
