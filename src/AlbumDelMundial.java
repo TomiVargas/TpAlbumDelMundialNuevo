@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,15 +61,40 @@ public class AlbumDelMundial  {
 			}
 			
 		}
+		void comprarFiguritasTop10(int dni) {
+			if(estaRegistrado(dni)) {
+				List<FiguritaTOP10> sobre =fabrica.generarSobreTop10(4);
+				for (Map.Entry<Integer, Participante> p : participantes.entrySet()) {
+				    if(p.getKey()== dni && p.getValue().album.nombre()=="Extendido") {
+				    for(int i =0; i < sobre.size(); i++) {
+				    	p.getValue().agregarFigus2(sobre.get(i));
+				    }
+				    }
+				}
+			}else {
+				throw new RuntimeException("Participante No esta registrado o Album invalido");
+			}
+		}
 		
 		//Metodo test
 		public List<Figurita> testComprarFigurita(int dni){
-			Figurita figurita = new FiguritaTradicional(111, "test", "test");
-			participante.agregarFigus2(figurita);
+			List<Figurita> sobre =fabrica.generarSobre(4);
+			Participante participante = null;
+			//Figurita figurita = new FiguritaTradicional(111, "test", "test");
+			for (Map.Entry<Integer, Participante> p : participantes.entrySet()) {
+			    if(p.getKey()== dni) {
+			    	for(int i =0; i < sobre.size(); i++) {
+				    	p.getValue().agregarFigus2(sobre.get(i));
+				    	
+				    }
+			    	participante = p.getValue();
+			    	
+			    }
+			}
 			return participante.figus;
 		}
 	//Nuevo metodo auxiliar devuelve el el objeto Participante 
-	private Participante participante(int dni) {
+	protected Participante participante(int dni) {
 		if(estaRegistrado(dni))
 		for (Map.Entry<Integer, Participante> p : participantes.entrySet()) {
 		    if(p.getKey()== dni)
@@ -80,9 +106,11 @@ public class AlbumDelMundial  {
 	//Devuelve la coleccion de Figuritas del Participante
 	public List<Figurita> figuritasAsociadas(int dni){
 		return participante(dni).figuritas2();
+		
 	}
 
-	public void comprarFiguritasConCodigoPromocional(int i) {
+	public void comprarFiguritasConCodigoPromocional(int dni) {
+		
 	}
 
 	//Devuelve nombre Participante
@@ -112,9 +140,22 @@ public class AlbumDelMundial  {
 		return sorteo[intAletorio];	
 	}
 	
-	public List<String> pegarFiguritas(int i) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<String> pegarFiguritas(int dni) {
+		List<String> figusPegadas = new ArrayList<String>();
+		for (Map.Entry<Integer, Participante> p : participantes.entrySet()) {
+			if(p.getKey()==dni) {
+				List<Figurita>	figusAlbum= p.getValue().album.figuritas();
+				List<Figurita> figusParticipante=figuritasAsociadas(dni);
+				for(int i=0;i<figusParticipante.size();i++) {
+					
+						figusPegadas.add("$"+figusParticipante.get(i).mostrarPais()+"-$"+figusParticipante.get(i).codigo()+"$");
+					
+				}
+				
+			}
+		}
+		
+		return figusPegadas;
 	}
 
 	public Object buscarFiguritaRepetida(int i) {

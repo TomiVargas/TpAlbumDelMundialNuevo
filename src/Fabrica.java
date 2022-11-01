@@ -17,10 +17,10 @@ public class Fabrica {
 	private String[] listadoDeMundialesTop10;
 	private Map<String, String[]> balonYPaisPorMundialTop10;
 	private Map<String, Integer> ranking;
+	protected AlbumDelMundial album;
 	
 
 	Fabrica() {
-		
 		random = new Random(System.currentTimeMillis());
 		lugaresPorPais = 12;
 		paisesParticipantes = generarPaisesClasificados();
@@ -28,6 +28,7 @@ public class Fabrica {
 		balonYPaisPorMundialTop10 = generarPaisesPorMundial();
 		ranking = generarRanking();
 		premiosInstantaneos = generarPremiosParaSorteoInstantaneo();
+		
 	}
 	
 	////////////////////////////////////////////////////////////////////////
@@ -57,15 +58,20 @@ public class Fabrica {
 	//Modificacion metodo
 	List<Figurita> generarSobre(int cantFigus) {
 		List<Figurita> sobre = new ArrayList<Figurita>(cantFigus);
-		FiguritaTradicional figurita = new FiguritaTradicional(10, "Messi", "Argentina");
-		for (int i=0; i<sobre.size(); i++) {
-			sobre.add(figurita);
+		Figurita figurita = new FiguritaTradicional(10, "Messi", "Argentina");
+		for (int i=0; i<cantFigus; i++) {
+				sobre.add(figurita);
 		}
 		return sobre;
 	}		
 
-	List<Figurita> generarSobreTop10(int cantFigus) {
-		throw new RuntimeException("A Implementar");
+	List<FiguritaTOP10> generarSobreTop10(int cantFigus) {
+		List<FiguritaTOP10> sobre = new ArrayList<FiguritaTOP10>(cantFigus);
+		FiguritaTOP10 figurita = new FiguritaTOP10(10, "Messi", "Argentina");
+		for (int i=0; i<cantFigus; i++) {
+			sobre.add(figurita);
+		}
+		return sobre;
 	}
 
 

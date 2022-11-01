@@ -8,6 +8,7 @@ public class FiguritaTradicional extends Figurita {
 		super(numeroIdentificador, nombrejugador, pais);
 		// TODO Auto-generated constructor stub
 	}
+	
 	@Override
 	public String mostrarNombreJugador() {
 		// TODO Auto-generated method stub

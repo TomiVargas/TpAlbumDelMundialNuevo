@@ -33,20 +33,20 @@ public class CodigoCliente {
 		
 		// El participante 333333 tiene un album tradicional y por eso puede 
 		// participar en un sortepo por un premio instantaneo.
-		System.out.println(
-				sistema.darNombre(222222) + 
-				" recibio por sorteo instantaneo: " + 
-				sistema.aplicarSorteoInstantaneo(222222)
-			);
-		System.out.println(
-				sistema.darNombre(333333) + 
-				" recibio por sorteo instantaneo: " + 
-				sistema.aplicarSorteoInstantaneo(333333)
-			);
-		System.out.println();
+		//System.out.println(
+			//	sistema.darNombre(222222) + 
+			//	" recibio por sorteo instantaneo: " + 
+			//	sistema.aplicarSorteoInstantaneo(222222)
+		//	);
+		//System.out.println(
+			//	sistema.darNombre(333333) + 
+			//	" recibio por sorteo instantaneo: " + 
+			//	sistema.aplicarSorteoInstantaneo(333333)
+		//	);
+		
 		
 		List<String> pegadas = sistema.pegarFiguritas(222222);
-		
+		System.out.println(sistema.pegarFiguritas(222222));
 		if(pegadas.isEmpty()) { //o sea... no pego ninguna
 			sistema.comprarFiguritas2(222222);
 			sistema.intercambiar(

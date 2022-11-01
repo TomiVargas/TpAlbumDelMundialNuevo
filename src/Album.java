@@ -21,19 +21,35 @@ public abstract class Album  {
 	}
 	
 	
+	
 	public int codigo() {
 		return this.codigo;
 	}
 
 	
-	/*public void pegarFigurita(int figurita) { 
-		for (Map.Entry<String, Integer[]> entry : paisParticipante.entrySet()) {
-			for(int i=0; i < entry.getValue().length ; i++) { 
-					if(figurita==i)
-						entry.getValue()[i]=figurita;
+	public void pegarFigurita(List<Figurita> figu) { 
+		for (Map.Entry<String, List<Figurita>> album : album.entrySet()) {
+			for(int i=0; i < album.getValue().size() ; i++) {
+				for(int j=i; j< figu.size();j++) {
+					if(album.getValue().get(i).codigo()==figu.get(j).codigo()) {
+						album.getValue().add(figu.get(j));
+					}
+				}
+					
 			}
 		}
-	}*/
+	}
+	
+	public List<Figurita> figuritas(){
+		List<Figurita> figus = new ArrayList<>();
+		for (Map.Entry<String, List<Figurita>> album : album.entrySet()) {
+			//album.getValue().addAll(figus);
+			for(int i=0;i<album.getValue().size();i++) {
+				figus.add(album.getValue().get(i));
+			}
+		}
+		return figus;
+	}
 	
 
 	/*public String toString() {
