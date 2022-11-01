@@ -15,10 +15,10 @@ public class Participante {
 	public Participante(Integer dni,String nombreUsuario,Album album) {
 			this.dni=dni;
 			this.nombreUsuario=nombreUsuario;
-			this.album=album;
 			
 			//Nueva estructura
 			this.figus=new ArrayList<Figurita>();
+			this.album=album;
 		}
 	
 	
@@ -28,6 +28,11 @@ public class Participante {
 			throw new RuntimeException("Figurita ya pegada!");
 		figus.add(figurita);
 	}
+	
+	//Nuevo metodo el participitante puede tener figuritas repetidas en su coleccion
+		void agregarFigus2(Figurita figurita) {
+			figus.add(figurita);
+		}
 	
 	
 	//Nuevo metodo
@@ -52,6 +57,11 @@ public class Participante {
 	}
 	
 	List<Figurita> figuritas(int dni){
+		return this.figus;
+	}
+	
+	//Nuevo metodo al estar en el particpante no es necesario el dni
+	List<Figurita> figuritas2(){
 		return this.figus;
 	}
 	

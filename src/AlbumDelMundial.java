@@ -46,19 +46,26 @@ public class AlbumDelMundial  {
 
 	
 	//Nuevo metodo
-		public void comprarFiguritas2(int dni) {
+		void  comprarFiguritas2(int dni) {
 			if(estaRegistrado(dni)) {
 				List<Figurita> sobre =fabrica.generarSobre(4);
 				for (Map.Entry<Integer, Participante> p : participantes.entrySet()) {
 				    if(p.getKey()== dni)
 				    for(int i =0; i < sobre.size(); i++) {
-				    	p.getValue().agregarFigus(sobre.get(i));
+				    	p.getValue().agregarFigus2(sobre.get(i));
 				    }
 				}
 			}else {
 				throw new RuntimeException("Participante No esta registrado");
 			}
 			
+		}
+		
+		//Metodo test
+		public List<Figurita> testComprarFigurita(int dni){
+			Figurita figurita = new FiguritaTradicional(111, "test", "test");
+			participante.agregarFigus2(figurita);
+			return participante.figus;
 		}
 	//Nuevo metodo auxiliar devuelve el el objeto Participante 
 	private Participante participante(int dni) {
@@ -72,7 +79,7 @@ public class AlbumDelMundial  {
 	
 	//Devuelve la coleccion de Figuritas del Participante
 	public List<Figurita> figuritasAsociadas(int dni){
-		return participante(dni).figus;
+		return participante(dni).figuritas2();
 	}
 
 	public void comprarFiguritasConCodigoPromocional(int i) {

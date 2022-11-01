@@ -17,17 +17,17 @@ public class CodigoCliente {
 		sistema.registrarParticipante(666666, "Jazzmine", "Extendido");
 		sistema.registrarParticipante(777777, "Dante", "Tradicional");
 		
-		//System.out.println("Figuritas :"+sistema.comprarFiguritas(222222));
+		//System.out.println("Figuritas :"+sistema.comprarFiguritas2(222222));
 		// El participante 111111 tiene album Web entonces tiene un codigo 
 		// promocional para solicitar 4 figuritas sin consto.
 		sistema.comprarFiguritasConCodigoPromocional(111111);
 		sistema.comprarFiguritas2(222222);
 		sistema.comprarFiguritas2(333333);
 		
-		//Mostrar las figuritas
-
-		for(Figurita c: sistema.figuritasAsociadas(222222)) {
-		    System.out.println(c.mostrarNombreJugador() + c.mostrarPais());
+		//Mostrar las figuritas test
+		System.out.println("Figuritas :"+sistema.testComprarFigurita(222222));
+		for(Figurita c: sistema.testComprarFigurita(222222)) {
+		    System.out.println("Nombre Jugador: "+c.mostrarNombreJugador() +" Pais: "+ c.mostrarPais());
 		 }
 		
 		

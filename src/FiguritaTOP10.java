@@ -1,8 +1,8 @@
 
 public class FiguritaTOP10 extends Figurita{
 
-	FiguritaTOP10(int numeroIdentificador, String nombrejugador) {
-		super(numeroIdentificador, nombrejugador);
+	FiguritaTOP10(int numeroIdentificador, String nombrejugador, String pais) {
+		super(numeroIdentificador, nombrejugador, pais);
 		
 	}
 
