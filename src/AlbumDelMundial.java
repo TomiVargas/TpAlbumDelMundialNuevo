@@ -46,36 +46,67 @@ public class AlbumDelMundial  {
 	}
 
 	
-	//Nuevo metodo
-		void  comprarFiguritas2(int dni) {
-			if(estaRegistrado(dni)) {
-				List<Figurita> sobre =fabrica.generarSobre(4);
-				for (Map.Entry<Integer, Participante> p : participantes.entrySet()) {
-				    if(p.getKey()== dni)
-				    for(int i =0; i < sobre.size(); i++) {
-				    	p.getValue().agregarFigus2(sobre.get(i));
-				    }
+	//Codigo Limpiado
+			void comprarFiguritas(int dni) {
+				if(estaRegistrado(dni)) {
+					List<Figurita> sobre =fabrica.generarSobre(4);
+					AgregarFiguritasAlSobre(sobre,dni);
+				}else {
+					throw new RuntimeException("Participante No esta registrado o Album invalido");
 				}
-			}else {
-				throw new RuntimeException("Participante No esta registrado");
 			}
-			
-		}
+		
+		//Codigo Limpiado
 		void comprarFiguritasTop10(int dni) {
 			if(estaRegistrado(dni)) {
 				List<FiguritaTOP10> sobre =fabrica.generarSobreTop10(4);
-				for (Map.Entry<Integer, Participante> p : participantes.entrySet()) {
-				    if(p.getKey()== dni && p.getValue().album.nombre()=="Extendido") {
-				    for(int i =0; i < sobre.size(); i++) {
-				    	p.getValue().agregarFigus2(sobre.get(i));
-				    }
-				    }
-				}
+				AgregarFiguritasAlSobreTOP10(sobre,dni);
 			}else {
 				throw new RuntimeException("Participante No esta registrado o Album invalido");
 			}
 		}
-		
+		//Metodo Auxiliar
+				private void AgregarFiguritasAlSobre(List<Figurita> sobre, int dni) {
+					for (Map.Entry<Integer, Participante> p : participantes.entrySet()) {
+					    if(dniParticipante(p.getValue(),dni)) {
+						    recorreSobreyAgregaFigurita(p.getValue(),sobre);
+					    }
+					}
+					
+				}
+		private boolean dniParticipante(Participante value, int dni) {
+			return value.dni==dni;
+			
+		}
+
+		//Metodo Auxiliar
+		private void AgregarFiguritasAlSobreTOP10(List<FiguritaTOP10> sobre, int dni) {
+			for (Map.Entry<Integer, Participante> p : participantes.entrySet()) {
+			    if(dniParticipanteYTieneAlbumExtendido(p.getValue(),p.getKey(),dni)) {
+				    recorreSobreyAgregaFiguritaTOP10(p.getValue(),sobre);
+			    }
+			}
+			
+		}
+		//Metodo Auxiliar
+		private void recorreSobreyAgregaFigurita(Participante value, List<Figurita> sobre) {
+					for(int i =0; i < sobre.size(); i++) {
+				    	value.agregarFigus2(sobre.get(i));
+				    }
+				}
+		//Metodo Auxiliar
+		private void recorreSobreyAgregaFiguritaTOP10(Participante value, List<FiguritaTOP10> sobre) {
+			for(int i =0; i < sobre.size(); i++) {
+		    	value.agregarFigus2(sobre.get(i));
+		    }
+		}
+
+		//Metodo Auxiliar
+		private boolean dniParticipanteYTieneAlbumExtendido(Participante value, Integer key,Integer dni) {
+			return key== dni && value.album.nombre()=="Extendido";
+			
+		}
+
 		//Metodo test
 		public List<Figurita> testComprarFigurita(int dni){
 			List<Figurita> sobre =fabrica.generarSobre(4);
@@ -93,7 +124,8 @@ public class AlbumDelMundial  {
 			}
 			return participante.figus;
 		}
-	//Nuevo metodo auxiliar devuelve el el objeto Participante 
+		
+	//Nuevo metodo devuelve el Participante 
 	protected Participante participante(int dni) {
 		if(estaRegistrado(dni))
 		for (Map.Entry<Integer, Participante> p : participantes.entrySet()) {
@@ -119,13 +151,19 @@ public class AlbumDelMundial  {
 		if(!estaRegistrado(dni)) {
 			throw new RuntimeException("No esta registrado!");
 		}
-		for (Map.Entry<Integer, Participante> p : participantes.entrySet()) {
-		    if(p.getKey()== dni)
-		    	nombre= p.getValue().darNombre();
-		}
+		nombre= nombreParticipante(dni);
 		return "Nombre participante: "+nombre;
 	}
 
+	//Metodo auxiliar devuelve el nombre del Participante.
+	private String nombreParticipante(int dni) {
+		String nombre="";
+		for (Map.Entry<Integer, Participante> p : participantes.entrySet()) {
+		    if(p.getKey()== dni)
+		    	nombre=p.getValue().darNombre();
+		}
+		return nombre;
+	}
 
 	public String aplicarSorteoInstantaneo(int dni) {
 		String sorteo[] = fabrica.generarPremiosParaSorteoInstantaneo();
@@ -140,6 +178,7 @@ public class AlbumDelMundial  {
 		return sorteo[intAletorio];	
 	}
 	
+	//Intentando Resolver esto.
 	public List<String> pegarFiguritas(int dni) {
 		List<String> figusPegadas = new ArrayList<String>();
 		for (Map.Entry<Integer, Participante> p : participantes.entrySet()) {

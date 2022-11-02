@@ -58,7 +58,7 @@ public class Fabrica {
 	//Modificacion metodo
 	List<Figurita> generarSobre(int cantFigus) {
 		List<Figurita> sobre = new ArrayList<Figurita>(cantFigus);
-		Figurita figurita = new FiguritaTradicional(10, "Messi", "Argentina");
+		Figurita figurita = new FiguritaTradicional(10, "Argentina");
 		for (int i=0; i<cantFigus; i++) {
 				sobre.add(figurita);
 		}
@@ -67,7 +67,7 @@ public class Fabrica {
 
 	List<FiguritaTOP10> generarSobreTop10(int cantFigus) {
 		List<FiguritaTOP10> sobre = new ArrayList<FiguritaTOP10>(cantFigus);
-		FiguritaTOP10 figurita = new FiguritaTOP10(10, "Messi", "Argentina");
+		FiguritaTOP10 figurita = new FiguritaTOP10(10, "Argentina");
 		for (int i=0; i<cantFigus; i++) {
 			sobre.add(figurita);
 		}

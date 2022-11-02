@@ -21,13 +21,13 @@ public class CodigoCliente {
 		// El participante 111111 tiene album Web entonces tiene un codigo 
 		// promocional para solicitar 4 figuritas sin consto.
 		sistema.comprarFiguritasConCodigoPromocional(111111);
-		sistema.comprarFiguritas2(222222);
-		sistema.comprarFiguritas2(333333);
+		sistema.comprarFiguritas(222222);
+		sistema.comprarFiguritas(333333);
 		
 		//Mostrar las figuritas test
 		System.out.println("Figuritas :"+sistema.testComprarFigurita(222222));
 		for(Figurita c: sistema.testComprarFigurita(222222)) {
-		    System.out.println("Nombre Jugador: "+c.mostrarNombreJugador() +" Pais: "+ c.mostrarPais());
+		    System.out.println("Numero Del Jugador:"+ c.codigo() +" Pais: "+ c.mostrarPais());
 		 }
 		
 		
@@ -48,7 +48,7 @@ public class CodigoCliente {
 		List<String> pegadas = sistema.pegarFiguritas(222222);
 		System.out.println(sistema.pegarFiguritas(222222));
 		if(pegadas.isEmpty()) { //o sea... no pego ninguna
-			sistema.comprarFiguritas2(222222);
+			sistema.comprarFiguritas(222222);
 			sistema.intercambiar(
 					222222,
 					sistema.buscarFiguritaRepetida(222222)
@@ -59,15 +59,15 @@ public class CodigoCliente {
 		
 		// Simulamos un uso prolongado del sistema.
 		for (int i =0;i<2000;i++) {
-			sistema.comprarFiguritas2(222222);
+			sistema.comprarFiguritas(222222);
 			sistema.pegarFiguritas(222222);
-			sistema.comprarFiguritas2(555555);
+			sistema.comprarFiguritas(555555);
 			sistema.pegarFiguritas(555555);
 		}
 		for (int i =0;i<500;i++) {
-			sistema.comprarFiguritas2(666666);
+			sistema.comprarFiguritas(666666);
 			sistema.pegarFiguritas(666666);
-			sistema.comprarFiguritas2(777777);
+			sistema.comprarFiguritas(777777);
 			sistema.pegarFiguritas(777777);
 		}
 		

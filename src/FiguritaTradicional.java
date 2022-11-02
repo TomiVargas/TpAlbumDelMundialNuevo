@@ -4,16 +4,12 @@ public class FiguritaTradicional extends Figurita {
 	FiguritaTradicional figurita  ;
 	Fabrica fabrica;
 
-	FiguritaTradicional(int numeroIdentificador, String nombrejugador, String pais) {
-		super(numeroIdentificador, nombrejugador, pais);
+	FiguritaTradicional(int numeroIdentificador, String pais) {
+		super(numeroIdentificador, pais);
 		// TODO Auto-generated constructor stub
 	}
 	
-	@Override
-	public String mostrarNombreJugador() {
-		// TODO Auto-generated method stub
-		return super.mostrarNombreJugador();
-	}
+	
 	@Override
 	public String mostrarPais() {
 		// TODO Auto-generated method stub
