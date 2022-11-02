@@ -141,10 +141,6 @@ public class AlbumDelMundial  {
 		
 	}
 
-	public void comprarFiguritasConCodigoPromocional(int dni) {
-		
-	}
-
 	//Devuelve nombre Participante
 	public String darNombre(int dni) {
 		String nombre="";
@@ -178,17 +174,15 @@ public class AlbumDelMundial  {
 		return sorteo[intAletorio];	
 	}
 	
-	//Intentando Resolver esto.
+	//Metodo Pegar figurita. 
 	public List<String> pegarFiguritas(int dni) {
 		List<String> figusPegadas = new ArrayList<String>();
 		for (Map.Entry<Integer, Participante> p : participantes.entrySet()) {
 			if(p.getKey()==dni) {
-				List<Figurita>	figusAlbum= p.getValue().album.figuritas();
 				List<Figurita> figusParticipante=figuritasAsociadas(dni);
 				for(int i=0;i<figusParticipante.size();i++) {
-					
-						figusPegadas.add("$"+figusParticipante.get(i).mostrarPais()+"-$"+figusParticipante.get(i).codigo()+"$");
-					
+						p.getValue().album.pegarFigurita(figusParticipante.get(i));
+						figusPegadas.add("$"+figusParticipante.get(i).mostrarPais()+"-$"+figusParticipante.get(i).codigo()+"$");	
 				}
 				
 			}
@@ -207,8 +201,8 @@ public class AlbumDelMundial  {
 		
 	}
 
-	public boolean llenoAlbum(int i) {
-		// TODO Auto-generated method stub
+	public boolean llenoAlbum(int dni) {
+		
 		return false;
 	}
 

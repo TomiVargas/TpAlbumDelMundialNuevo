@@ -7,7 +7,6 @@ public abstract class  Figurita {
 	
 	Figurita(int numeroIdentificador, String pais){
 		this.numeroIdentificador=numeroIdentificador;
-		
 		this.pais=pais;
 	}
 
@@ -15,8 +14,6 @@ public abstract class  Figurita {
 	protected String mostrarPais() {
 		return this.pais;
 	}
-	
-
 	
 	protected Integer codigo() {
 		return this.numeroIdentificador;

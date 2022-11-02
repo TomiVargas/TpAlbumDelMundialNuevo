@@ -58,19 +58,27 @@ public class Fabrica {
 	//Modificacion metodo
 	List<Figurita> generarSobre(int cantFigus) {
 		List<Figurita> sobre = new ArrayList<Figurita>(cantFigus);
-		Figurita figurita = new FiguritaTradicional(10, "Argentina");
-		for (int i=0; i<cantFigus; i++) {
-				sobre.add(figurita);
+		for(int i=0;i<4;i++) {
+			int aleatorio=random.nextInt(12);
+			int paisAleatorio=random.nextInt(paisesParticipantes.length);
+			FiguritaTradicional figu= new FiguritaTradicional(aleatorio,paisesParticipantes[paisAleatorio]);
+			sobre.add(figu);
+			
 		}
+	
 		return sobre;
 	}		
 
-	List<FiguritaTOP10> generarSobreTop10(int cantFigus) {
-		List<FiguritaTOP10> sobre = new ArrayList<FiguritaTOP10>(cantFigus);
-		FiguritaTOP10 figurita = new FiguritaTOP10(10, "Argentina");
-		for (int i=0; i<cantFigus; i++) {
-			sobre.add(figurita);
+	List<Figurita> generarSobreTop10(int cantFigus) {
+		List<Figurita> sobre = new ArrayList<Figurita>(cantFigus);
+		for(int i=0;i<4;i++) {
+			int aleatorio=random.nextInt(12);
+			int paisAleatorio=random.nextInt(paisesParticipantes.length);
+			FiguritaTOP10 figu= new FiguritaTOP10(aleatorio,paisesParticipantes[paisAleatorio]);
+			sobre.add(figu);
+			
 		}
+	
 		return sobre;
 	}
 

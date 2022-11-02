@@ -8,6 +8,7 @@ public abstract class Album  {
 	private String tipoAlbum;	
 	//Nueva estructura
 	private Map<String, List<Figurita>> album;
+	private List<Figurita> lugares;
 	
 
 	public Album(Integer lugaresPorPais, String[] paisesParticipantes, int codigo) {
@@ -27,21 +28,32 @@ public abstract class Album  {
 	}
 
 	
-	public void pegarFigurita(List<Figurita> figu) { 
+	public void pegarFigurita(Figurita figu) { 
 		for (Map.Entry<String, List<Figurita>> album : album.entrySet()) {
 			for(int i=0; i < album.getValue().size() ; i++) {
-				for(int j=i; j< figu.size();j++) {
-					if(album.getValue().get(i).codigo()==figu.get(j).codigo()) {
-						album.getValue().add(figu.get(j));
+					if(album.getValue().get(i).codigo()==figu.codigo() && 
+						album.getValue().get(i).mostrarPais()== figu.mostrarPais() && !estaPegada(figu)) {
+						lugares.add(figu);
 					}
 				}
 					
 			}
 		}
+	private boolean estaPegada(Figurita figu) {
+		for (Map.Entry<String, List<Figurita>> album : album.entrySet()) {
+			for(int i=0; i < album.getValue().size() ; i++) {
+					if(album.getValue().get(i).codigo()==figu.codigo() && 
+						album.getValue().get(i).mostrarPais()== figu.mostrarPais()) {
+						return true;
+					}
+				}
+					
+			}
+		return false;
 	}
 	
 	public List<Figurita> figuritas(){
-		List<Figurita> figus = new ArrayList<>();
+		List<Figurita> figus = new ArrayList<Figurita>();
 		for (Map.Entry<String, List<Figurita>> album : album.entrySet()) {
 			//album.getValue().addAll(figus);
 			for(int i=0;i<album.getValue().size();i++) {

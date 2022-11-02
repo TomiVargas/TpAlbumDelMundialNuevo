@@ -20,7 +20,7 @@ public class CodigoCliente {
 		//System.out.println("Figuritas :"+sistema.comprarFiguritas2(222222));
 		// El participante 111111 tiene album Web entonces tiene un codigo 
 		// promocional para solicitar 4 figuritas sin consto.
-		sistema.comprarFiguritasConCodigoPromocional(111111);
+		//sistema.comprarFiguritasConCodigoPromocional(111111);
 		sistema.comprarFiguritas(222222);
 		sistema.comprarFiguritas(333333);
 		
@@ -33,20 +33,20 @@ public class CodigoCliente {
 		
 		// El participante 333333 tiene un album tradicional y por eso puede 
 		// participar en un sortepo por un premio instantaneo.
-		//System.out.println(
-			//	sistema.darNombre(222222) + 
-			//	" recibio por sorteo instantaneo: " + 
-			//	sistema.aplicarSorteoInstantaneo(222222)
-		//	);
-		//System.out.println(
-			//	sistema.darNombre(333333) + 
-			//	" recibio por sorteo instantaneo: " + 
-			//	sistema.aplicarSorteoInstantaneo(333333)
-		//	);
+		System.out.println(
+				sistema.darNombre(222222) + 
+				" recibio por sorteo instantaneo: " + 
+			sistema.aplicarSorteoInstantaneo(222222)
+			);
+		/*System.out.println(
+				sistema.darNombre(333333) + 
+				" recibio por sorteo instantaneo: " + 
+				sistema.aplicarSorteoInstantaneo(333333)
+			);*/
 		
 		
 		List<String> pegadas = sistema.pegarFiguritas(222222);
-		System.out.println(sistema.pegarFiguritas(222222));
+		System.out.println(pegadas);
 		if(pegadas.isEmpty()) { //o sea... no pego ninguna
 			sistema.comprarFiguritas(222222);
 			sistema.intercambiar(
@@ -55,15 +55,16 @@ public class CodigoCliente {
 				);
 		}
 		
-		sistema.pegarFiguritas(333333);
 		
 		// Simulamos un uso prolongado del sistema.
-		for (int i =0;i<2000;i++) {
+		for (int i =0;i<200;i++) {
 			sistema.comprarFiguritas(222222);
 			sistema.pegarFiguritas(222222);
 			sistema.comprarFiguritas(555555);
 			sistema.pegarFiguritas(555555);
 		}
+		//System.out.println(sistema.participante(555555).figus);
+		
 		for (int i =0;i<500;i++) {
 			sistema.comprarFiguritas(666666);
 			sistema.pegarFiguritas(666666);

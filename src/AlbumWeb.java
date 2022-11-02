@@ -1,6 +1,6 @@
 
 public class AlbumWeb extends Album{
-	
+	int codigoPromocional=0;
 
 	public AlbumWeb(Integer lugaresPorPais, String[] paisesParticipantes, int codigo) {
 		super(lugaresPorPais, paisesParticipantes, codigo);
@@ -11,4 +11,5 @@ public class AlbumWeb extends Album{
 	public String nombre() {
 		return "Web";
 	}
+	
 }
