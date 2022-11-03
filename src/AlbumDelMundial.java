@@ -77,18 +77,18 @@ public class AlbumDelMundial {
 
 	private void agregarFiguritas(Participante participante, List<Figurita> sobre) {
 		for (int i = 0; i < sobre.size(); i++) {
-			participante.agregarFigus2(sobre.get(i));
+			participante.agregarFigurita(sobre.get(i));
 		}
 	}
 
 	private void agregarFiguritasTOP10(Participante participante, List<FiguritaTOP10> sobre) {
 		for (int i = 0; i < sobre.size(); i++) {
-			participante.agregarFigus2(sobre.get(i));
+			participante.agregarFigurita(sobre.get(i));
 		}
 	}
 
 	public List<Figurita> figuritasAsociadas(int dni) {
-		return participantes.get(dni).figuritas2();
+		return participantes.get(dni).figuritas();
 
 	}
 

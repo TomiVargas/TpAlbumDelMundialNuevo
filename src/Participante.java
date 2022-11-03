@@ -23,13 +23,13 @@ public class Participante {
 
 	
 	//Nuevo metodo el participitante puede tener figuritas repetidas en su coleccion
-		void agregarFigus2(Figurita figurita) {
+		void agregarFigurita(Figurita figurita) {
 			figus.add(figurita);
 		}
 	
 	
 	//Nuevo metodo
-	boolean estaAsociadaFigu(int codigo) {
+	boolean estaAsociadaFigurita(int codigo) {
 		for (Figurita figurita : figus) {
 			if(figurita.codigo()==codigo) {
 				return true;
@@ -39,8 +39,8 @@ public class Participante {
 	}
 	
 	//Nuevo metodo
-	boolean quitaFigu(Figurita figurita) {
-		if(estaAsociadaFigu(figurita.codigo()))
+	boolean quitaFigurita(Figurita figurita) {
+		if(estaAsociadaFigurita(figurita.codigo()))
 			for (Figurita figurit : figus) {
 				if(figurit.codigo().equals(figurita.codigo())) {
 					figus.remove(figurita);
@@ -49,12 +49,8 @@ public class Participante {
 		return false;
 	}
 	
-	List<Figurita> figuritas(int dni){
-		return this.figus;
-	}
-	
 	//Nuevo metodo al estar en el particpante no es necesario el dni
-	List<Figurita> figuritas2(){
+	List<Figurita> figuritas(){
 		return this.figus;
 	}
 	
