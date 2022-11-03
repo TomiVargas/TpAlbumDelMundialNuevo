@@ -82,8 +82,9 @@ public class AlbumDelMundial  {
 					if(estaRegistrado(dni)) {
 						List<Figurita> sobre =fabrica.generarSobre(4);
 						agregarSobre(sobre,dni);
-					}
+					}else {
 					throw new RuntimeException("Participante No esta registrado o Album invalido");
+					}
 				}
 				
 				//Codigo Limpiado nuevo Alan
@@ -91,8 +92,9 @@ public class AlbumDelMundial  {
 							if(estaRegistrado(dni) && participante(dni).tipoAlbum()=="Extendido") { 
 								List<FiguritaTOP10> sobre =fabrica.generarSobreTop10(4);
 								agregarSobreTOP10(sobre,dni);
-							}
+							}else {
 							throw new RuntimeException("Participante No esta registrado o Album invalido");
+							}
 						}
 				
 			    // Los metodos agregar buscan por tabla de Hash el objeto participante 
@@ -100,14 +102,12 @@ public class AlbumDelMundial  {
 						
 				//Metodo Auxiliar nuevo Alan
 				private void agregarSobre(List<Figurita> sobre, int dni) {
-					if(participantes.containsKey(dni))
-						agregarFiguritas(participantes.get(dni), sobre);	
+					agregarFiguritas(participantes.get(dni), sobre);	
 				}
 				
 				//Metodo Auxiliar nuevo Alan
 				private void agregarSobreTOP10(List<FiguritaTOP10> sobre, int dni) {
-					if(participantes.containsKey(dni))
-						agregarFiguritasTOP10(participantes.get(dni), sobre);	
+					agregarFiguritasTOP10(participantes.get(dni), sobre);	
 				}
 		
 				//Metodo Auxiliar nuevo Alan
@@ -125,8 +125,8 @@ public class AlbumDelMundial  {
 				    }
 				}
 
-		private boolean dniParticipante(Participante value, int dni) {
-			return value.dni==dni;
+		private boolean dniParticipante(Participante participante, int dni) {
+			return participante.dni==dni;
 			
 		}
 
@@ -183,28 +183,10 @@ public class AlbumDelMundial  {
 		
 	}
 
-	//Devuelve nombre Participante
-	public String darNombre(int dni) {
-		String nombre="";
-		if(!estaRegistrado(dni)) {
-			throw new RuntimeException("No esta registrado!");
-		}
-		nombre= nombreParticipante(dni);
-		return "Nombre participante: "+nombre;
-	}
 
-	//Metodo auxiliar devuelve el nombre del Participante.
-	private String nombreParticipante(int dni) {
-		String nombre="";
-		for (Map.Entry<Integer, Participante> p : participantes.entrySet()) {
-		    if(p.getKey()== dni)
-		    	nombre=p.getValue().darNombre();
-		}
-		return nombre;
-	}
 	
 	//De esta forma podriamos simplificar a un metodo mostrar nombre Alan
-	public String darNombre2(int dni) {
+	public String darNombre(int dni) {
 		if(estaRegistrado(dni)) {
 			return participantes.get(dni).darNombre();
 		}

@@ -23,7 +23,9 @@ public class CodigoCliente {
 		//sistema.comprarFiguritasConCodigoPromocional(111111);
 		sistema.comprarFiguritas(222222);
 		sistema.comprarFiguritas(333333);
-		
+
+		sistema.comprarFiguritas2(222222);
+		sistema.comprarFiguritas2(333333);
 	
 		
 		

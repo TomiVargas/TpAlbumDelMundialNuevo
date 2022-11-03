@@ -20,14 +20,7 @@ public class Participante {
 			this.figus=new ArrayList<Figurita>();
 			this.album=album;
 		}
-	
-	
-	//Nuevo metodo
-	void agregarFigus(Figurita figurita) {
-		if(estaAsociadaFigu(figurita.codigo()))
-			throw new RuntimeException("Figurita ya pegada!");
-		figus.add(figurita);
-	}
+
 	
 	//Nuevo metodo el participitante puede tener figuritas repetidas en su coleccion
 		void agregarFigus2(Figurita figurita) {
