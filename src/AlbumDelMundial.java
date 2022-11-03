@@ -55,6 +55,7 @@ public class AlbumDelMundial  {
 					throw new RuntimeException("Participante No esta registrado o Album invalido");
 				}
 			}
+	
 		
 		//Codigo Limpiado
 		void comprarFiguritasTop10(int dni) {
@@ -65,6 +66,7 @@ public class AlbumDelMundial  {
 				throw new RuntimeException("Participante No esta registrado o Album invalido");
 			}
 		}
+		
 		//Metodo Auxiliar
 				private void AgregarFiguritasAlSobre(List<Figurita> sobre, int dni) {
 					for (Map.Entry<Integer, Participante> p : participantes.entrySet()) {
@@ -74,6 +76,55 @@ public class AlbumDelMundial  {
 					}
 					
 				}
+				
+				//Codigo Limpiado nuevo Alan
+				void comprarFiguritas2(int dni) {
+					if(estaRegistrado(dni)) {
+						List<Figurita> sobre =fabrica.generarSobre(4);
+						agregarSobre(sobre,dni);
+					}
+					throw new RuntimeException("Participante No esta registrado o Album invalido");
+				}
+				
+				//Codigo Limpiado nuevo Alan
+						void comprarFiguritasTop102(int dni) {
+							if(estaRegistrado(dni) && participante(dni).tipoAlbum()=="Extendido") { 
+								List<FiguritaTOP10> sobre =fabrica.generarSobreTop10(4);
+								agregarSobreTOP10(sobre,dni);
+							}
+							throw new RuntimeException("Participante No esta registrado o Album invalido");
+						}
+				
+			    // Los metodos agregar buscan por tabla de Hash el objeto participante 
+				// por su dni(key), por lo que ya no tendriamos que recorrer el diccionario
+						
+				//Metodo Auxiliar nuevo Alan
+				private void agregarSobre(List<Figurita> sobre, int dni) {
+					if(participantes.containsKey(dni))
+						agregarFiguritas(participantes.get(dni), sobre);	
+				}
+				
+				//Metodo Auxiliar nuevo Alan
+				private void agregarSobreTOP10(List<FiguritaTOP10> sobre, int dni) {
+					if(participantes.containsKey(dni))
+						agregarFiguritasTOP10(participantes.get(dni), sobre);	
+				}
+		
+				//Metodo Auxiliar nuevo Alan
+				private void agregarFiguritas(Participante participante, List<Figurita> sobre) {
+							for(int i =0; i < sobre.size(); i++) {
+						    	participante.agregarFigus2(sobre.get(i));
+						    }
+						}
+				// Metodo Auxiliar nuevo Alan , con este metodo podria no haria falta verificar nuevamente
+				// si el participante tiene album extendido, ya que para llegar a este punto se verifico
+				// antes < agregarSobreTOP10() >
+				private void agregarFiguritasTOP10(Participante participante, List<FiguritaTOP10> sobre) {
+					for(int i =0; i < sobre.size(); i++) {
+						participante.agregarFigus2(sobre.get(i));
+				    }
+				}
+
 		private boolean dniParticipante(Participante value, int dni) {
 			return value.dni==dni;
 			
@@ -107,23 +158,6 @@ public class AlbumDelMundial  {
 			
 		}
 
-		//Metodo test
-		public List<Figurita> testComprarFigurita(int dni){
-			List<Figurita> sobre =fabrica.generarSobre(4);
-			Participante participante = null;
-			//Figurita figurita = new FiguritaTradicional(111, "test", "test");
-			for (Map.Entry<Integer, Participante> p : participantes.entrySet()) {
-			    if(p.getKey()== dni) {
-			    	for(int i =0; i < sobre.size(); i++) {
-				    	p.getValue().agregarFigus2(sobre.get(i));
-				    	
-				    }
-			    	participante = p.getValue();
-			    	
-			    }
-			}
-			return participante.figus;
-		}
 		
 	//Nuevo metodo devuelve el Participante 
 	protected Participante participante(int dni) {
@@ -134,6 +168,14 @@ public class AlbumDelMundial  {
 		}
 		throw new RuntimeException("No esta Registrado");
 	}
+	
+	//Nuevo metodo devuelve el Participante Alan
+		protected Participante participante2(int dni) {
+			if(estaRegistrado(dni)) {
+				return participantes.get(dni);
+			}
+			throw new RuntimeException("No esta Registrado");
+		}
 	
 	//Devuelve la coleccion de Figuritas del Participante
 	public List<Figurita> figuritasAsociadas(int dni){
@@ -159,6 +201,14 @@ public class AlbumDelMundial  {
 		    	nombre=p.getValue().darNombre();
 		}
 		return nombre;
+	}
+	
+	//De esta forma podriamos simplificar a un metodo mostrar nombre Alan
+	public String darNombre2(int dni) {
+		if(estaRegistrado(dni)) {
+			return participantes.get(dni).darNombre();
+		}
+		throw new RuntimeException("No registrado");
 	}
 
 	public String aplicarSorteoInstantaneo(int dni) {

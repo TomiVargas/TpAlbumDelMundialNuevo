@@ -24,11 +24,7 @@ public class CodigoCliente {
 		sistema.comprarFiguritas(222222);
 		sistema.comprarFiguritas(333333);
 		
-		//Mostrar las figuritas test
-		System.out.println("Figuritas :"+sistema.testComprarFigurita(222222));
-		for(Figurita c: sistema.testComprarFigurita(222222)) {
-		    System.out.println("Numero Del Jugador:"+ c.codigo() +" Pais: "+ c.mostrarPais());
-		 }
+	
 		
 		
 		// El participante 333333 tiene un album tradicional y por eso puede 
