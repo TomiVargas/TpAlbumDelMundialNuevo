@@ -10,8 +10,6 @@ public class CodigoCliente {
 		
 		System.out.println("Codigo Album : " + sistema.registrarParticipante(222222, "Christian", "Tradicional"));
 		System.out.println("Codigo Album : " + sistema.registrarParticipante(333333, "Mariana", "Extendido"));
-		System.out.println(sistema.darNombre(333333));
-		//sistema.registrarParticipante(333333, "Mariana", "Extendido");
 		sistema.registrarParticipante(111111, "Jose", "Web");
 		sistema.registrarParticipante(555555, "Miguel", "Web");
 		sistema.registrarParticipante(666666, "Jazzmine", "Extendido");
@@ -22,10 +20,8 @@ public class CodigoCliente {
 		// promocional para solicitar 4 figuritas sin consto.
 		//sistema.comprarFiguritasConCodigoPromocional(111111);
 		sistema.comprarFiguritas(222222);
-		sistema.comprarFiguritas(333333);
+		sistema.comprarFiguritas(222222);
 
-		sistema.comprarFiguritas2(222222);
-		sistema.comprarFiguritas2(333333);
 	
 		
 		
