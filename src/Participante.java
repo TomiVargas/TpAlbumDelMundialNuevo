@@ -61,5 +61,20 @@ public class Participante {
 	String tipoAlbum() {
 		return album.nombre();
 	}
+	
+	List<Figurita> figuritasRepetida() {
+		List<Figurita> repetidas;
+		for (int i = 0; i < figus.size(); i++) {
+			repetidas.add(repetida(figus.get(i), figus));
+		}
+		return repetidas;
+	}
+
+
+	private Figurita repetida(Figurita figurita, List<Figurita> figus2) {
+		for (int i = 0; i < figus.size(); i++) {
+			if(figurita.equals(figus.get(i)))
+				return figurita;
+	}
 	 
 }
