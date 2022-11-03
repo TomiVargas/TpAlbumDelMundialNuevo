@@ -58,7 +58,7 @@ public class AlbumDelMundial  {
 		
 		//Codigo Limpiado
 		void comprarFiguritasTop10(int dni) {
-			if(estaRegistrado(dni)) {
+			if(estaRegistrado(dni) && participante(dni).tipoAlbum()=="Extendido") {
 				List<FiguritaTOP10> sobre =fabrica.generarSobreTop10(4);
 				AgregarFiguritasAlSobreTOP10(sobre,dni);
 			}else {
@@ -216,8 +216,18 @@ public class AlbumDelMundial  {
 		return null;
 	}
 
-	public String[] participantesQueCompletaronElPais(String string) {
+	public List<String> participantesQueCompletaronElPais(String string) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public boolean intercambiarUnaFiguritaRepetida(int dniConAlbumTradicional) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void comprarFiguritasConCodigoPromocional(int dniConAlbumTradicional) {
+		// TODO Auto-generated method stub
+		
 	}
 }

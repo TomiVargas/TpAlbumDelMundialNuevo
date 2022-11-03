@@ -69,8 +69,8 @@ public class Fabrica {
 		return sobre;
 	}		
 
-	List<Figurita> generarSobreTop10(int cantFigus) {
-		List<Figurita> sobre = new ArrayList<Figurita>(cantFigus);
+	List<FiguritaTOP10> generarSobreTop10(int cantFigus) {
+		List<FiguritaTOP10> sobre = new ArrayList<FiguritaTOP10>(cantFigus);
 		for(int i=0;i<4;i++) {
 			int aleatorio=random.nextInt(12);
 			int paisAleatorio=random.nextInt(paisesParticipantes.length);
