@@ -63,7 +63,7 @@ public class Participante {
 	}
 	
 	List<Figurita> figuritasRepetida() {
-		List<Figurita> repetidas;
+		List<Figurita> repetidas = new 	ArrayList<Figurita>();
 		for (int i = 0; i < figus.size(); i++) {
 			repetidas.add(repetida(figus.get(i), figus));
 		}
@@ -72,9 +72,13 @@ public class Participante {
 
 
 	private Figurita repetida(Figurita figurita, List<Figurita> figus2) {
-		for (int i = 0; i < figus.size(); i++) {
-			if(figurita.equals(figus.get(i)))
-				return figurita;
+		Figurita figu=null;
+		for (int i = 0; i < figus2.size(); i++) {
+			if(figurita.equals(figus2.get(i))) {
+				figu=figurita;
+			}
 	}
+		return figu;
 	 
+}
 }

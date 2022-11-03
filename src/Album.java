@@ -9,10 +9,12 @@ public abstract class Album  {
 	//Nueva estructura
 	private Map<String, List<Figurita>> album;
 	private List<Figurita> lugares;
+	private String[] paisesParticipantes;
 	
 
 	public Album(Integer lugaresPorPais, String[] paisesParticipantes, int codigo) {
 		this.codigo=codigo;
+		this.paisesParticipantes=paisesParticipantes;
 		this.album = new HashMap<String, List<Figurita>>();
 		
 		List<Figurita> lugares = new ArrayList<Figurita>(11);
@@ -51,6 +53,7 @@ public abstract class Album  {
 			}
 		return false;
 	}
+		
 	
 	public List<Figurita> figuritas(){
 		List<Figurita> figus = new ArrayList<Figurita>();
@@ -63,6 +66,31 @@ public abstract class Album  {
 		return figus;
 	}
 	
+	//Intente resolverlo pero creo que quedo mal. No esta en los test para probarlo,
+	//solo esta el que da error. 
+	public boolean albumLleno() {
+		boolean estaLleno=true;
+		for(Map.Entry<String, List<Figurita>> album : album.entrySet()) {
+			for(int i=0;i<paisesParticipantes.length;i++) {
+				if(album.getKey().equals(paisesParticipantes[i])) {
+					estaLleno=estaLleno && tamañoDeLaListaDeFiguritas(album.getValue()).size()==12;
+				}
+			}
+		}
+		return estaLleno;
+		
+	}
+	private List<Figurita> tamañoDeLaListaDeFiguritas(List<Figurita> figu){
+		List<Figurita> figus = new ArrayList<Figurita>();
+			//album.getValue().addAll(figus);
+			for(int i=0;i<figu.size();i++) {
+				figus.add(figu.get(i));
+			}
+			return figus;	
+	}
+	
+
+
 
 	/*public String toString() {
 		StringBuilder resultado = new StringBuilder();
@@ -88,6 +116,9 @@ public abstract class Album  {
 	
 	//Este metodo esta implementado en los 3 album, que devuelve el nombre de cada uno. 
 	protected abstract String nombre();
+	protected abstract void usarCodigo();
+	protected abstract boolean codigoUsado();
+	//protected abstract boolean albumLleno();
 } 	
 
 

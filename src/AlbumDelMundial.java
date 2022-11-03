@@ -63,6 +63,23 @@ public class AlbumDelMundial {
 			throw new RuntimeException("Participante No esta registrado o Album invalido");
 		}
 	}
+	public void comprarFiguritasConCodigoPromocional(int dni) {
+		if (estaRegistrado(dni) && participantes.get(dni).album.nombre()=="Web") {
+			List<Figurita> sobre = fabrica.generarSobre(4);
+			if(!codigoUsado(dni)) {
+				agregarSobre(sobre,dni);
+				usarCodigo(dni);
+			}
+		} else {
+			throw new RuntimeException("Participante No esta registrado o Album invalido o Codigo Usado");
+		}
+	}
+	private boolean codigoUsado(int dni) {
+		return participantes.get(dni).album.codigoUsado();
+	}
+	private void usarCodigo(int dni) {
+		participantes.get(dni).album.usarCodigo();
+	}
 
 	// Los metodos agregar buscan por tabla de Hash el objeto participante
 	// por su dni(key), por lo que ya no tendriamos que recorrer el diccionario
@@ -113,17 +130,13 @@ public class AlbumDelMundial {
 
 	public List<String> pegarFiguritas(int dni) {
 		List<String> figusPegadas = new ArrayList<String>();
-		for (Map.Entry<Integer, Participante> p : participantes.entrySet()) {
-			if (p.getKey() == dni) {
+		Participante participante=participantes.get(dni);
 				List<Figurita> figusParticipante = figuritasAsociadas(dni);
 				for (int i = 0; i < figusParticipante.size(); i++) {
-					p.getValue().album.pegarFigurita(figusParticipante.get(i));
+					participante.album.pegarFigurita(figusParticipante.get(i));
 					figusPegadas.add("$" + figusParticipante.get(i).mostrarPais() + "-$"
 							+ figusParticipante.get(i).codigo() + "$");
 				}
-
-			}
-		}
 
 		return figusPegadas;
 	}
@@ -139,8 +152,7 @@ public class AlbumDelMundial {
 	}
 
 	public boolean llenoAlbum(int dni) {
-
-		return false;
+		return participantes.get(dni).album.albumLleno();
 	}
 
 	public String darPremio(int i) {
@@ -158,13 +170,9 @@ public class AlbumDelMundial {
 		return null;
 	}
 
-	public boolean intercambiarUnaFiguritaRepetida(int dniConAlbumTradicional) {
+	public boolean intercambiarUnaFiguritaRepetida(int dni) {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-	public void comprarFiguritasConCodigoPromocional(int dniConAlbumTradicional) {
-		// TODO Auto-generated method stub
-
-	}
+	
 }
