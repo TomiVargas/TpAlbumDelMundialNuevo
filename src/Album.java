@@ -120,8 +120,10 @@ public abstract class Album  {
 	
 	//Este metodo esta implementado en los 3 album, que devuelve el nombre de cada uno. 
 	protected abstract String nombre();
-	protected abstract void usarCodigo();
-	protected abstract boolean codigoUsado();
+	protected  void usarCodigo() {}
+	protected boolean codigoUsado(){
+		return false;}
+	protected abstract String darPremio();
 	//protected abstract boolean albumLleno();
 } 	
 

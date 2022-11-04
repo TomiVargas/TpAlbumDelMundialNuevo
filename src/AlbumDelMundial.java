@@ -165,13 +165,28 @@ public class AlbumDelMundial {
 	}
 
 	public String darPremio(int dni) {
-		// TODO Auto-generated method stub
-		return null;
+			String premio="";
+			Participante participante= participantes.get(dni);
+			//FALTA RESOLVER LO DE ALBUM LLENO esto en realidad iria 
+			// participante.album.albumLleno() sin negar.
+			if (estaRegistrado(dni) && participante.album.albumLleno()) {
+				premio = participante.album.darPremio();
+			} else {
+				throw new RuntimeException("Participante no registrado o album incompleto");
+			}
+			return premio;
 	}
 
-	public char[] listadoDeGanadores() {
-		// TODO Auto-generated method stub
-		return null;
+	public String listadoDeGanadores() {
+		String listaDeGanadores="";
+		for (Map.Entry<Integer, Participante> participante : participantes.entrySet()) {
+			if(participante.getValue().album.albumLleno()) {
+				listaDeGanadores+="-"+"("+"$"+participante.getValue().dni+")"+" $"+
+				participante.getValue().darNombre()+":"+ " $"+participante.getValue().tipoAlbum();
+			}
+		}
+		return listaDeGanadores;
+		
 	}
 
 	public List<String> participantesQueCompletaronElPais(String pais) {

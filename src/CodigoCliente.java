@@ -70,7 +70,7 @@ public class CodigoCliente {
 		System.out.println("Codigo "+ sistema.buscarFiguritaRepetida(222222));
 		System.out.println(sistema.llenoAlbum(777777));
 		System.out.println(sistema.llenoAlbum(222222));
-		if(sistema.llenoAlbum(222222)) {
+		if(!sistema.llenoAlbum(222222)) {
 			System.out.println(
 					sistema.darNombre(222222) + 
 					" recibio: " + 

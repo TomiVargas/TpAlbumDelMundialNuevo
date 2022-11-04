@@ -20,6 +20,10 @@ public class AlbumWeb extends Album{
 	public boolean codigoUsado() {
 		return codigoPromocional==0;
 	}
+	@Override
+	protected String darPremio() {
+		return "Camiseta oficial de la seleccion";
+	}
 		
 	
 }

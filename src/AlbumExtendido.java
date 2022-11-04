@@ -15,4 +15,9 @@ public class AlbumExtendido extends Album{
 	public String nombre() {
 		return "Extendido";
 	}
+
+	@Override
+	protected String darPremio() {
+		return "Una pelota y un viaje";
+	}
 }
