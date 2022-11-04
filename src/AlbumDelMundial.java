@@ -133,7 +133,7 @@ public class AlbumDelMundial {
 
 	public List<String> pegarFiguritas(int dni) {
 		List<String> figusPegadas = new ArrayList<String>();
-		List<Figurita> figusPegadasQuitar = new ArrayList<Figurita>();
+		//List<Figurita> figusPegadasQuitar = new ArrayList<Figurita>();
 		Participante participante=participantes.get(dni);
 				List<Figurita> figusParticipante = figuritasAsociadas(dni);
 				for (int i = 0; i < figusParticipante.size(); i++) {
@@ -203,5 +203,4 @@ public class AlbumDelMundial {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
 }

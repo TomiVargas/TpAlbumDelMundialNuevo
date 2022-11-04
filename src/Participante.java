@@ -26,6 +26,7 @@ public class Participante {
 		void agregarFigurita(Figurita figurita) {
 			figus.add(figurita);
 		}
+		
 	
 	
 	//Nuevo metodo
@@ -83,4 +84,7 @@ public class Participante {
 		}
 		return f;
 	}
+
+
+	
 }

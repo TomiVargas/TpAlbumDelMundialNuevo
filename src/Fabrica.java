@@ -61,7 +61,7 @@ public class Fabrica {
 		for(int i=0;i<4;i++) {
 			int aleatorio=random.nextInt(12);
 			int paisAleatorio=random.nextInt(paisesParticipantes.length);
-			FiguritaTradicional figu= new FiguritaTradicional(aleatorio,paisesParticipantes[paisAleatorio]);
+			Figurita figu= new FiguritaTradicional(aleatorio,paisesParticipantes[paisAleatorio]);
 			sobre.add(figu);
 			
 		}
@@ -89,7 +89,7 @@ public class Fabrica {
 	
 	// Dado el pais y numero de jugador de una figurita calcula
 	// cual es su valor base simbobilo.
-	private int calcularValorBase(String pais, int numero) {
+	protected int calcularValorBase(String pais, int numero) {
 		return ranking.get(pais) + numero;
 	}
 

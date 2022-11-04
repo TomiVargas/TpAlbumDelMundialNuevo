@@ -2,11 +2,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public abstract class Album  {
 	private int codigo;
 	private Map<String, List<Figurita>> album;
-	private String[] paisesParticipantes;
+	protected String[] paisesParticipantes;
 	
 
 	public Album(Integer lugaresPorPais, String[] paisesParticipantes, int codigo) {
@@ -14,7 +15,7 @@ public abstract class Album  {
 		this.paisesParticipantes=paisesParticipantes;
 		this.album = new HashMap<String, List<Figurita>>();
 		
-		List<Figurita> lugares = new ArrayList<Figurita>(12);
+		List<Figurita> lugares = new ArrayList<Figurita>(lugaresPorPais);
 		for(int pais = 0; pais < paisesParticipantes.length; pais++) {	
 			album.put(paisesParticipantes[pais], lugares);
 		}
@@ -29,14 +30,20 @@ public abstract class Album  {
 	
 	public void pegarFigurita(Figurita figu) { 
 		for (Map.Entry<String, List<Figurita>> album : album.entrySet()) {
-			for(int i=0; i < album.getValue().size() ; i++) {
-					if(album.getValue().get(i).equals(figu) && !estaPegada(figu)) {
-						album.getValue().add(figu);
+			if(album.getKey()==figu.mostrarPais()) {
+				for(int i=0; i < album.getValue().size() ; i++) {
+					if(figu.codigo()==i && !estaPegada(figu)) {
+					album.getValue().add(i,figu);
 					}
 				}
 					
-			}
 		}
+		}
+	}
+	
+
+
+
 	protected boolean estaPegada(Figurita figu) {
 		for (Map.Entry<String, List<Figurita>> album : album.entrySet()) {
 			for(int i=0; i < album.getValue().size() ; i++) {
@@ -68,7 +75,7 @@ public abstract class Album  {
 		for(Map.Entry<String, List<Figurita>> album : album.entrySet()) {
 			for(int i=0;i<paisesParticipantes.length;i++) {
 				if(paisesParticipantes[i]==album.getKey()) {	
-				estaLleno=estaLleno && album.getValue().size()==11;
+				estaLleno=estaLleno && album.getValue().size()==12;
 				}
 			}
 		}
@@ -102,16 +109,16 @@ public abstract class Album  {
 		resultado.append("* ALBUM TRADICIONAL *").append("\n");
 		resultado.append("*********************").append("\n").append("\n");
 		// Recorremos en Album
-		for (Map.Entry<String, Integer[]> entry : paisParticipante.entrySet()) {
+		for (Map.Entry<String, List<Figurita>> entry : album.entrySet()) {
 		    
 			//Mostramos la clave (Nombre del pais participante)
 			resultado.append(entry.getKey());
 			resultado.append("\n");
 			resultado.append("   Figuritas : "); 
 			
-			for(int i=0; i < entry.getValue().length ; i++) {
+			for(int i=0; i < entry.getValue().size() ; i++) {
 				// Mostramos valor (Lugares de cada pais)
-				resultado.append(i + " = " + entry.getValue()[i] + ", ");
+				resultado.append(i + " = " + entry.getValue().get(i) + ", ");
 			}
 			resultado.append("\n").append("\n").append("***************************************************************************************************************************").append("\n");
 		}

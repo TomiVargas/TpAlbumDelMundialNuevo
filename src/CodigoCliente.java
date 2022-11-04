@@ -67,10 +67,11 @@ public class CodigoCliente {
 		}
 		List<String> f = sistema.figuritasAsociadas2(222222);
 			System.out.println(f);
+			
 		System.out.println("Codigo "+ sistema.buscarFiguritaRepetida(222222));
 		System.out.println(sistema.llenoAlbum(777777));
 		System.out.println(sistema.llenoAlbum(222222));
-		if(!sistema.llenoAlbum(222222)) {
+		if(sistema.llenoAlbum(222222)) {
 			System.out.println(
 					sistema.darNombre(222222) + 
 					" recibio: " + 
@@ -79,7 +80,7 @@ public class CodigoCliente {
 			System.out.println();
 		}
 		
-		
+		sistema.toString();
 		System.out.println("Llenaron album:");
 		//System.out.println(sistema.listadoDeGanadores());
 		System.out.println();
