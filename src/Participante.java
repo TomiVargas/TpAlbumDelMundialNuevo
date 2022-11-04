@@ -67,7 +67,8 @@ public class Participante {
 		List<Figurita> repetidas = new 	ArrayList<Figurita>();
 		for (int i = 0; i < figus.size(); i++) {
 			for(int j=0;j<figus.size();j++) {
-				if( figus.get(j).equals(figus.get(i)) && !album.estaPegada(figus.get(j))) {
+				if( figus.get(j).equals(figus.get(i)) 
+					&& !album.estaPegada(figus.get(j))) {
 					repetidas.add(figus.get(j));
 				}
 			}
