@@ -119,7 +119,6 @@ public class AlbumDelMundialtest {
 	}
 	
 	// Lleno Album
-	
 	@Test
 	public void t14_llenoAlbumConParticipanteNuevo_DevuelveFalse() {
 		assertFalse(sistema.llenoAlbum(dniConAlbumWeb));

@@ -108,6 +108,9 @@ public class AlbumDelMundial {
 		return participantes.get(dni).figuritas();
 
 	}
+	public List<String> figuritasAsociadas2(int dni){
+		return participantes.get(dni).figuritas(dni);
+	}
 
 	public String darNombre(int dni) {
 		if (estaRegistrado(dni)) {
@@ -130,20 +133,26 @@ public class AlbumDelMundial {
 
 	public List<String> pegarFiguritas(int dni) {
 		List<String> figusPegadas = new ArrayList<String>();
+		List<Figurita> figusPegadasQuitar = new ArrayList<Figurita>();
 		Participante participante=participantes.get(dni);
 				List<Figurita> figusParticipante = figuritasAsociadas(dni);
 				for (int i = 0; i < figusParticipante.size(); i++) {
 					participante.album.pegarFigurita(figusParticipante.get(i));
-					figusPegadas.add("$" + figusParticipante.get(i).mostrarPais() + "-$"
-							+ figusParticipante.get(i).codigo() + "$");
+					figusPegadas.add(" $ " + figusParticipante.get(i).mostrarPais() + " -$ "
+							+ figusParticipante.get(i).codigo() + " $ ");
+					
 				}
-
 		return figusPegadas;
 	}
 
+	
+
 	public int buscarFiguritaRepetida(int dni) {
-		return dni;
-		// TODO Auto-generated method stub
+		if(estaRegistrado(dni) && participantes.get(dni).figuritasRepetida().size()>=1) {
+			return participantes.get(dni).figuritasRepetida().get(0).codigo();
+			
+		}
+		return -1;
 	};
 
 	public void intercambiar(int i, Object buscarFiguritaRepetida) {
@@ -155,7 +164,7 @@ public class AlbumDelMundial {
 		return participantes.get(dni).album.albumLleno();
 	}
 
-	public String darPremio(int i) {
+	public String darPremio(int dni) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -165,9 +174,14 @@ public class AlbumDelMundial {
 		return null;
 	}
 
-	public List<String> participantesQueCompletaronElPais(String string) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<String> participantesQueCompletaronElPais(String pais) {
+		List<String> participantesQueCompletaronElPais= new ArrayList<>();
+		for(Map.Entry<Integer, Participante> participante : participantes.entrySet()) {
+			if(participante.getValue().album.paisCompleto(pais)) {
+				participantesQueCompletaronElPais.add(participante.getValue().darNombre());
+			}
+		}
+		return participantesQueCompletaronElPais;
 	}
 
 	public boolean intercambiarUnaFiguritaRepetida(int dni) {

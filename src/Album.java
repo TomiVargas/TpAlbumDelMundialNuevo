@@ -5,10 +5,7 @@ import java.util.Map;
 
 public abstract class Album  {
 	private int codigo;
-	private String tipoAlbum;	
-	//Nueva estructura
 	private Map<String, List<Figurita>> album;
-	private List<Figurita> lugares;
 	private String[] paisesParticipantes;
 	
 
@@ -17,7 +14,7 @@ public abstract class Album  {
 		this.paisesParticipantes=paisesParticipantes;
 		this.album = new HashMap<String, List<Figurita>>();
 		
-		List<Figurita> lugares = new ArrayList<Figurita>(11);
+		List<Figurita> lugares = new ArrayList<Figurita>(12);
 		for(int pais = 0; pais < paisesParticipantes.length; pais++) {	
 			album.put(paisesParticipantes[pais], lugares);
 		}
@@ -33,19 +30,17 @@ public abstract class Album  {
 	public void pegarFigurita(Figurita figu) { 
 		for (Map.Entry<String, List<Figurita>> album : album.entrySet()) {
 			for(int i=0; i < album.getValue().size() ; i++) {
-					if(album.getValue().get(i).codigo()==figu.codigo() && 
-						album.getValue().get(i).mostrarPais()== figu.mostrarPais() && !estaPegada(figu)) {
-						lugares.add(figu);
+					if(album.getValue().get(i).equals(figu) && !estaPegada(figu)) {
+						album.getValue().add(figu);
 					}
 				}
 					
 			}
 		}
-	private boolean estaPegada(Figurita figu) {
+	protected boolean estaPegada(Figurita figu) {
 		for (Map.Entry<String, List<Figurita>> album : album.entrySet()) {
 			for(int i=0; i < album.getValue().size() ; i++) {
-					if(album.getValue().get(i).codigo()==figu.codigo() && 
-						album.getValue().get(i).mostrarPais()== figu.mostrarPais()) {
+					if(album.getValue().get(i).equals(figu)) {
 						return true;
 					}
 				}
@@ -72,15 +67,24 @@ public abstract class Album  {
 		boolean estaLleno=true;
 		for(Map.Entry<String, List<Figurita>> album : album.entrySet()) {
 			for(int i=0;i<paisesParticipantes.length;i++) {
-				if(album.getKey().equals(paisesParticipantes[i])) {
-					estaLleno=estaLleno && tamañoDeLaListaDeFiguritas(album.getValue()).size()==12;
+				if(paisesParticipantes[i]==album.getKey()) {	
+				estaLleno=estaLleno && album.getValue().size()==11;
 				}
 			}
 		}
 		return estaLleno;
 		
 	}
-	private List<Figurita> tamañoDeLaListaDeFiguritas(List<Figurita> figu){
+	public boolean paisCompleto(String pais) {
+		boolean estaLleno=true;
+		for(Map.Entry<String, List<Figurita>> album : album.entrySet()) {
+				if(album.getKey()==pais) {
+					estaLleno=estaLleno && album.getValue().size()==12;
+				}	
+		}
+		return estaLleno;
+	}
+	protected List<Figurita> tamañoDeLaListaDeFiguritas(List<Figurita> figu){
 		List<Figurita> figus = new ArrayList<Figurita>();
 			//album.getValue().addAll(figus);
 			for(int i=0;i<figu.size();i++) {

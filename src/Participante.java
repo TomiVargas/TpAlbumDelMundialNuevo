@@ -29,9 +29,9 @@ public class Participante {
 	
 	
 	//Nuevo metodo
-	boolean estaAsociadaFigurita(int codigo) {
+	boolean estaAsociadaFigurita(Figurita figu) {
 		for (Figurita figurita : figus) {
-			if(figurita.codigo()==codigo) {
+			if(figurita.equals(figu)) {
 				return true;
 			}
 		}
@@ -39,13 +39,13 @@ public class Participante {
 	}
 	
 	//Nuevo metodo
-	boolean quitaFigurita(Figurita figurita) {
-		if(estaAsociadaFigurita(figurita.codigo()))
-			for (Figurita figurit : figus) {
-				if(figurit.codigo().equals(figurita.codigo())) {
+	protected boolean quitaFigurita(Figurita figurita) {
+			for (int i=0;i<figus.size();i++) {
+				if(figus.get(i).codigo() == figurita.codigo() && figus.get(i).mostrarPais()== figurita.mostrarPais()) {
 					figus.remove(figurita);
 				}
 			}
+			
 		return false;
 	}
 	
@@ -65,20 +65,22 @@ public class Participante {
 	List<Figurita> figuritasRepetida() {
 		List<Figurita> repetidas = new 	ArrayList<Figurita>();
 		for (int i = 0; i < figus.size(); i++) {
-			repetidas.add(repetida(figus.get(i), figus));
+			for(int j=0;j<figus.size();j++) {
+				if( figus.get(j).equals(figus.get(i)) && !album.estaPegada(figus.get(j))) {
+					repetidas.add(figus.get(j));
+				}
+			}
+			
 		}
 		return repetidas;
 	}
 
 
-	private Figurita repetida(Figurita figurita, List<Figurita> figus2) {
-		Figurita figu=null;
-		for (int i = 0; i < figus2.size(); i++) {
-			if(figurita.equals(figus2.get(i))) {
-				figu=figurita;
-			}
+	public List<String> figuritas(int dni2) {
+		List<String> f= new ArrayList<String>();
+		for(int i=0;i<figus.size();i++) {
+			f.add(figus.get(i).codigo().toString());
+		}
+		return f;
 	}
-		return figu;
-	 
-}
 }
