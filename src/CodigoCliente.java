@@ -40,7 +40,7 @@ public class CodigoCliente {
 		
 		
 		List<String> pegadas = sistema.pegarFiguritas(222222);
-		System.out.println(pegadas);
+		//System.out.println(pegadas);
 		if(pegadas.isEmpty()) { //o sea... no pego ninguna
 			sistema.comprarFiguritas(222222);
 			sistema.intercambiar(
@@ -65,12 +65,15 @@ public class CodigoCliente {
 			sistema.comprarFiguritas(777777);
 			sistema.pegarFiguritas(777777);
 		}
-		List<String> f = sistema.figuritasAsociadas2(222222);
-			System.out.println(f);
+		/*List<String> f = sistema.figuritasAsociadas2(222222);
+			System.out.println(f);*/
 			
 		System.out.println("Codigo "+ sistema.buscarFiguritaRepetida(222222));
-		System.out.println(sistema.llenoAlbum(777777));
-		System.out.println(sistema.llenoAlbum(222222));
+		System.out.println(sistema.darNombre(777777) + " tiene album lleno?  "+sistema.llenoAlbum(777777));
+		System.out.println(sistema.darNombre(222222) + " tiene album lleno?  "+sistema.llenoAlbum(222222));
+		
+		System.out.println(sistema.darNombre(777777) + " tiene album lleno?  "+sistema.llenoAlbum2(777777));
+		System.out.println(sistema.darNombre(222222) + " tiene album lleno?  "+sistema.llenoAlbum2(222222));
 		if(sistema.llenoAlbum(222222)) {
 			System.out.println(
 					sistema.darNombre(222222) + 

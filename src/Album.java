@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -80,8 +81,25 @@ public abstract class Album  {
 			}
 		}
 		return estaLleno;
-		
 	}
+	
+	public boolean albumLleno2() {
+		boolean lleno=true;
+		for (int i = 0; i < paisesParticipantes.length; i++) {
+			lleno = lleno && paisLleno(album.get(paisesParticipantes[i]));
+		}
+		return lleno;
+	}
+	
+	public boolean paisLleno(List<Figurita> figurita) {
+		boolean lleno= true;
+		for (int i = 0; i < figurita.size(); i++) {
+			lleno= lleno && figurita.get(i)!= null;
+		}
+		return lleno;
+	}
+	
+	
 	public boolean paisCompleto(String pais) {
 		boolean estaLleno=true;
 		for(Map.Entry<String, List<Figurita>> album : album.entrySet()) {
