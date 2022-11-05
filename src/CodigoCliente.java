@@ -37,7 +37,7 @@ public class CodigoCliente {
 			);
 		
 		
-		List<String> pegadas = sistema.pegarFiguritas(222222);
+		List<String> pegadas = sistema.pegarFiguritas2(222222);
 		System.out.println(pegadas);
 		if(pegadas.isEmpty()) { //o sea... no pego ninguna
 			sistema.comprarFiguritas(222222);
@@ -51,17 +51,17 @@ public class CodigoCliente {
 		// Simulamos un uso prolongado del sistema.
 		for (int i =0;i<200;i++) {
 			sistema.comprarFiguritas(222222);
-			sistema.pegarFiguritas(222222);
+			sistema.pegarFiguritas2(222222);
 			sistema.comprarFiguritas(555555);
-			sistema.pegarFiguritas(555555);
+			sistema.pegarFiguritas2(555555);
 		}
 	
 		
 		for (int i =0;i<1000;i++) {
 			sistema.comprarFiguritas(666666);
-			sistema.pegarFiguritas(666666);
+			sistema.pegarFiguritas2(666666);
 			sistema.comprarFiguritas(777777);
-			sistema.pegarFiguritas(777777);
+			sistema.pegarFiguritas2(777777);
 		}
 		
 			
@@ -96,5 +96,6 @@ public class CodigoCliente {
 		System.out.println("=================================================");
 		System.out.println(sistema);
 	}
+	}}
 
-}
+

@@ -25,6 +25,12 @@ public class Participante {
 			figus.add(figurita);
 		}
 		
+		//Metodos nuevo pegar
+		void pegarFigurita(Figurita figurita) {
+			if(!album.estaPegada(figurita))
+				album.pegarFigurita2(figurita);
+		}
+		
 	
 	
 	boolean estaAsociadaFigurita(Figurita figu) {

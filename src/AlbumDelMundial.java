@@ -156,6 +156,25 @@ public class AlbumDelMundial {
 				}
 		return figusPegadas;
 	}
+	
+	public List<String> pegarFiguritas2(int dni) {
+		if(estaRegistrado(dni)) {
+			List<String> figusPegadas = new ArrayList<String>();
+			List<Figurita> figusParticipante = figuritasAsociadas(dni);
+			
+			for (int i = 0; i < figusParticipante.size(); i++) {
+				
+				if(participantes.get(dni).album.pegarFigurita2(figusParticipante.get(i))) {
+						figusPegadas.add(
+								" $ " + figusParticipante.get(i).mostrarPais() + " -$ "
+										+ figusParticipante.get(i).codigo() + " $ ");			
+				}
+			}
+			return figusPegadas;
+		} else {
+		throw new RuntimeException("No registrado");
+		}
+	}
 
 	
 
@@ -179,13 +198,9 @@ public class AlbumDelMundial {
 				 		return true;
 				 	}
 				 }
-			 
-			 
 			 }
-			 
 		 }
 		 return false;
-
 	}
 
 	private Figurita recorrerLaListaDeFigusRepetidasYVerificaSiEsta(List<Figurita> figusRepetida, int codFigurita) {
@@ -209,17 +224,14 @@ public class AlbumDelMundial {
 		return false;
 	}
 	public boolean llenoAlbum(int dni) {
-		return participantes.get(dni).album.albumLleno();
+		return participantes.get(dni).album.albumLleno2();
 	}
 	
-	/*public boolean llenoAlbum2(int dni) {
-		return participantes.get(dni).album.albumLleno2();
-	}*/
 
 	public String darPremio(int dni) {
 			String premio="";
 			Participante participante= participantes.get(dni);
-			if (estaRegistrado(dni) && participante.album.albumLleno2()) {
+			if (estaRegistrado(dni) && participante.album.albumLleno()) {
 				premio = participante.album.darPremio();
 			} else {
 				throw new RuntimeException("Participante no registrado o album incompleto");
