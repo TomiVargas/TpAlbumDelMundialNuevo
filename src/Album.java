@@ -51,7 +51,8 @@ public abstract class Album {
 				}
 
 			}
-		} return null;
+		}
+		return null;
 	}
 
 	/*
@@ -93,16 +94,21 @@ public abstract class Album {
 	 * paisCompleto(album.getValue()[i].mostrarPais()); } } } return estaLleno; }
 	 */
 
-	/*
-	 * public boolean albumLleno2() { boolean lleno=true; for(Map.Entry<String,
-	 * List<Figurita>> album : album.entrySet()) { lleno=lleno &&
-	 * album.getValue().isEmpty(); } return lleno; }
-	 * 
-	 * 
-	 * public boolean paisLleno(List<Figurita> figurita) { boolean lleno= true; for
-	 * (int i = 0; i < figurita.size(); i++) { lleno= lleno &&
-	 * figurita.get(i)!=null; } return lleno; }
-	 */
+	public boolean albumLleno() {
+		boolean lleno = true;
+		for (Map.Entry<String, Figurita[]> a : album.entrySet()) {
+			lleno = lleno && paisLleno(a.getValue());
+		}
+		return lleno;
+	}
+
+	public boolean paisLleno(Figurita[] figurita) {
+		boolean lleno = true;
+		for (int i = 0; i < figurita.length ; i++) {
+			lleno = lleno && figurita[i] != null;
+		}
+		return lleno;
+	}
 
 	/*
 	 * public boolean paisCompleto(String pais) { boolean estaLleno=true;
@@ -148,8 +154,8 @@ public abstract class Album {
 
 			for (int i = 0; i < entry.getValue().length; i++) {
 				// Mostramos valor (Lugares de cada pais)
-				resultado.append(i + " = " );
-				if(estaPegada(entry.getValue()[i])) {
+				resultado.append(i + " = ");
+				if (estaPegada(entry.getValue()[i])) {
 					resultado.append(i + "; ");
 				}
 			}
@@ -160,4 +166,5 @@ public abstract class Album {
 
 		return resultado.toString();
 	}
+
 }
