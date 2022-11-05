@@ -7,16 +7,17 @@ import java.util.Map.Entry;
 
 public abstract class Album  {
 	private int codigo;
-	private Map<String, List<Figurita>> album;
+	private Map<String, Figurita[]> album;
 	protected String[] paisesParticipantes;
 	
 
 	public Album(Integer lugaresPorPais, String[] paisesParticipantes, int codigo) {
 		this.codigo=codigo;
 		this.paisesParticipantes=paisesParticipantes;
-		this.album = new HashMap<String, List<Figurita>>();
+		Figurita[] lugares = new Figurita[12];
+		this.album = new HashMap<String, Figurita[]>();
 		
-		List<Figurita> lugares = new ArrayList<Figurita>(lugaresPorPais);
+		
 		for(int pais = 0; pais < paisesParticipantes.length; pais++) {	
 			album.put(paisesParticipantes[pais], lugares);
 		}
@@ -30,11 +31,13 @@ public abstract class Album  {
 
 	
 	public void pegarFigurita(Figurita figu) { 
-		for (Map.Entry<String, List<Figurita>> album : album.entrySet()) {
-			if(album.getKey()==figu.mostrarPais()) {
-				for(int i=0; i < album.getValue().size() ; i++) {
-					if(figu.codigo()==i && !estaPegada(figu)) {
-					album.getValue().add(i,figu);
+		for (Map.Entry<String, Figurita[]> album : album.entrySet()) {
+			if(album.getKey().equals(figu.mostrarPais())) {
+				for(int i=0; i < album.getValue().length ; i++) {
+					if(figu.codigo()==i) {
+						if(album.getValue()==null) {
+					album.getValue()[i]=figu;
+						}
 					}
 				}
 					
@@ -46,9 +49,9 @@ public abstract class Album  {
 
 
 	protected boolean estaPegada(Figurita figu) {
-		for (Map.Entry<String, List<Figurita>> album : album.entrySet()) {
-			for(int i=0; i < album.getValue().size() ; i++) {
-					if(album.getValue().get(i).equals(figu)) {
+		for (Map.Entry<String, Figurita[]> album : album.entrySet()) {
+			for(int i=0; i < album.getValue().length ; i++) {
+					if(album.getValue()[i]==figu) {
 						return true;
 					}
 				}
@@ -60,26 +63,26 @@ public abstract class Album  {
 	
 	public List<Figurita> figuritas(){
 		List<Figurita> figus = new ArrayList<Figurita>();
-		for (Map.Entry<String, List<Figurita>> album : album.entrySet()) {
+		for (Map.Entry<String, Figurita[]> album : album.entrySet()) {
 			//album.getValue().addAll(figus);
-			for(int i=0;i<album.getValue().size();i++) {
-				figus.add(album.getValue().get(i));
+			for(int i=0;i<album.getValue().length;i++) {
+				figus.add(album.getValue()[i]);
 			}
 		}
 		return figus;
 	}
 	
-		public boolean albumLleno() {
+		/*public boolean albumLleno() {
 			boolean estaLleno=true;
-			for(Map.Entry<String, List<Figurita>> album : album.entrySet()) {
+			for(Map.Entry<String, Figurita[]> album : album.entrySet()) {
 				for(int i=0;i<paisesParticipantes.length;i++) {
 					if(paisesParticipantes[i]==album.getKey()) {	
-					estaLleno=estaLleno && album.getValue().size()==12;
+					estaLleno=estaLleno &&	paisCompleto(album.getValue()[i].mostrarPais());
 					}
 				}
 			}
 			return estaLleno;
-		}
+		}*/
 	
 	/*public boolean albumLleno2() {
 		boolean lleno=true;
@@ -99,26 +102,29 @@ public abstract class Album  {
 	}*/
 	
 	
-	public boolean paisCompleto(String pais) {
+	/*public boolean paisCompleto(String pais) {
 		boolean estaLleno=true;
-		for(Map.Entry<String, List<Figurita>> album : album.entrySet()) {
+		for(Map.Entry<String, Figurita[]> album : album.entrySet()) {
 				if(album.getKey()==pais) {
-					estaLleno=estaLleno && album.getValue().size()==12;
-				}	
+					for(int i=0;album.getValue().length;i++) {
+					estaLleno=estaLleno &&	album.getValue()[i]!=null;
+					}
+					}
+					
 		}
 		return estaLleno;
-	}
+	}*/
 	
 	
 	
-	protected List<Figurita> tamañoDeLaListaDeFiguritas(List<Figurita> figu){
+	/*protected List<Figurita> tamañoDeLaListaDeFiguritas(Figurita[] figu){
 		List<Figurita> figus = new ArrayList<Figurita>();
 			//album.getValue().addAll(figus);
 			for(int i=0;i<figu.size();i++) {
 				figus.add(figu.get(i));
 			}
 			return figus;	
-	}
+	}*/
 	
 	//Este metodo esta implementado en los 3 album, que devuelve el nombre de cada uno. 
 	protected abstract String nombre();
@@ -126,6 +132,28 @@ public abstract class Album  {
 	protected boolean codigoUsado(){
 		return false;}
 	protected abstract String darPremio();
+	public String toString() {
+		StringBuilder resultado = new StringBuilder();
+		resultado.append("*********************").append("\n");
+		resultado.append("* ALBUM TRADICIONAL *").append("\n");
+		resultado.append("*********************").append("\n").append("\n");
+		// Recorremos en Album
+		for (Map.Entry<String, Figurita[]> entry : album.entrySet()) {
+		    
+			//Mostramos la clave (Nombre del pais participante)
+			resultado.append(entry.getKey());
+			resultado.append("\n");
+			resultado.append("   Figuritas : ").append("\n");
+			
+			for(int i=0; i < entry.getValue().length ; i++) {
+				// Mostramos valor (Lugares de cada pais)
+				resultado.append(i + " = " + entry.getValue()[i] + ", ");
+			}
+		}
+		resultado.append("\n").append("\n").append("***************************************************************************************************************************").append("\n");
+	
+	return resultado.toString();
+}
 } 	
 
 

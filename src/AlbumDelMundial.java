@@ -148,6 +148,7 @@ public class AlbumDelMundial {
 		Participante participante=participantes.get(dni);
 				List<Figurita> figusParticipante = figuritasAsociadas(dni);
 				for (int i = 0; i < figusParticipante.size(); i++) {
+				
 					participante.album.pegarFigurita(figusParticipante.get(i));
 					figusPegadas.add(" $ " + figusParticipante.get(i).mostrarPais() + " -$ "
 							+ figusParticipante.get(i).codigo() + " $ ");
@@ -219,7 +220,7 @@ public class AlbumDelMundial {
 	public String darPremio(int dni) {
 			String premio="";
 			Participante participante= participantes.get(dni);
-			if (estaRegistrado(dni) && participante.album.albumLleno2()) {
+			if (estaRegistrado(dni) && participante.album.albumLleno()) {
 				premio = participante.album.darPremio();
 			} else {
 				throw new RuntimeException("Participante no registrado o album incompleto");
@@ -257,6 +258,9 @@ public class AlbumDelMundial {
 			}
 		}
 		return false;
+	}
+	public String mostrarElAlbum(int dni) {
+		return participantes.get(dni).album.toString();
 	}
 	
 	public String toString() {
