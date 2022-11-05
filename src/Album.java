@@ -109,6 +109,9 @@ public abstract class Album  {
 		}
 		return estaLleno;
 	}
+	
+	
+	
 	protected List<Figurita> tamañoDeLaListaDeFiguritas(List<Figurita> figu){
 		List<Figurita> figus = new ArrayList<Figurita>();
 			//album.getValue().addAll(figus);

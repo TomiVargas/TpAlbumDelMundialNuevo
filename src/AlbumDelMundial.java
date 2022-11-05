@@ -202,6 +202,11 @@ public class AlbumDelMundial {
 		}
 		return participantesQueCompletaronElPais;
 	}
+	
+	/*List<String> participantesQueCompletaronElPais2(String nombrePais){
+		if(album.paisCompleto(nombrePais))
+			List<String> participantes = participante.darNombre();
+	}*/
 
 	public boolean intercambiarUnaFiguritaRepetida(int dni) {
 		// TODO Auto-generated method stub
