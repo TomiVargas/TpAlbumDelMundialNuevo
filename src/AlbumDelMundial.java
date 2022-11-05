@@ -155,9 +155,46 @@ public class AlbumDelMundial {
 		return -1;
 	};
 
-	public void intercambiar(int i, Object buscarFiguritaRepetida) {
-		// TODO Auto-generated method stub
+	public boolean intercambiar(int dni, int codFigurita) {
+		 if(estaRegistrado(dni) && !existeFigurita(dni,codFigurita)) {
+			 for(Map.Entry<Integer, Participante> participante : participantes.entrySet()) {
+				 if(participantes.get(dni).tipoAlbum()
+					== participante.getValue().tipoAlbum()) {
+				 List<Figurita> figuRepetidaParticipante2=participante.getValue().figuritasRepetida(); 
+				 	participantes.get(dni).figus
+				 	.add(recorrerLaListaDeFigusRepetidasYVerificaSiEsta(figuRepetidaParticipante2,codFigurita));
+				 	if(recorrerLaListaDeFigusRepetidasYVerificaSiEsta(figuRepetidaParticipante2,codFigurita)!=null) {
+				 		return true;
+				 	}
+				 }
+			 
+			 
+			 }
+			 
+		 }
+		 return false;
 
+	}
+
+	private Figurita recorrerLaListaDeFigusRepetidasYVerificaSiEsta(List<Figurita> figusRepetida, int codFigurita) {
+		Figurita figu=null;		
+		for(int i=0;i<figusRepetida.size();i++) {
+					if(figusRepetida.get(i).codigo()==codFigurita) {
+						figu=figusRepetida.get(i);
+					}
+				}
+				return figu;
+		
+	}
+
+	private boolean existeFigurita(int dni, int codFigurita) {
+		List<Figurita> figus= figuritasAsociadas(dni);
+		for(int i=0;i<figus.size();i++) {
+			if(figus.get(i).codigo()== codFigurita) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public boolean llenoAlbum(int dni) {
