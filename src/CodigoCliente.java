@@ -15,12 +15,12 @@ public class CodigoCliente {
 		sistema.registrarParticipante(666666, "Jazzmine", "Extendido");
 		sistema.registrarParticipante(777777, "Dante", "Tradicional");
 		
-		//System.out.println("Figuritas :"+sistema.comprarFiguritas2(222222));
 		// El participante 111111 tiene album Web entonces tiene un codigo 
-		// promocional para solicitar 4 figuritas sin consto.
-		//sistema.comprarFiguritasConCodigoPromocional(111111);
+		// promocional para solicitar 4 figuritas sin costo.
+		sistema.comprarFiguritasConCodigoPromocional(111111);
 		sistema.comprarFiguritas(222222);
 		sistema.comprarFiguritas(222222);
+		sistema.comprarFiguritasConCodigoPromocional(555555);
 
 	
 		
@@ -32,15 +32,15 @@ public class CodigoCliente {
 				" recibio por sorteo instantaneo: " + 
 			sistema.aplicarSorteoInstantaneo(222222)
 			);
-		/*System.out.println(
-				sistema.darNombre(333333) + 
+		System.out.println(
+				sistema.darNombre(777777) + 
 				" recibio por sorteo instantaneo: " + 
-				sistema.aplicarSorteoInstantaneo(333333)
-			);*/
+				sistema.aplicarSorteoInstantaneo(777777)
+			);
 		
 		
 		List<String> pegadas = sistema.pegarFiguritas(222222);
-		//System.out.println(pegadas);
+		System.out.println(pegadas);
 		if(pegadas.isEmpty()) { //o sea... no pego ninguna
 			sistema.comprarFiguritas(222222);
 			sistema.intercambiar(
@@ -57,7 +57,7 @@ public class CodigoCliente {
 			sistema.comprarFiguritas(555555);
 			sistema.pegarFiguritas(555555);
 		}
-		//System.out.println(sistema.participante(555555).figus);
+	
 		
 		for (int i =0;i<1000;i++) {
 			sistema.comprarFiguritas(666666);
@@ -65,15 +65,9 @@ public class CodigoCliente {
 			sistema.comprarFiguritas(777777);
 			sistema.pegarFiguritas(777777);
 		}
-		/*List<String> f = sistema.figuritasAsociadas2(222222);
-			System.out.println(f);*/
+		
 			
 		System.out.println("Codigo "+ sistema.buscarFiguritaRepetida(222222));
-		//System.out.println(sistema.darNombre(777777) + " tiene album lleno?  "+sistema.llenoAlbum(777777));
-		//System.out.println(sistema.darNombre(222222) + " tiene album lleno?  "+sistema.llenoAlbum(222222));
-		
-		System.out.println(sistema.darNombre(777777) + " tiene album lleno?  "+sistema.llenoAlbum2(333333));
-		System.out.println(sistema.darNombre(222222) + " tiene album lleno?  "+sistema.llenoAlbum2(555555));
 		if(sistema.llenoAlbum2(333333)) {
 			System.out.println(
 					sistema.darNombre(333333) + 

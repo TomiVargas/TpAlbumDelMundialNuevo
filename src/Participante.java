@@ -7,8 +7,6 @@ public class Participante {
 	protected Integer dni;
 	private String nombreUsuario;
 	protected Album album;
-	
-	//Nueva estructura
 	protected List<Figurita> figus;
 	
 	
@@ -29,7 +27,6 @@ public class Participante {
 		
 	
 	
-	//Nuevo metodo
 	boolean estaAsociadaFigurita(Figurita figu) {
 		for (Figurita figurita : figus) {
 			if(figurita.equals(figu)) {
@@ -39,7 +36,6 @@ public class Participante {
 		return false;
 	}
 	
-	//Nuevo metodo
 	protected boolean quitaFigurita(Figurita figurita) {
 			for (int i=0;i<figus.size();i++) {
 				if(figus.get(i).codigo() == figurita.codigo() && figus.get(i).mostrarPais()== figurita.mostrarPais()) {

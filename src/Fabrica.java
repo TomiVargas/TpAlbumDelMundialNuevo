@@ -17,7 +17,7 @@ public class Fabrica {
 	private String[] listadoDeMundialesTop10;
 	private Map<String, String[]> balonYPaisPorMundialTop10;
 	private Map<String, Integer> ranking;
-	protected AlbumDelMundial album;
+	
 	
 
 	Fabrica() {

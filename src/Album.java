@@ -68,8 +68,7 @@ public abstract class Album  {
 		}
 		return figus;
 	}
-	//Intente resolverlo pero creo que quedo mal. No esta en los test para probarlo,
-		//solo esta el que da error. 
+	
 		public boolean albumLleno() {
 			boolean estaLleno=true;
 			for(Map.Entry<String, List<Figurita>> album : album.entrySet()) {
@@ -120,38 +119,12 @@ public abstract class Album  {
 			return figus;	
 	}
 	
-
-
-
-	/*public String toString() {
-		StringBuilder resultado = new StringBuilder();
-		resultado.append("*********************").append("\n");
-		resultado.append("* ALBUM TRADICIONAL *").append("\n");
-		resultado.append("*********************").append("\n").append("\n");
-		// Recorremos en Album
-		for (Map.Entry<String, List<Figurita>> entry : album.entrySet()) {
-		    
-			//Mostramos la clave (Nombre del pais participante)
-			resultado.append(entry.getKey());
-			resultado.append("\n");
-			resultado.append("   Figuritas : "); 
-			
-			for(int i=0; i < entry.getValue().size() ; i++) {
-				// Mostramos valor (Lugares de cada pais)
-				resultado.append(i + " = " + entry.getValue().get(i) + ", ");
-			}
-			resultado.append("\n").append("\n").append("***************************************************************************************************************************").append("\n");
-		}
-		return resultado.toString();
-	}*/
-	
 	//Este metodo esta implementado en los 3 album, que devuelve el nombre de cada uno. 
 	protected abstract String nombre();
 	protected  void usarCodigo() {}
 	protected boolean codigoUsado(){
 		return false;}
 	protected abstract String darPremio();
-	//protected abstract boolean albumLleno();
 } 	
 
 

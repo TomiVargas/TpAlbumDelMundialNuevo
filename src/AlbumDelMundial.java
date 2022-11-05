@@ -10,10 +10,16 @@ public class AlbumDelMundial {
 	private Album album;
 	private Participante participante;
 	private Map<Integer, Participante> participantes;
+	private int cantDeVecesCodigoPromo;
+	private int cantDeSorteosEfectuados;
+	private int cantDeFiguritasCompradas;
 
 	public AlbumDelMundial() {
 		this.participantes = new HashMap<>();
 		this.fabrica = new Fabrica();
+		this.cantDeVecesCodigoPromo=0;
+		this.cantDeSorteosEfectuados=0;
+		this.cantDeFiguritasCompradas=0;
 	}
 
 	int registrarParticipante(Integer dni, String nombre, String tipoAlbum) {
@@ -49,6 +55,7 @@ public class AlbumDelMundial {
 	void comprarFiguritas(int dni) {
 		if (estaRegistrado(dni)) {
 			List<Figurita> sobre = fabrica.generarSobre(4);
+			cantDeFiguritasCompradas+=4;
 			agregarSobre(sobre, dni);
 		} else {
 			throw new RuntimeException("Participante No esta registrado o Album invalido");
@@ -58,6 +65,7 @@ public class AlbumDelMundial {
 	void comprarFiguritasTop10(int dni) {
 		if (estaRegistrado(dni) && participantes.get(dni).tipoAlbum() == "Extendido") {
 			List<FiguritaTOP10> sobre = fabrica.generarSobreTop10(4);
+			cantDeFiguritasCompradas+=4;
 			agregarSobreTOP10(sobre, dni);
 		} else {
 			throw new RuntimeException("Participante No esta registrado o Album invalido");
@@ -68,7 +76,10 @@ public class AlbumDelMundial {
 			List<Figurita> sobre = fabrica.generarSobre(4);
 			if(!codigoUsado(dni)) {
 				agregarSobre(sobre,dni);
+				cantDeFiguritasCompradas+=4;
 				usarCodigo(dni);
+				cantDeVecesCodigoPromo++;
+				
 			}
 		} else {
 			throw new RuntimeException("Participante No esta registrado o Album invalido o Codigo Usado");
@@ -128,18 +139,19 @@ public class AlbumDelMundial {
 		}
 
 		int intAletorio = aleatorio.nextInt(3);
+		cantDeSorteosEfectuados++;
 		return sorteo[intAletorio];
 	}
 
 	public List<String> pegarFiguritas(int dni) {
 		List<String> figusPegadas = new ArrayList<String>();
-		//List<Figurita> figusPegadasQuitar = new ArrayList<Figurita>();
 		Participante participante=participantes.get(dni);
 				List<Figurita> figusParticipante = figuritasAsociadas(dni);
 				for (int i = 0; i < figusParticipante.size(); i++) {
 					participante.album.pegarFigurita(figusParticipante.get(i));
 					figusPegadas.add(" $ " + figusParticipante.get(i).mostrarPais() + " -$ "
 							+ figusParticipante.get(i).codigo() + " $ ");
+					
 					
 				}
 		return figusPegadas;
@@ -207,9 +219,7 @@ public class AlbumDelMundial {
 	public String darPremio(int dni) {
 			String premio="";
 			Participante participante= participantes.get(dni);
-			//FALTA RESOLVER LO DE ALBUM LLENO esto en realidad iria 
-			// participante.album.albumLleno() sin negar.
-			if (estaRegistrado(dni) && participante.album.albumLleno()) {
+			if (estaRegistrado(dni) && participante.album.albumLleno2()) {
 				premio = participante.album.darPremio();
 			} else {
 				throw new RuntimeException("Participante no registrado o album incompleto");
@@ -238,11 +248,6 @@ public class AlbumDelMundial {
 		}
 		return participantesQueCompletaronElPais;
 	}
-	
-	/*List<String> participantesQueCompletaronElPais2(String nombrePais){
-		if(album.paisCompleto(nombrePais))
-			List<String> participantes = participante.darNombre();
-	}*/
 
 	public boolean intercambiarUnaFiguritaRepetida(int dni) {
 		List<Figurita> repetidas=participantes.get(dni).figuritasRepetida();
@@ -252,5 +257,48 @@ public class AlbumDelMundial {
 			}
 		}
 		return false;
+	}
+	
+	public String toString() {
+		StringBuilder resultado = new StringBuilder();
+		int cantidadDeParticipantes=0;
+		int cantidadDeTipoDeAlbumExtendido=0;
+		int cantidadDeTipoDeAlbumWeb=0;
+		int cantidadDeTipoDeAlbumTradicional=0;
+		resultado.append("*********************************").append("\n");
+		resultado.append("* Sistema Del Album Del Mundial *").append("\n");
+		resultado.append("*********************************").append("\n");
+			// Recorremos en Album
+			for (Map.Entry<Integer,Participante> participante : participantes.entrySet()) {
+				if(participante.getValue().tipoAlbum()=="Extendido") {
+					cantidadDeTipoDeAlbumExtendido++;
+				}
+				if(participante.getValue().tipoAlbum()=="Tradicional") {
+					cantidadDeTipoDeAlbumTradicional++;
+				}
+				if(participante.getValue().tipoAlbum()=="Web") {
+					cantidadDeTipoDeAlbumWeb++;
+				}
+				if(estaRegistrado(participante.getValue().dni)) {
+					cantidadDeParticipantes++;
+				}
+			}
+			resultado.append("Cantidad de participantes: ");
+			resultado.append(cantidadDeParticipantes).append("\n");
+			resultado.append("Cantidad de tipo de album Tradicional: ");
+			resultado.append(cantidadDeTipoDeAlbumTradicional).append("\n");
+			resultado.append("Cantidad de tipo de album Extendido: ");
+			resultado.append(cantidadDeTipoDeAlbumExtendido).append("\n");
+			resultado.append("Cantidad de tipo de album Web: ");
+			resultado.append(cantidadDeTipoDeAlbumWeb).append("\n");
+			resultado.append("Cantidad de codigo promocional canjeado: ");
+			resultado.append(cantDeVecesCodigoPromo).append("\n");
+			resultado.append("Cantidad de sorteos efectuados: ");
+			resultado.append(cantDeSorteosEfectuados).append("\n");
+			resultado.append("Cantidad de figuritas Compradas: ");
+			resultado.append(cantDeFiguritasCompradas);
+			resultado.append("\n").append("\n").append("*********************************").append("\n");
+			return resultado.toString();
+	
 	}
 }
