@@ -243,7 +243,7 @@ public class AlbumDelMundial {
 	public List<String> participantesQueCompletaronElPais(String pais) {
 		List<String> participantesQueCompletaronElPais= new ArrayList<>();
 		for(Map.Entry<Integer, Participante> participante : participantes.entrySet()) {
-			if(participante.getValue().album.paisLleno(pais)) {
+			if(participante.getValue().album.paisCompleto(pais)) {
 				participantesQueCompletaronElPais.add(participante.getValue().darNombre());
 			}
 		}

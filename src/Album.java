@@ -104,20 +104,20 @@ public abstract class Album {
 
 	public boolean paisLleno(Figurita[] figurita) {
 		boolean lleno = true;
-		for (int i = 0; i < figurita.length ; i++) {
+		for (int i = 0; i < figurita.length; i++) {
 			lleno = lleno && figurita[i] != null;
 		}
 		return lleno;
 	}
 
-	/*
-	 * public boolean paisCompleto(String pais) { boolean estaLleno=true;
-	 * for(Map.Entry<String, Figurita[]> album : album.entrySet()) {
-	 * if(album.getKey()==pais) { for(int i=0;album.getValue().length;i++) {
-	 * estaLleno=estaLleno && album.getValue()[i]!=null; } }
-	 * 
-	 * } return estaLleno; }
-	 */
+	public boolean paisCompleto(String pais) {
+		boolean lleno = true;
+		for (Map.Entry<String, Figurita[]> a : album.entrySet()) {
+			if(a.getKey().equals(pais))
+				lleno = lleno && paisLleno(a.getValue());
+		}
+		return lleno;
+	}
 
 	/*
 	 * protected List<Figurita> tamañoDeLaListaDeFiguritas(Figurita[] figu){
