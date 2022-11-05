@@ -77,5 +77,9 @@ public class Participante {
 		}
 		return f;
 	}
+	
+	boolean AlbumCompleto() {
+		return this.album.albumLleno();
+	}
 
 }
