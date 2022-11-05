@@ -72,9 +72,9 @@ public class CodigoCliente {
 		//System.out.println(sistema.darNombre(777777) + " tiene album lleno?  "+sistema.llenoAlbum(777777));
 		//System.out.println(sistema.darNombre(222222) + " tiene album lleno?  "+sistema.llenoAlbum(222222));
 		
-		System.out.println(sistema.darNombre(777777) + " tiene album lleno?  "+sistema.llenoAlbum2(333333));
-		System.out.println(sistema.darNombre(222222) + " tiene album lleno?  "+sistema.llenoAlbum2(555555));
-		if(sistema.llenoAlbum2(333333)) {
+		System.out.println(sistema.darNombre(777777) + " tiene album lleno?  "+sistema.llenoAlbum(333333));
+		System.out.println(sistema.darNombre(222222) + " tiene album lleno?  "+sistema.llenoAlbum(555555));
+		if(sistema.llenoAlbum(333333)) {
 			System.out.println(
 					sistema.darNombre(333333) + 
 					" recibio: " + 
