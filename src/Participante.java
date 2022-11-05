@@ -63,6 +63,10 @@ public class Participante {
 		return album.nombre();
 	}
 	
+	String dni() {
+		return this.dni.toString();
+	}
+	
 	List<Figurita> figuritasRepetida() {
 		List<Figurita> repetidas = new 	ArrayList<Figurita>();
 		for (int i = 0; i < figus.size(); i++) {
