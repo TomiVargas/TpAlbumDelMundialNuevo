@@ -145,11 +145,11 @@ public class AlbumDelMundial {
 
 	public List<String> pegarFiguritas(int dni) {
 		List<String> figusPegadas = new ArrayList<String>();
-		Participante participante=participantes.get(dni);
 				List<Figurita> figusParticipante = figuritasAsociadas(dni);
 				for (int i = 0; i < figusParticipante.size(); i++) {
 				
-					participante.album.pegarFigurita(figusParticipante.get(i));
+					participantes.get(dni).album.pegarFigurita2(figusParticipante.get(i));
+					
 					figusPegadas.add(" $ " + figusParticipante.get(i).mostrarPais() + " -$ "
 							+ figusParticipante.get(i).codigo() + " $ ");
 					
