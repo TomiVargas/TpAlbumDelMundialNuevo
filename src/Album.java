@@ -1,9 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 public abstract class Album {
 	private int codigo;
@@ -55,14 +53,6 @@ public abstract class Album {
 		return null;
 	}
 
-	/*
-	 * public void pegarFigurita2(Figurita figu) { Figurita[]
-	 * figus=album.get(figu.mostrarPais()); for (int i = 0; i < figus.length; i++) {
-	 * if(!figu.equals(figus[i])) {
-	 * 
-	 * } } }
-	 */
-
 	protected boolean estaPegada(Figurita figu) {
 		for (Map.Entry<String, Figurita[]> album : album.entrySet()) {
 			for (int i = 0; i < album.getValue().length; i++) {
@@ -86,14 +76,6 @@ public abstract class Album {
 		return figus;
 	}
 
-	/*
-	 * public boolean albumLleno() { boolean estaLleno=true; for(Map.Entry<String,
-	 * Figurita[]> album : album.entrySet()) { for(int
-	 * i=0;i<paisesParticipantes.length;i++) {
-	 * if(paisesParticipantes[i]==album.getKey()) { estaLleno=estaLleno &&
-	 * paisCompleto(album.getValue()[i].mostrarPais()); } } } return estaLleno; }
-	 */
-
 	public boolean albumLleno() {
 		boolean lleno = true;
 		for (Map.Entry<String, Figurita[]> a : album.entrySet()) {
@@ -102,7 +84,7 @@ public abstract class Album {
 		return lleno;
 	}
 
-	public boolean paisLleno(Figurita[] figurita) {
+	private boolean paisLleno(Figurita[] figurita) {
 		boolean lleno = true;
 		for (int i = 0; i < figurita.length; i++) {
 			lleno = lleno && figurita[i] != null;
@@ -110,21 +92,14 @@ public abstract class Album {
 		return lleno;
 	}
 
-	public boolean paisCompleto(String pais) {
+	public boolean argentinaLleno(String pais) {
 		boolean lleno = true;
 		for (Map.Entry<String, Figurita[]> a : album.entrySet()) {
-			if(a.getKey().equals(pais))
+			if (a.getKey().equals(pais))
 				lleno = lleno && paisLleno(a.getValue());
 		}
 		return lleno;
 	}
-
-	/*
-	 * protected List<Figurita> tamañoDeLaListaDeFiguritas(Figurita[] figu){
-	 * List<Figurita> figus = new ArrayList<Figurita>();
-	 * //album.getValue().addAll(figus); for(int i=0;i<figu.size();i++) {
-	 * figus.add(figu.get(i)); } return figus; }
-	 */
 
 	// Este metodo esta implementado en los 3 album, que devuelve el nombre de cada
 	// uno.
