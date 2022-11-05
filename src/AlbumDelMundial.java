@@ -156,7 +156,7 @@ public class AlbumDelMundial {
 	};
 
 	public boolean intercambiar(int dni, int codFigurita) {
-		 if(estaRegistrado(dni) && !existeFigurita(dni,codFigurita)) {
+		 if(estaRegistrado(dni) && existeFigurita(dni,codFigurita)) {
 			 for(Map.Entry<Integer, Participante> participante : participantes.entrySet()) {
 				 if(participantes.get(dni).tipoAlbum()
 					== participante.getValue().tipoAlbum()) {
@@ -196,7 +196,6 @@ public class AlbumDelMundial {
 		}
 		return false;
 	}
-
 	public boolean llenoAlbum(int dni) {
 		return participantes.get(dni).album.albumLleno();
 	}
@@ -241,7 +240,12 @@ public class AlbumDelMundial {
 	}
 
 	public boolean intercambiarUnaFiguritaRepetida(int dni) {
-		// TODO Auto-generated method stub
+		List<Figurita> repetidas=participantes.get(dni).figuritasRepetida();
+		for(int i=0;i<repetidas.size();i++) {
+			if(intercambiar(dni,repetidas.get(i).codigo())) {
+				return true;
+			}
+		}
 		return false;
 	}
 }

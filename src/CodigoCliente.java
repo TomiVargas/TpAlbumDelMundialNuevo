@@ -69,16 +69,16 @@ public class CodigoCliente {
 			System.out.println(f);*/
 			
 		System.out.println("Codigo "+ sistema.buscarFiguritaRepetida(222222));
-		System.out.println(sistema.darNombre(777777) + " tiene album lleno?  "+sistema.llenoAlbum(777777));
-		System.out.println(sistema.darNombre(222222) + " tiene album lleno?  "+sistema.llenoAlbum(222222));
+		//System.out.println(sistema.darNombre(777777) + " tiene album lleno?  "+sistema.llenoAlbum(777777));
+		//System.out.println(sistema.darNombre(222222) + " tiene album lleno?  "+sistema.llenoAlbum(222222));
 		
-		System.out.println(sistema.darNombre(777777) + " tiene album lleno?  "+sistema.llenoAlbum2(777777));
-		System.out.println(sistema.darNombre(222222) + " tiene album lleno?  "+sistema.llenoAlbum2(222222));
-		if(sistema.llenoAlbum(222222)) {
+		System.out.println(sistema.darNombre(777777) + " tiene album lleno?  "+sistema.llenoAlbum2(333333));
+		System.out.println(sistema.darNombre(222222) + " tiene album lleno?  "+sistema.llenoAlbum2(555555));
+		if(sistema.llenoAlbum2(333333)) {
 			System.out.println(
-					sistema.darNombre(222222) + 
+					sistema.darNombre(333333) + 
 					" recibio: " + 
-					sistema.darPremio(222222)
+					sistema.darPremio(333333)
 				);
 			System.out.println();
 		}
@@ -87,7 +87,7 @@ public class CodigoCliente {
 		System.out.println("Llenaron album:");
 		//System.out.println(sistema.listadoDeGanadores());
 		System.out.println();
-		
+		System.out.println();
 		System.out.println("Participantes que Llenaron el Pais Argentina:" +sistema.participantesQueCompletaronElPais("Argentina"));
 		for (String item: sistema.participantesQueCompletaronElPais("Argentina"))
 			System.out.println(item);

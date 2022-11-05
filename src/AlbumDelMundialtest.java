@@ -96,7 +96,7 @@ public class AlbumDelMundialtest {
 	public void t10_intercambiarFiguritasConAlbumVacio_DevuelveTrue() {
 		// Para este caso se registraron 2 tradicionales 
 		// y ambos compraron figuritas.
-		assertTrue(sistema.intercambiarUnaFiguritaRepetida(dniConAlbumTradicional));
+		assertTrue(sistema.intercambiar(dniConAlbumTradicional,0));
 	}
 	
 	@Test

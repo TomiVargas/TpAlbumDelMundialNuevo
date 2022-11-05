@@ -68,20 +68,19 @@ public abstract class Album  {
 		}
 		return figus;
 	}
-	
 	//Intente resolverlo pero creo que quedo mal. No esta en los test para probarlo,
-	//solo esta el que da error. 
-	public boolean albumLleno() {
-		boolean estaLleno=true;
-		for(Map.Entry<String, List<Figurita>> album : album.entrySet()) {
-			for(int i=0;i<paisesParticipantes.length;i++) {
-				if(paisesParticipantes[i]==album.getKey()) {	
-				estaLleno=estaLleno && album.getValue().size()==12;
+		//solo esta el que da error. 
+		public boolean albumLleno() {
+			boolean estaLleno=true;
+			for(Map.Entry<String, List<Figurita>> album : album.entrySet()) {
+				for(int i=0;i<paisesParticipantes.length;i++) {
+					if(paisesParticipantes[i]==album.getKey()) {	
+					estaLleno=estaLleno && album.getValue().size()==12;
+					}
 				}
 			}
+			return estaLleno;
 		}
-		return estaLleno;
-	}
 	
 	public boolean albumLleno2() {
 		boolean lleno=true;
@@ -94,7 +93,7 @@ public abstract class Album  {
 	public boolean paisLleno(List<Figurita> figurita) {
 		boolean lleno= true;
 		for (int i = 0; i < figurita.size(); i++) {
-			lleno= lleno && figurita.get(i)!= null;
+			lleno= lleno && figurita.get(i)!=null;
 		}
 		return lleno;
 	}
