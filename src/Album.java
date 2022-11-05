@@ -81,13 +81,14 @@ public abstract class Album  {
 			return estaLleno;
 		}
 	
-	public boolean albumLleno2() {
+	/*public boolean albumLleno2() {
 		boolean lleno=true;
-		for (int i = 0; i < paisesParticipantes.length; i++) {
-			lleno = lleno && paisLleno(album.get(paisesParticipantes[i]));
-		}
+		for(Map.Entry<String, List<Figurita>> album : album.entrySet()) {
+				lleno=lleno && album.getValue().isEmpty();
+			}
 		return lleno;
 	}
+	
 	
 	public boolean paisLleno(List<Figurita> figurita) {
 		boolean lleno= true;
@@ -95,7 +96,7 @@ public abstract class Album  {
 			lleno= lleno && figurita.get(i)!=null;
 		}
 		return lleno;
-	}
+	}*/
 	
 	
 	public boolean paisCompleto(String pais) {

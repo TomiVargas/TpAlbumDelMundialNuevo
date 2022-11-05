@@ -124,6 +124,7 @@ public class AlbumDelMundialtest {
 		assertFalse(sistema.llenoAlbum(dniConAlbumWeb));
 	}
 	
+	
 	// Consultar por participante puntual
 	
 	@Test

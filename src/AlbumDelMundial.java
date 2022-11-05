@@ -212,9 +212,9 @@ public class AlbumDelMundial {
 		return participantes.get(dni).album.albumLleno();
 	}
 	
-	public boolean llenoAlbum2(int dni) {
+	/*public boolean llenoAlbum2(int dni) {
 		return participantes.get(dni).album.albumLleno2();
-	}
+	}*/
 
 	public String darPremio(int dni) {
 			String premio="";

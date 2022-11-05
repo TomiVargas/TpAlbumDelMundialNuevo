@@ -15,8 +15,6 @@ public class CodigoCliente {
 		sistema.registrarParticipante(666666, "Jazzmine", "Extendido");
 		sistema.registrarParticipante(777777, "Dante", "Tradicional");
 		
-		// El participante 111111 tiene album Web entonces tiene un codigo 
-		// promocional para solicitar 4 figuritas sin costo.
 		sistema.comprarFiguritasConCodigoPromocional(111111);
 		sistema.comprarFiguritas(222222);
 		sistema.comprarFiguritas(222222);
@@ -68,7 +66,14 @@ public class CodigoCliente {
 		
 			
 		System.out.println("Codigo "+ sistema.buscarFiguritaRepetida(222222));
-		if(sistema.llenoAlbum2(333333)) {
+
+		if(sistema.llenoAlbum(333333)) {
+
+		
+		System.out.println(sistema.darNombre(777777) + " tiene album lleno?  "+sistema.llenoAlbum(333333));
+		System.out.println(sistema.darNombre(222222) + " tiene album lleno?  "+sistema.llenoAlbum(555555));
+		if(sistema.llenoAlbum(333333)) {
+
 			System.out.println(
 					sistema.darNombre(333333) + 
 					" recibio: " + 
