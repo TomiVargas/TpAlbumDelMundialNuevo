@@ -78,7 +78,7 @@ public class Participante {
 		return f;
 	}
 	
-	boolean AlbumCompleto() {
+	boolean albumCompleto() {
 		return this.album.albumLleno();
 	}
 
