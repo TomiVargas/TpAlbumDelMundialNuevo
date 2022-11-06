@@ -19,6 +19,7 @@ public class CodigoCliente {
 		sistema.comprarFiguritas(222222);
 		sistema.comprarFiguritas(222222);
 		sistema.comprarFiguritasConCodigoPromocional(555555);
+		sistema.pegarFiguritas(111111);
 
 	
 		
@@ -36,8 +37,13 @@ public class CodigoCliente {
 				sistema.aplicarSorteoInstantaneo(777777)
 			);
 		
+
+		System.out.println(sistema);
+		List<String> pegadas = sistema.pegarFiguritas(222222);
+=======
 		
 		List<String> pegadas = sistema.pegarFiguritas2(222222);
+
 		System.out.println(pegadas);
 		if(pegadas.isEmpty()) { //o sea... no pego ninguna
 			sistema.comprarFiguritas(222222);
@@ -65,13 +71,8 @@ public class CodigoCliente {
 		}
 		
 			
-		System.out.println("Codigo "+ sistema.buscarFiguritaRepetida(222222));
-
-		if(sistema.llenoAlbum(333333)) {
 
 		
-		System.out.println(sistema.darNombre(777777) + " tiene album lleno?  "+sistema.llenoAlbum(333333));
-		System.out.println(sistema.darNombre(222222) + " tiene album lleno?  "+sistema.llenoAlbum(555555));
 		if(sistema.llenoAlbum(333333)) {
 
 			System.out.println(
@@ -88,8 +89,6 @@ public class CodigoCliente {
 		System.out.println();
 		System.out.println();
 		System.out.println("Participantes que Llenaron el Pais Argentina:" +sistema.participantesQueCompletaronElPais("Argentina"));
-		for (String item: sistema.participantesQueCompletaronElPais("Argentina"))
-			System.out.println(item);
 		
 		
 		System.out.println();

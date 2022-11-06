@@ -17,7 +17,9 @@ public abstract class  Figurita {
 	
 	protected Integer codigo() {
 		return this.numeroIdentificador;
-	};
+	}
+
+
 	
 	
 	
