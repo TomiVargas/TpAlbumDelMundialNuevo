@@ -8,6 +8,7 @@ public class Participante {
 	protected Album album;
 	protected List<Figurita> figus;
 
+
 	public Participante(Integer dni, String nombreUsuario, Album album) {
 		this.dni = dni;
 		this.nombreUsuario = nombreUsuario;
@@ -20,6 +21,22 @@ public class Participante {
 	void agregarFigurita(Figurita figurita) {
 		figus.add(figurita);
 	}
+
+=======
+	
+	//Nuevo metodo el participitante puede tener figuritas repetidas en su coleccion
+		void agregarFigurita(Figurita figurita) {
+			figus.add(figurita);
+		}
+		
+		//Metodos nuevo pegar
+		void pegarFigurita(Figurita figurita) {
+			if(!album.estaPegada(figurita))
+				album.pegarFigurita2(figurita);
+		}
+		
+	
+	
 
 	boolean estaAsociadaFigurita(Figurita figu) {
 		for (Figurita figurita : figus) {
