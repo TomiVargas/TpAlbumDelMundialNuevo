@@ -66,13 +66,8 @@ public class CodigoCliente {
 		}
 		
 			
-		System.out.println("Codigo "+ sistema.buscarFiguritaRepetida(111111));
 
-	
-		System.out.println(sistema.mostrarElAlbum(111111));
 		
-		System.out.println(sistema.darNombre(777777) + " tiene album lleno?  "+sistema.llenoAlbum(333333));
-		System.out.println(sistema.darNombre(222222) + " tiene album lleno?  "+sistema.llenoAlbum(555555));
 		if(sistema.llenoAlbum(333333)) {
 
 			System.out.println(
@@ -89,8 +84,6 @@ public class CodigoCliente {
 		System.out.println();
 		System.out.println();
 		System.out.println("Participantes que Llenaron el Pais Argentina:" +sistema.participantesQueCompletaronElPais("Argentina"));
-		for (String item: sistema.participantesQueCompletaronElPais("Argentina"))
-			System.out.println(item);
 		
 		
 		System.out.println();

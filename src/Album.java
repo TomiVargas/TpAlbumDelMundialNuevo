@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -7,11 +8,12 @@ public abstract class Album {
 	private int codigo;
 	private Map<String, Figurita[]> album;
 	protected String[] paisesParticipantes;
+	private Figurita[] lugares;
 
 	public Album(Integer lugaresPorPais, String[] paisesParticipantes, int codigo) {
 		this.codigo = codigo;
 		this.paisesParticipantes = paisesParticipantes;
-		Figurita[] lugares = new Figurita[12];
+		this.lugares = new Figurita[12];
 		this.album = new HashMap<String, Figurita[]>();
 
 		for (int pais = 0; pais < paisesParticipantes.length; pais++) {
@@ -23,58 +25,22 @@ public abstract class Album {
 		return this.codigo;
 	}
 
-	public void pegarFigurita(Figurita figu) {
-		for (Map.Entry<String, Figurita[]> album : album.entrySet()) {
-			if (album.getKey().equals(figu.mostrarPais())) {
-				for (int i = 0; i < album.getValue().length; i++) {
-					if (figu.codigo() == i) {
-						if (album.getValue() == null) {
-							album.getValue()[i] = figu;
-						}
-					}
-				}
-
-			}
+	boolean pegarFigurita2(Figurita figus) {
+		if(!estaPegada(figus)) {
+			album.get(figus.mostrarPais())[figus.codigo()]=figus;
+				return true;
 		}
-	}
-
-	Figurita pegarFigurita2(Figurita figu) {
-		for (Map.Entry<String, Figurita[]> a : album.entrySet()) {
-			if (a.getKey().equals(figu.mostrarPais())) {
-				for (int i = 0; i < a.getValue().length; i++) {
-					if (figu.codigo() == i) {
-						a.getValue()[i] = figu;
-						return figu;
-					}
-				}
-
-			}
+			return false;
 		}
-		return null;
-	}
 
 	protected boolean estaPegada(Figurita figu) {
-		for (Map.Entry<String, Figurita[]> album : album.entrySet()) {
-			for (int i = 0; i < album.getValue().length; i++) {
-				if (album.getValue()[i] == figu) {
+		if(album.get(figu.mostrarPais())[figu.codigo()]==figu){
 					return true;
-				}
-			}
-
 		}
 		return false;
 	}
 
-	public List<Figurita> figuritas() {
-		List<Figurita> figus = new ArrayList<Figurita>();
-		for (Map.Entry<String, Figurita[]> album : album.entrySet()) {
-			// album.getValue().addAll(figus);
-			for (int i = 0; i < album.getValue().length; i++) {
-				figus.add(album.getValue()[i]);
-			}
-		}
-		return figus;
-	}
+	
 
 	public boolean albumLleno() {
 		boolean lleno = true;
@@ -95,8 +61,9 @@ public abstract class Album {
 	public boolean argentinaLleno(String pais) {
 		boolean lleno = true;
 		for (Map.Entry<String, Figurita[]> a : album.entrySet()) {
-			if (a.getKey().equals(pais))
+			if (a.getKey().equals(pais)) {
 				lleno = lleno && paisLleno(a.getValue());
+			}
 		}
 		return lleno;
 	}
@@ -114,32 +81,8 @@ public abstract class Album {
 
 	protected abstract String darPremio();
 
-	public String toString() {
-		StringBuilder resultado = new StringBuilder();
-		resultado.append("*********************").append("\n");
-		resultado.append("* ALBUM TRADICIONAL *").append("\n");
-		resultado.append("*********************").append("\n").append("\n");
-		// Recorremos en Album
-		for (Map.Entry<String, Figurita[]> entry : album.entrySet()) {
-
-			// Mostramos la clave (Nombre del pais participante)
-			resultado.append(entry.getKey());
-			resultado.append("\n");
-			resultado.append("   Figuritas : ").append("\n");
-
-			for (int i = 0; i < entry.getValue().length; i++) {
-				// Mostramos valor (Lugares de cada pais)
-				resultado.append(i + " = ");
-				if (estaPegada(entry.getValue()[i])) {
-					resultado.append(i + "; ");
-				}
-			}
-		}
-		resultado.append("\n").append("\n").append(
-				"***************************************************************************************************************************")
-				.append("\n");
-
-		return resultado.toString();
-	}
-
 }
+	
+	
+
+

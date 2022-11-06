@@ -32,7 +32,7 @@ public class Participante {
 
 	protected boolean quitaFigurita(Figurita figurita) {
 		for (int i = 0; i < figus.size(); i++) {
-			if (figus.get(i).codigo() == figurita.codigo() && figus.get(i).mostrarPais() == figurita.mostrarPais()) {
+			if (figus.contains(figurita)) {
 				figus.remove(figurita);
 			}
 		}
@@ -43,6 +43,14 @@ public class Participante {
 	// Nuevo metodo al estar en el particpante no es necesario el dni
 	List<Figurita> figuritas() {
 		return this.figus;
+	}
+	
+	Figurita[] figuritas2() {
+		Figurita[] figu= new Figurita[figus.size()];
+		for(int i=0;i<figus.size();i++) {
+			figu[i]=figus.get(i);
+		}
+		return figu;
 	}
 
 	String darNombre() {
@@ -73,7 +81,7 @@ public class Participante {
 	public List<String> figuritas(int dni2) {
 		List<String> f = new ArrayList<String>();
 		for (int i = 0; i < figus.size(); i++) {
-			f.add(figus.get(i).codigo().toString());
+			f.add(figus.get(i).codigo().toString() + figus.get(i).mostrarPais());
 		}
 		return f;
 	}

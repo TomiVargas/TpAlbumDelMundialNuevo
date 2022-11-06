@@ -12,7 +12,7 @@ public class Fabrica {
 	private Random random;
 
 	private String[] premiosInstantaneos;
-	private String[] paisesParticipantes;
+	protected String[] paisesParticipantes;
 	private int lugaresPorPais;
 	private String[] listadoDeMundialesTop10;
 	private Map<String, String[]> balonYPaisPorMundialTop10;

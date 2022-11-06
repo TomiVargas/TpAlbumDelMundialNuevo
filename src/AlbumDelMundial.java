@@ -122,6 +122,9 @@ public class AlbumDelMundial {
 		return participantes.get(dni).figuritas();
 
 	}
+	public Figurita[] figuritasAsociadas3(int dni) {
+		return participantes.get(dni).figuritas2();
+	}
 
 	public List<String> figuritasAsociadas2(int dni) {
 		return participantes.get(dni).figuritas(dni);
@@ -149,14 +152,17 @@ public class AlbumDelMundial {
 
 	public List<String> pegarFiguritas(int dni) {
 		List<String> figusPegadas = new ArrayList<String>();
-		List<Figurita> figusParticipante = figuritasAsociadas(dni);
-		for (int i = 0; i < figusParticipante.size(); i++) {
+		Figurita[] figusParticipante = figuritasAsociadas3(dni);
+		
+		
+		for (int i = 0; i < figusParticipante.length; i++) {
+			if(participantes.get(dni).album.pegarFigurita2(figusParticipante[i])) {
+			figusPegadas.add(" $ " + figusParticipante[i].mostrarPais() + " -$ "
+					+ figusParticipante[i].codigo() + " $ ");
+			}
+			
 
-			participantes.get(dni).album.pegarFigurita2(figusParticipante.get(i));
-
-			figusPegadas.add(" $ " + figusParticipante.get(i).mostrarPais() + " -$ " + figusParticipante.get(i).codigo()
-					+ " $ ");
-
+		
 		}
 		return figusPegadas;
 	}
@@ -260,9 +266,7 @@ public class AlbumDelMundial {
 		return false;
 	}
 
-	public String mostrarElAlbum(int dni) {
-		return participantes.get(dni).album.toString();
-	}
+	
 
 	public String toString() {
 		StringBuilder resultado = new StringBuilder();
