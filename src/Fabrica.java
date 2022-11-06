@@ -74,7 +74,8 @@ public class Fabrica {
 		for(int i=0;i<4;i++) {
 			int aleatorio=random.nextInt(12);
 			int paisAleatorio=random.nextInt(paisesParticipantes.length);
-			FiguritaTOP10 figu= new FiguritaTOP10(aleatorio,paisesParticipantes[paisAleatorio]);
+			FiguritaTOP10 figu= new FiguritaTOP10(aleatorio,paisesParticipantes[paisAleatorio], 
+					generarListadoDeMundiales(),generarPaisesPorMundial());
 			sobre.add(figu);
 			
 		}
