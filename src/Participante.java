@@ -81,5 +81,9 @@ public class Participante {
 	boolean albumCompleto() {
 		return this.album.albumLleno();
 	}
+	
+	boolean tieneAlbumExtendido() {
+		return album.nombre()=="Extendido";
+	}
 
 }
