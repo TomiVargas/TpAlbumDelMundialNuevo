@@ -23,11 +23,14 @@ public class Participante {
 	}
 
 		
-		//Metodos nuevo pegar
-		void pegarFigurita(Figurita figurita) {
-			if(!album.estaPegada(figurita))
+		/*//Metodos nuevo pegar
+		boolean pegarFigurita(Figurita figurita) {
+			if(!album.estaPegada(figurita)) {
 				album.pegarFigurita2(figurita);
-		}
+				return true;
+			}
+			return false;
+		}*/
 		
 	
 	
@@ -43,8 +46,10 @@ public class Participante {
 
 	protected boolean quitaFigurita(Figurita figurita) {
 		for (int i = 0; i < figus.size(); i++) {
-			if (figus.contains(figurita)) {
+			if (figurita!=null ) {
 				figus.remove(figurita);
+				figus.add(i, null);
+				return true;
 			}
 		}
 
@@ -80,8 +85,10 @@ public class Participante {
 		List<Figurita> repetidas = new ArrayList<Figurita>();
 		for (int i = 0; i < figus.size(); i++) {
 			for (int j = 0; j < figus.size(); j++) {
+				if(figus.get(i)!=null && figus.get(j)!=null) {
 				if (figus.get(j).equals(figus.get(i)) && !album.estaPegada(figus.get(j))) {
 					repetidas.add(figus.get(j));
+				}
 				}
 			}
 

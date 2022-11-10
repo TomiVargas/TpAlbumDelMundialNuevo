@@ -14,13 +14,14 @@ public class CodigoCliente {
 		sistema.registrarParticipante(555555, "Miguel", "Web");
 		sistema.registrarParticipante(666666, "Jazzmine", "Extendido");
 		sistema.registrarParticipante(777777, "Dante", "Tradicional");
-		
+		sistema.comprarFiguritas(111111);
 		sistema.comprarFiguritasConCodigoPromocional(111111);
 		sistema.comprarFiguritas(222222);
 		sistema.comprarFiguritas(222222);
 		sistema.comprarFiguritasConCodigoPromocional(555555);
 		sistema.pegarFiguritas(111111);
-
+		sistema.comprarFiguritasTop10(666666);
+		sistema.pegarFiguritas(666666);
 	
 		
 		
@@ -36,12 +37,16 @@ public class CodigoCliente {
 				" recibio por sorteo instantaneo: " + 
 				sistema.aplicarSorteoInstantaneo(777777)
 			);
-		
-
+		System.out.println(sistema.mostrarAlbum(666666));
+		List<Figurita> figus= sistema.figuritasAsociadas(666666);
+		System.out.println(figus);
+		List<Figurita> figu= sistema.figuritasAsociadas(111111);
+		System.out.println(figu);
 		System.out.println(sistema);
-		List<String> pegadas = sistema.pegarFiguritas(222222);
+		List<String> pegadas = sistema.pegarFiguritas(111111);
 
 		System.out.println(pegadas);
+		System.out.println(sistema.mostrarAlbum(111111));
 		if(pegadas.isEmpty()) { //o sea... no pego ninguna
 			sistema.comprarFiguritas(222222);
 			sistema.intercambiar(
@@ -54,17 +59,17 @@ public class CodigoCliente {
 		// Simulamos un uso prolongado del sistema.
 		for (int i =0;i<200;i++) {
 			sistema.comprarFiguritas(222222);
-			sistema.pegarFiguritas2(222222);
+			sistema.pegarFiguritas(222222);
 			sistema.comprarFiguritas(555555);
-			sistema.pegarFiguritas2(555555);
+			sistema.pegarFiguritas(555555);
 		}
 	
 		
 		for (int i =0;i<1000;i++) {
 			sistema.comprarFiguritas(666666);
-			sistema.pegarFiguritas2(666666);
+			sistema.pegarFiguritas(666666);
 			sistema.comprarFiguritas(777777);
-			sistema.pegarFiguritas2(777777);
+			sistema.pegarFiguritas(777777);
 		}
 		
 			
@@ -79,7 +84,7 @@ public class CodigoCliente {
 				);
 			System.out.println();
 		}
-		System.out.println(sistema.mostrarAlbum(111111));
+		
 		sistema.toString();
 		System.out.println("Llenaron album:");
 		//System.out.println(sistema.listadoDeGanadores());

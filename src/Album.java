@@ -25,19 +25,43 @@ public abstract class Album {
 	}
 
 
-	boolean pegarFigurita2(Figurita figus) {
-		if(!estaPegada(figus)) {
-			album.get(figus.mostrarPais())[figus.codigo()]=figus;
+	protected boolean pegarFigurita2(Figurita figus) {
+		if(estaPegada(figus) || figus==null) {
+				return false;
+		}else {
+				album.get(figus.mostrarPais())[figus.codigo()]=figus;
 				return true;
 		}
-			return false;
-		}
-
-	protected boolean estaPegada(Figurita figu) {
-		if(album.get(figu.mostrarPais())[figu.codigo()]==figu){
-					return true;
+	}
+	private boolean existeFigurita(Figurita figu) {
+		for(Map.Entry<String, Figurita[]> figus : album.entrySet()) {
+			for(int i=0;i<figus.getValue().length;i++) {
+				if(figus.getValue()[i]!=null) {
+					if(figus.getValue()[i].equals(figu)) {
+						return true;
+				}
+				}
+			}
 		}
 		return false;
+	}
+
+	protected boolean estaPegada(Figurita figu) {
+		if(figu!=null) {
+			for(Map.Entry<String, Figurita[]> figus : album.entrySet()) {
+				for(int i=0;i<figus.getValue().length;i++) {
+					if(figus.getValue()[i]!=null) {
+						if(figus.getValue()[i].equals(figu)) {
+							return true;
+						}
+					}
+				
+			
+				}
+			}
+		}
+		return false;
+		
 	}
 
 	
@@ -66,10 +90,10 @@ public abstract class Album {
 		}
 		return lleno;
 	}
-	public String toString() {
+	public String toString(String tipoAlbum) {
 		StringBuilder resultado = new StringBuilder();
 		resultado.append("*********************").append("\n");
-		resultado.append("* ALBUM TRADICIONAL *").append("\n");
+		resultado.append("* ALBUM ").append(tipoAlbum.toUpperCase()).append(" *").append("\n");
 		resultado.append("*********************").append("\n").append("\n");
 		// Recorremos en Album
 		for (Map.Entry<String, Figurita[]> entry : album.entrySet()) {

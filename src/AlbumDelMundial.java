@@ -150,34 +150,22 @@ public class AlbumDelMundial {
 		return sorteo[intAletorio];
 	}
 
-	public List<String> pegarFiguritas(int dni) {
-		List<String> figusPegadas = new ArrayList<String>();
-		Figurita[] figusParticipante = figuritasAsociadas3(dni);
-		
-		
-		for (int i = 0; i < figusParticipante.length; i++) {
-			if(participantes.get(dni).album.pegarFigurita2(figusParticipante[i])) {
-			figusPegadas.add(" $ " + figusParticipante[i].mostrarPais() + " -$ "
-					+ figusParticipante[i].codigo() + " $ ");
-			}
-			
-
-		
-		}
-		return figusPegadas;
-	}
 	
-	public List<String> pegarFiguritas2(int dni) {
+	
+	public List<String> pegarFiguritas(int dni) {
 		if(estaRegistrado(dni)) {
 			List<String> figusPegadas = new ArrayList<String>();
 			List<Figurita> figusParticipante = figuritasAsociadas(dni);
+			int largoDeFigusParticipante= participantes.get(dni).figus.size();
 			
-			for (int i = 0; i < figusParticipante.size(); i++) {
-				
+			for (int i = 0; i < largoDeFigusParticipante; i++) {
+				if(figusParticipante.get(i)!=null) {
 				if(participantes.get(dni).album.pegarFigurita2(figusParticipante.get(i))) {
 						figusPegadas.add(
 								" $ " + figusParticipante.get(i).mostrarPais() + " -$ "
-										+ figusParticipante.get(i).codigo() + " $ ");			
+										+ figusParticipante.get(i).codigo() + " $ ");	
+						
+				}
 				}
 			}
 			return figusPegadas;
@@ -277,7 +265,7 @@ public class AlbumDelMundial {
 	}
 	
 	public String mostrarAlbum(int dni) {
-		return participantes.get(dni).album.toString();
+		return participantes.get(dni).album.toString(participantes.get(dni).album.nombre());
 	}
 	
 

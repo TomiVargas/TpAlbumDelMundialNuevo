@@ -9,6 +9,7 @@ public class FiguritaTOP10 extends Figurita{
 		super(numeroIdentificador, pais);
 		
 		this.balonYPaisPorMundialTop10=balonYPaisPorMundialTop10;
+		
 	}
 	
 	@Override
