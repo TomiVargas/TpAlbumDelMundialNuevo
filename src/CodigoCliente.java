@@ -40,9 +40,6 @@ public class CodigoCliente {
 
 		System.out.println(sistema);
 		List<String> pegadas = sistema.pegarFiguritas(222222);
-=======
-		
-		List<String> pegadas = sistema.pegarFiguritas2(222222);
 
 		System.out.println(pegadas);
 		if(pegadas.isEmpty()) { //o sea... no pego ninguna
@@ -82,7 +79,7 @@ public class CodigoCliente {
 				);
 			System.out.println();
 		}
-		
+		System.out.println(sistema.mostrarAlbum(111111));
 		sistema.toString();
 		System.out.println("Llenaron album:");
 		//System.out.println(sistema.listadoDeGanadores());
@@ -95,6 +92,6 @@ public class CodigoCliente {
 		System.out.println("=================================================");
 		System.out.println(sistema);
 	}
-	}}
+	}
 
 

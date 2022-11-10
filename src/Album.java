@@ -1,7 +1,5 @@
-import java.util.ArrayList;
+
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 public abstract class Album {
@@ -13,8 +11,6 @@ public abstract class Album {
 	public Album(Integer lugaresPorPais, String[] paisesParticipantes, int codigo) {
 		this.codigo = codigo;
 		this.paisesParticipantes = paisesParticipantes;
-
-		this.lugares = new Figurita[12];
 		this.album = new HashMap<String, Figurita[]>();
 
 		this.lugares = new Figurita[lugaresPorPais];
@@ -70,6 +66,34 @@ public abstract class Album {
 		}
 		return lleno;
 	}
+	public String toString() {
+		StringBuilder resultado = new StringBuilder();
+		resultado.append("*********************").append("\n");
+		resultado.append("* ALBUM TRADICIONAL *").append("\n");
+		resultado.append("*********************").append("\n").append("\n");
+		// Recorremos en Album
+		for (Map.Entry<String, Figurita[]> entry : album.entrySet()) {
+
+			// Mostramos la clave (Nombre del pais participante)
+			resultado.append(entry.getKey());
+			resultado.append("\n");
+			resultado.append("   Figuritas : ").append("\n");
+
+			for (int i = 0; i < entry.getValue().length; i++) {
+				// Mostramos valor (Lugares de cada pais)
+				resultado.append(i + " = ").append(entry.getValue()[i]).append( "; ");
+				}
+		}
+		resultado.append("\n").append("\n").append(
+				"***************************************************************************************************************************")
+				.append("\n");
+
+	
+	
+
+		return resultado.toString();
+	}
+	
 
 
 	// Este metodo esta implementado en los 3 album, que devuelve el nombre de cada

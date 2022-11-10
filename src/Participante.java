@@ -22,12 +22,6 @@ public class Participante {
 		figus.add(figurita);
 	}
 
-=======
-	
-	//Nuevo metodo el participitante puede tener figuritas repetidas en su coleccion
-		void agregarFigurita(Figurita figurita) {
-			figus.add(figurita);
-		}
 		
 		//Metodos nuevo pegar
 		void pegarFigurita(Figurita figurita) {

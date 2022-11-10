@@ -214,22 +214,6 @@ public class AlbumDelMundial {
 		}
 		return false;
 
-=======
-		 if(estaRegistrado(dni) && existeFigurita(dni,codFigurita)) {
-			 for(Map.Entry<Integer, Participante> participante : participantes.entrySet()) {
-				 if(participantes.get(dni).tipoAlbum()
-					== participante.getValue().tipoAlbum()) {
-				 List<Figurita> figuRepetidaParticipante2=participante.getValue().figuritasRepetida(); 
-				 	participantes.get(dni).figus
-				 	.add(recorrerLaListaDeFigusRepetidasYVerificaSiEsta(figuRepetidaParticipante2,codFigurita));
-				 	if(recorrerLaListaDeFigusRepetidasYVerificaSiEsta(figuRepetidaParticipante2,codFigurita)!=null) {
-				 		return true;
-				 	}
-				 }
-			 }
-		 }
-		 return false;
-
 	}
 
 	private Figurita recorrerLaListaDeFigusRepetidasYVerificaSiEsta(List<Figurita> figusRepetida, int codFigurita) {
@@ -255,7 +239,7 @@ public class AlbumDelMundial {
 	
 
 	public boolean llenoAlbum(int dni) {
-		return participantes.get(dni).album.albumLleno2();
+		return participantes.get(dni).album.albumLleno();
 	}
 
 
@@ -268,19 +252,6 @@ public class AlbumDelMundial {
 			throw new RuntimeException("Participante no registrado o album incompleto");
 		}
 		return premio;
-=======
-	
-
-	public String darPremio(int dni) {
-			String premio="";
-			Participante participante= participantes.get(dni);
-			if (estaRegistrado(dni) && participante.album.albumLleno()) {
-				premio = participante.album.darPremio();
-			} else {
-				throw new RuntimeException("Participante no registrado o album incompleto");
-			}
-			return premio;
-
 	}
 
 	public String listadoDeGanadores() {
@@ -303,6 +274,10 @@ public class AlbumDelMundial {
 			}
 		}
 		return participantesQueCompletaronElPais;
+	}
+	
+	public String mostrarAlbum(int dni) {
+		return participantes.get(dni).album.toString();
 	}
 	
 

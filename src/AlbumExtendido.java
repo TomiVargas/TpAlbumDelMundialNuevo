@@ -18,6 +18,8 @@ public class AlbumExtendido extends Album{
 		}
 	}
 	
+	
+	
 	@Override
 	public String nombre() {
 		return "Extendido";
