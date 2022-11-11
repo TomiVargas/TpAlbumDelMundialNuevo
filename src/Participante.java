@@ -84,16 +84,22 @@ public class Participante {
 	List<Figurita> figuritasRepetida() {
 		List<Figurita> repetidas = new ArrayList<Figurita>();
 		for (int i = 0; i < figus.size(); i++) {
+			
 			for (int j = 0; j < figus.size(); j++) {
-				if(figus.get(i)!=null && figus.get(j)!=null) {
-				if (figus.get(j).equals(figus.get(i)) && !album.estaPegada(figus.get(j))) {
+				if(sonRepetidas(figus.get(i), figus.get(j))) {
 					repetidas.add(figus.get(j));
-				}
 				}
 			}
 
 		}
 		return repetidas;
+	}
+	
+	// metodo auxiliar simplifica verificacion repetida
+	private boolean sonRepetidas(Figurita figurita, Figurita figurita2) {
+		return (figurita.equals(figurita2) 
+				&& (figurita!=null || figurita2 != null)
+				&& !album.estaPegada(figurita)) ? true :  false;
 	}
 
 	public List<String> figuritas(int dni2) {

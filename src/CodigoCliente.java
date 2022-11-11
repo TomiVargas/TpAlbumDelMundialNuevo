@@ -64,7 +64,7 @@ public class CodigoCliente {
 			sistema.pegarFiguritas(555555);
 		}
 	
-		
+	
 		for (int i =0;i<1000;i++) {
 			sistema.comprarFiguritas(666666);
 			sistema.pegarFiguritas(666666);
@@ -96,6 +96,8 @@ public class CodigoCliente {
 		System.out.println();
 		System.out.println("=================================================");
 		System.out.println(sistema);
+		
+		System.out.println(sistema.mostrarEstadoAlbumParticipante(222222));
 	}
 	}
 

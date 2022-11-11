@@ -118,6 +118,9 @@ public abstract class Album {
 		return resultado.toString();
 	}
 	
+	String[] mostrarPaisesParticpantes() {
+		return this.paisesParticipantes;
+	}
 
 
 	// Este metodo esta implementado en los 3 album, que devuelve el nombre de cada

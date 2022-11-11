@@ -122,6 +122,7 @@ public class AlbumDelMundial {
 		return participantes.get(dni).figuritas();
 
 	}
+
 	public Figurita[] figuritasAsociadas3(int dni) {
 		return participantes.get(dni).figuritas2();
 	}
@@ -150,27 +151,24 @@ public class AlbumDelMundial {
 		return sorteo[intAletorio];
 	}
 
-	
-	
 	public List<String> pegarFiguritas(int dni) {
-		if(estaRegistrado(dni)) {
+		if (estaRegistrado(dni)) {
 			List<String> figusPegadas = new ArrayList<String>();
 			List<Figurita> figusParticipante = figuritasAsociadas(dni);
-			int largoDeFigusParticipante= participantes.get(dni).figus.size();
-			
+			int largoDeFigusParticipante = participantes.get(dni).figus.size();
+
 			for (int i = 0; i < largoDeFigusParticipante; i++) {
-				if(figusParticipante.get(i)!=null) {
-				if(participantes.get(dni).album.pegarFigurita2(figusParticipante.get(i))) {
-						figusPegadas.add(
-								" $ " + figusParticipante.get(i).mostrarPais() + " -$ "
-										+ figusParticipante.get(i).codigo() + " $ ");	
-						
-				}
+				if (figusParticipante.get(i) != null) {
+					if (participantes.get(dni).album.pegarFigurita2(figusParticipante.get(i))) {
+						figusPegadas.add(" $ " + figusParticipante.get(i).mostrarPais() + " -$ "
+								+ figusParticipante.get(i).codigo() + " $ ");
+
+					}
 				}
 			}
 			return figusPegadas;
 		} else {
-		throw new RuntimeException("No registrado");
+			throw new RuntimeException("No registrado");
 		}
 	}
 
@@ -186,7 +184,7 @@ public class AlbumDelMundial {
 
 		if (estaRegistrado(dni) && existeFigurita(dni, codFigurita)) {
 			for (Map.Entry<Integer, Participante> participante : participantes.entrySet()) {
-				if (participantes.get(dni).tipoAlbum() == participante.getValue().tipoAlbum() 
+				if (participantes.get(dni).tipoAlbum() == participante.getValue().tipoAlbum()
 						&& participantes.get(dni).dni != dni) {
 					List<Figurita> figuRepetidaParticipante2 = participante.getValue().figuritasRepetida();
 					participantes.get(dni).figus.add(
@@ -224,12 +222,10 @@ public class AlbumDelMundial {
 		}
 		return false;
 	}
-	
 
 	public boolean llenoAlbum(int dni) {
 		return participantes.get(dni).album.albumLleno();
 	}
-
 
 	public String darPremio(int dni) {
 		String premio = "";
@@ -263,11 +259,10 @@ public class AlbumDelMundial {
 		}
 		return participantesQueCompletaronElPais;
 	}
-	
+
 	public String mostrarAlbum(int dni) {
-		return participantes.get(dni).album.toString(participantes.get(dni).album.nombre());
+		return participantes.get(dni).album.nombre();
 	}
-	
 
 	public boolean intercambiarUnaFiguritaRepetida(int dni) {
 		List<Figurita> repetidas = participantes.get(dni).figuritasRepetida();
@@ -278,8 +273,6 @@ public class AlbumDelMundial {
 		}
 		return false;
 	}
-
-	
 
 	public String toString() {
 		StringBuilder resultado = new StringBuilder();
@@ -322,5 +315,51 @@ public class AlbumDelMundial {
 		resultado.append("\n").append("\n").append("*********************************").append("\n");
 		return resultado.toString();
 
+	}
+
+	String mostrarEstadoAlbumParticipante(int dni) {
+		StringBuilder AlbumParticipante = new StringBuilder();
+
+		if (participantes.containsKey(dni)) {
+			AlbumParticipante.append(mostrarAlbum(dni));
+			AlbumParticipante.append("\n");
+			AlbumParticipante.append("************");
+			AlbumParticipante.append("\n");
+
+			Figurita[] figuritas = participantes.get(dni).figuritas2();
+			List<Figurita> repetidas = participantes.get(dni).figuritasRepetida();
+			String[] pais = participantes.get(dni).album.mostrarPaisesParticpantes();
+
+			for (int j = 0; j < pais.length; j++) {
+
+				AlbumParticipante.append(pais[j].toString());
+				AlbumParticipante.append("[ ");
+
+				for (int i = 0; i < figuritas.length; i++) {
+
+					if (pais[j].toString() == figuritas[i].mostrarPais()) {
+
+						AlbumParticipante.append(figuritas[i].codigo()).append(", ");
+					}
+				}
+
+				AlbumParticipante.append("]");
+				AlbumParticipante.append("\n");
+				AlbumParticipante.append("Repetidas [ ");
+				for (int i = 0; i < repetidas.size(); i++) {
+					
+					if (pais[j].toString() == repetidas.get(i).mostrarPais()) {
+						AlbumParticipante.append(repetidas.get(i).codigo()).append(", ");
+					}
+				}
+				AlbumParticipante.append("]");
+				AlbumParticipante.append("\n");
+			}
+			Album a = participantes.get(dni).album;
+
+			AlbumParticipante.append(a.nombre());
+		}
+
+		return AlbumParticipante.toString();
 	}
 }
