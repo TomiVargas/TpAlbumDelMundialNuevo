@@ -1,16 +1,22 @@
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public abstract class Album {
 	private int codigo;
 	private Map<String, Figurita[]> album;
 	protected String[] paisesParticipantes;
+	
+	private List<Figurita> pegadas;
 
 	private Figurita[] lugares;
 	public Album(Integer lugaresPorPais, String[] paisesParticipantes, int codigo) {
 		this.codigo = codigo;
 		this.paisesParticipantes = paisesParticipantes;
+		
+		this.pegadas= new ArrayList<>();
 		this.album = new HashMap<String, Figurita[]>();
 
 		this.lugares = new Figurita[lugaresPorPais];
@@ -33,6 +39,31 @@ public abstract class Album {
 				return true;
 		}
 	}
+	
+	protected boolean pegar(Figurita figurita) {
+		if(album.containsKey(figurita.mostrarPais()))
+			return pegarEnPais(album.get(figurita.mostrarPais()), figurita);
+		return false;
+	}
+	
+	protected boolean pegarEnPais(Figurita[] figuritas, Figurita figurita) {
+		for (int posicion = 0; posicion < figuritas.length; posicion++) {
+			if(figuritas[posicion]==null) {
+				figuritas[posicion]=figurita;
+				agregarAPegadas(figuritas[posicion]);
+				return true;
+			}
+		} return false;
+	}
+	
+	protected void agregarAPegadas(Figurita figurita) {
+		this.pegadas.add(figurita);
+	}
+	
+	protected List<Figurita> mostrarPegadas(){
+		return this.pegadas;
+	}
+
 	private boolean existeFigurita(Figurita figu) {
 		for(Map.Entry<String, Figurita[]> figus : album.entrySet()) {
 			for(int i=0;i<figus.getValue().length;i++) {
@@ -136,4 +167,6 @@ public abstract class Album {
 	}
 
 	protected abstract String darPremio();
+
+	protected abstract List<Figurita> pegadas();
 }

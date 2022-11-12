@@ -1,3 +1,4 @@
+import java.util.List;
 
 public class AlbumTradicional extends Album{
 	
@@ -15,6 +16,12 @@ public class AlbumTradicional extends Album{
 	@Override
 	protected String darPremio() {
 		return "Pelota";
+	}
+
+	@Override
+	protected List<Figurita> pegadas() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

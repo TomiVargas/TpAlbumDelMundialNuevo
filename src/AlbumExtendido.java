@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AlbumExtendido extends Album{
@@ -79,5 +80,11 @@ public class AlbumExtendido extends Album{
 	
 
 		return resultado.toString();
+	}
+
+	@Override
+	protected List<Figurita> pegadas() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

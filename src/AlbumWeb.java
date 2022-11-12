@@ -1,3 +1,4 @@
+import java.util.List;
 
 public class AlbumWeb extends Album{
 	int codigoPromocional;
@@ -23,6 +24,11 @@ public class AlbumWeb extends Album{
 	@Override
 	protected String darPremio() {
 		return "Camiseta oficial de la seleccion";
+	}
+	@Override
+	protected List<Figurita> pegadas() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 		
 	

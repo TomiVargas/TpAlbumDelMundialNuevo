@@ -55,6 +55,10 @@ public class Participante {
 
 		return false;
 	}
+	
+	protected boolean quitar(Figurita figurita) {
+		return figuritas().remove(figurita);
+	}
 
 	// Nuevo metodo al estar en el particpante no es necesario el dni
 	List<Figurita> figuritas() {

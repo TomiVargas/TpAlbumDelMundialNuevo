@@ -171,6 +171,16 @@ public class AlbumDelMundial {
 			throw new RuntimeException("No registrado");
 		}
 	}
+	
+	public List<String> pegar(int dni){
+		List<Figurita> asociadas = participantes.get(dni).figus;
+		for (int i = 0; i < asociadas.size(); i++) {
+			if(participantes.get(dni).album.pegar(asociadas.get(i))) {
+				participantes.get(dni).quitar(asociadas.get(i));
+			}
+		}
+		return participantes.get(dni).figuritas(dni);
+	}
 
 	public int buscarFiguritaRepetida(int dni) {
 		if (estaRegistrado(dni) && participantes.get(dni).figuritasRepetida().size() >= 1) {
@@ -336,9 +346,10 @@ public class AlbumDelMundial {
 			// Estructuras
 			Figurita[] figuritas = participantes.get(dni).figuritas2();
 			List<Figurita> repetidas = participantes.get(dni).figuritasRepetida();
-			String[] pais = participantes.get(dni).album.mostrarPaisesParticpantes();
+			List<Figurita> pegadas = participantes.get(dni).album.pegadas();
 
 			// Mostrar coleccion figuritas por pais
+			String[] pais = participantes.get(dni).album.mostrarPaisesParticpantes();
 			for (int j = 0; j < pais.length; j++) {
 
 				AlbumParticipante.append(pais[j].toString());

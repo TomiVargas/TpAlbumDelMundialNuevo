@@ -8,8 +8,8 @@ public class CodigoCliente {
 		AlbumDelMundial sistema = new AlbumDelMundial();
 		
 		
-		System.out.println("Codigo Album : " + sistema.registrarParticipante(222222, "Christian", "Tradicional"));
-		System.out.println("Codigo Album : " + sistema.registrarParticipante(333333, "Mariana", "Extendido"));
+		sistema.registrarParticipante(222222, "Christian", "Tradicional");
+		sistema.registrarParticipante(333333, "Mariana", "Extendido");
 		sistema.registrarParticipante(111111, "Jose", "Web");
 		sistema.registrarParticipante(555555, "Miguel", "Web");
 		sistema.registrarParticipante(666666, "Jazzmine", "Extendido");
@@ -21,13 +21,13 @@ public class CodigoCliente {
 		sistema.comprarFiguritasConCodigoPromocional(555555);
 		sistema.pegarFiguritas(111111);
 		sistema.comprarFiguritasTop10(666666);
-		sistema.pegarFiguritas(666666);
+		sistema.pegar(666666);
 	
 		
 		
 		// El participante 333333 tiene un album tradicional y por eso puede 
 		// participar en un sortepo por un premio instantaneo.
-		System.out.println(
+		/*System.out.println(
 				sistema.darNombre(222222) + 
 				" recibio por sorteo instantaneo: " + 
 			sistema.aplicarSorteoInstantaneo(222222)
@@ -37,15 +37,13 @@ public class CodigoCliente {
 				" recibio por sorteo instantaneo: " + 
 				sistema.aplicarSorteoInstantaneo(777777)
 			);
-		System.out.println(sistema.mostrarAlbum(666666));
-		List<Figurita> figus= sistema.figuritasAsociadas(666666);
-		System.out.println(figus);
-		List<Figurita> figu= sistema.figuritasAsociadas(111111);
-		System.out.println(figu);
-		System.out.println(sistema);
-		List<String> pegadas = sistema.pegarFiguritas(111111);
+		*/
+		
+		List<String> pegadas = sistema.pegar(666666);
 
 		System.out.println(pegadas);
+		
+		
 		System.out.println(sistema.mostrarAlbum(111111));
 		if(pegadas.isEmpty()) { //o sea... no pego ninguna
 			sistema.comprarFiguritas(222222);
@@ -57,17 +55,17 @@ public class CodigoCliente {
 		
 		
 		// Simulamos un uso prolongado del sistema.
-		for (int i =0;i<200;i++) {
+		for (int i =0;i<100;i++) {
 			sistema.comprarFiguritas(222222);
-			sistema.pegarFiguritas(222222);
+			sistema.pegar(222222);
 			sistema.comprarFiguritas(555555);
-			sistema.pegarFiguritas(555555);
+			sistema.pegar(555555);
 		}
 	
 	
 		for (int i =0;i<1000;i++) {
 			sistema.comprarFiguritas(666666);
-			sistema.pegarFiguritas(666666);
+			sistema.pegar(666666);
 			sistema.comprarFiguritas(777777);
 			sistema.pegarFiguritas(777777);
 		}
@@ -97,7 +95,7 @@ public class CodigoCliente {
 		System.out.println("=================================================");
 		System.out.println(sistema);
 		
-		System.out.println(sistema.mostrarEstadoAlbumParticipante(222222));
+		System.out.println(sistema.mostrarEstadoAlbumParticipante(666666));
 	}
 	}
 
