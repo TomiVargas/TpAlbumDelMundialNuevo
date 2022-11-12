@@ -174,6 +174,8 @@ public class AlbumDelMundial {
 	
 	public List<String> pegar(int dni){
 		List<String> pegadas = new ArrayList<String>();
+		//TEST
+		System.out.println("Cantidad figuritas :"+ participantes.get(dni).figus.size());
 		for (int i = 0; i < participantes.get(dni).figus.size(); i++) {  
 			if(participantes.get(dni).album.pegar(participantes.get(dni).figus.get(i))) {
 				

@@ -61,12 +61,12 @@ public class CodigoCliente {
 		}
 	
 	
-		for (int i =0;i<1000;i++) {
+		/*for (int i =0;i<1000;i++) {
 			sistema.comprarFiguritas(666666);
 			sistema.pegar(222222);
 			sistema.comprarFiguritas(777777);
 			sistema.pegarFiguritas(777777);
-		}
+		}*/
 		
 			
 

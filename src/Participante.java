@@ -51,6 +51,8 @@ public class Participante {
 
 	// Nuevo metodo
 	protected boolean quitar(Figurita figurita) {
+		//TEST
+		System.out.println("Se quita :"+ figurita.mostrarPais()+" " + figurita.codigo());
 		return figus.remove(figurita);
 	}
 

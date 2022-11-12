@@ -46,13 +46,18 @@ public abstract class Album {
 	//Nuevo metodo
 	protected boolean pegarEnPais(Figurita[] pais, Figurita figurita) {
 		for (int posicion = 0; posicion < pais.length; posicion++) {
-			if(posicion == figurita.codigo() && pais[posicion] == null) {
+			System.out.println(" Se verifica para pegar: "+ figurita.mostrarPais()+ " - " + posicion+" - "+figurita.codigo());
+			if(posicion == figurita.codigo() && pais[posicion]==null) {
+				System.out.print(" - true");
 				pais[posicion]=figurita;
 				agregarAPegadas(pais[posicion]);
 				return true;
 			}
 		} return false;
 	}
+	
+	
+	
 	//Nuevo metodo
 	protected void agregarAPegadas(Figurita figurita) {
 		this.pegadas.add(figurita);
@@ -74,6 +79,11 @@ public abstract class Album {
 			}
 		}
 		return false;
+	}
+	
+	//NuevoMetodos
+	protected boolean pegada(Figurita figurita) {
+		return pegadas.contains(figurita);
 	}
 
 	protected boolean estaPegada(Figurita figu) {
