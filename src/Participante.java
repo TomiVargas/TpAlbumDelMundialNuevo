@@ -49,6 +49,7 @@ public class Participante {
 		return false;
 	}
 
+	// Nuevo metodo
 	protected boolean quitar(Figurita figurita) {
 		return figus.remove(figurita);
 	}
@@ -87,6 +88,7 @@ public class Participante {
 		return this.dni.toString();
 	}
 
+	// Nnuevo metodo
 	List<Figurita> figuritasRepetida() {
 
 		for (int i = 0; i < figus.size(); i++) {
@@ -105,7 +107,7 @@ public class Participante {
 				&& (figurita != null || figurita2 != null) && !album.estaPegada(figurita)) ? true : false;
 	}
 	
-	
+	//Nuevo metodo
 	public List<Figurita> mostrarRepetidas(){
 		return this.repetidas;
 	}

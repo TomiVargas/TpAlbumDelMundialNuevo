@@ -39,11 +39,11 @@ public abstract class Album {
 				return true;
 		}
 	}
-	
+	//Nuevo metodo
 	protected boolean pegar(Figurita figurita) {
 		return pegarEnPais(album.get(figurita.mostrarPais()), figurita);
 	}
-	
+	//Nuevo metodo
 	protected boolean pegarEnPais(Figurita[] pais, Figurita figurita) {
 		for (int posicion = 0; posicion < pais.length; posicion++) {
 			if(posicion == figurita.codigo() && pais[posicion] == null) {
@@ -53,11 +53,12 @@ public abstract class Album {
 			}
 		} return false;
 	}
-	
+	//Nuevo metodo
 	protected void agregarAPegadas(Figurita figurita) {
 		this.pegadas.add(figurita);
 	}
 	
+	//Nuevo metodo
 	protected List<Figurita> mostrarPegadas(){
 		return this.pegadas;
 	}
