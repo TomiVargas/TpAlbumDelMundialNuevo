@@ -41,14 +41,21 @@ public abstract class Album {
 	}
 	//Nuevo metodo
 	protected boolean pegar(Figurita figurita) {
-		return pegarEnPais(album.get(figurita.mostrarPais()), figurita);
+			for(Map.Entry<String, Figurita[]> figu: album.entrySet()) {
+				if(figu.getKey().equals(figurita.mostrarPais())) {
+					return pegarEnPais(figu.getValue(),figurita);
+				}
+			}
+			return false;
 	}
 	//Nuevo metodo
 	protected boolean pegarEnPais(Figurita[] pais, Figurita figurita) {
 		for (int posicion = 0; posicion < pais.length; posicion++) {
 			System.out.println(" Se verifica para pegar: "+ figurita.mostrarPais()+ " - " + posicion+" - "+figurita.codigo());
+			System.out.println(pais[posicion]);
 			if(posicion == figurita.codigo() && pais[posicion]==null) {
-				System.out.print(" - true");
+				System.out.println(pais[posicion]);
+				System.out.print(" - true" + posicion +"se pego:" + figurita.codigo());
 				pais[posicion]=figurita;
 				agregarAPegadas(pais[posicion]);
 				return true;

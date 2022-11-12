@@ -19,7 +19,13 @@ public class Participante {
 	// Nuevo metodo el participitante puede tener figuritas repetidas en su
 	// coleccion
 	void agregarFigurita(Figurita figurita) {
+		if(figus.contains(figurita)) {
+			System.out.println("true");
+			repetidas.add(figurita);
+		}else {
+			//System.out.println("false");
 		figus.add(figurita);
+	}
 	}
 
 	/*
@@ -37,17 +43,6 @@ public class Participante {
 		return false;
 	}
 
-	protected boolean quitaFigurita(Figurita figurita) {
-		for (int i = 0; i < figus.size(); i++) {
-			if (figurita != null) {
-				figus.remove(figurita);
-				figus.add(i, null);
-				return true;
-			}
-		}
-
-		return false;
-	}
 
 	// Nuevo metodo
 	protected boolean quitar(Figurita figurita) {

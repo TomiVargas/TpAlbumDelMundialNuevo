@@ -175,14 +175,14 @@ public class AlbumDelMundial {
 	public List<String> pegar(int dni){
 		List<String> pegadas = new ArrayList<String>();
 		//TEST
-		System.out.println("Cantidad figuritas :"+ participantes.get(dni).figus.size());
+		//System.out.println("Cantidad figuritas :"+ participantes.get(dni).figus.size());
 		for (int i = 0; i < participantes.get(dni).figus.size(); i++) {  
 			if(participantes.get(dni).album.pegar(participantes.get(dni).figus.get(i))) {
 				
 				pegadas.add(" $ " + participantes.get(dni).figus.get(i).mostrarPais() + " -$ "
 						+ participantes.get(dni).figus.get(i).codigo() + " $ ");
 
-				participantes.get(dni).quitar(participantes.get(dni).figus.get(i));
+				//participantes.get(dni).quitar(participantes.get(dni).figus.get(i));
 			}
 		}
 		return pegadas;
@@ -277,7 +277,7 @@ public class AlbumDelMundial {
 	}
 
 	public String mostrarAlbum(int dni) {
-		return participantes.get(dni).album.nombre();
+		return participantes.get(dni).album.toString(participantes.get(dni).tipoAlbum());
 	}
 
 	public boolean intercambiarUnaFiguritaRepetida(int dni) {
@@ -340,7 +340,7 @@ public class AlbumDelMundial {
 		if (participantes.containsKey(dni)) {
 			AlbumParticipante.append("***************************************");
 			AlbumParticipante.append("\n");
-			AlbumParticipante.append("Tipo Album: "+mostrarAlbum(dni)+ " "+participantes.get(dni).darNombre());
+			AlbumParticipante.append("Tipo Album: "+participantes.get(dni).tipoAlbum()+ " "+participantes.get(dni).darNombre());
 			AlbumParticipante.append("\n");
 			AlbumParticipante.append("Nombre: "+participantes.get(dni).darNombre());
 			AlbumParticipante.append("\n");
