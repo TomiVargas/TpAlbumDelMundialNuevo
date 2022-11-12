@@ -39,12 +39,10 @@ public class CodigoCliente {
 			);
 		*/
 		
-		List<String> pegadas = sistema.pegar(666666);
+		List<String> pegadas = sistema.pegar(222222);
 
 		System.out.println(pegadas);
 		
-		
-		System.out.println(sistema.mostrarAlbum(111111));
 		if(pegadas.isEmpty()) { //o sea... no pego ninguna
 			sistema.comprarFiguritas(222222);
 			sistema.intercambiar(
@@ -59,13 +57,13 @@ public class CodigoCliente {
 			sistema.comprarFiguritas(222222);
 			sistema.pegar(222222);
 			sistema.comprarFiguritas(555555);
-			sistema.pegar(555555);
+			sistema.pegar(222222);
 		}
 	
 	
 		for (int i =0;i<1000;i++) {
 			sistema.comprarFiguritas(666666);
-			sistema.pegar(666666);
+			sistema.pegar(222222);
 			sistema.comprarFiguritas(777777);
 			sistema.pegarFiguritas(777777);
 		}
@@ -95,7 +93,7 @@ public class CodigoCliente {
 		System.out.println("=================================================");
 		System.out.println(sistema);
 		
-		System.out.println(sistema.mostrarEstadoAlbumParticipante(666666));
+		System.out.println(sistema.mostrarEstadoAlbumParticipante(222222));
 	}
 	}
 

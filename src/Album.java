@@ -41,16 +41,14 @@ public abstract class Album {
 	}
 	
 	protected boolean pegar(Figurita figurita) {
-		if(album.containsKey(figurita.mostrarPais()))
-			return pegarEnPais(album.get(figurita.mostrarPais()), figurita);
-		return false;
+		return pegarEnPais(album.get(figurita.mostrarPais()), figurita);
 	}
 	
-	protected boolean pegarEnPais(Figurita[] figuritas, Figurita figurita) {
-		for (int posicion = 0; posicion < figuritas.length; posicion++) {
-			if(figuritas[posicion]==null) {
-				figuritas[posicion]=figurita;
-				agregarAPegadas(figuritas[posicion]);
+	protected boolean pegarEnPais(Figurita[] pais, Figurita figurita) {
+		for (int posicion = 0; posicion < pais.length; posicion++) {
+			if(posicion == figurita.codigo() && pais[posicion] == null) {
+				pais[posicion]=figurita;
+				agregarAPegadas(pais[posicion]);
 				return true;
 			}
 		} return false;

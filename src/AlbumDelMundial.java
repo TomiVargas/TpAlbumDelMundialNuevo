@@ -173,13 +173,17 @@ public class AlbumDelMundial {
 	}
 	
 	public List<String> pegar(int dni){
-		List<Figurita> asociadas = participantes.get(dni).figus;
-		for (int i = 0; i < asociadas.size(); i++) {
-			if(participantes.get(dni).album.pegar(asociadas.get(i))) {
-				participantes.get(dni).quitar(asociadas.get(i));
+		List<String> pegadas = new ArrayList<String>();
+		for (int i = 0; i < participantes.get(dni).figus.size(); i++) {  
+			if(participantes.get(dni).album.pegar(participantes.get(dni).figus.get(i))) {
+				
+				pegadas.add(" $ " + participantes.get(dni).figus.get(i).mostrarPais() + " -$ "
+						+ participantes.get(dni).figus.get(i).codigo() + " $ ");
+
+				participantes.get(dni).quitar(participantes.get(dni).figus.get(i));
 			}
 		}
-		return participantes.get(dni).figuritas(dni);
+		return pegadas;
 	}
 
 	public int buscarFiguritaRepetida(int dni) {
@@ -344,9 +348,10 @@ public class AlbumDelMundial {
 			AlbumParticipante.append("\n");
 
 			// Estructuras
-			Figurita[] figuritas = participantes.get(dni).figuritas2();
+			List<Figurita> figuritas = participantes.get(dni).figus;
 			List<Figurita> repetidas = participantes.get(dni).figuritasRepetida();
-			List<Figurita> pegadas = participantes.get(dni).album.pegadas();
+			List<Figurita> pegadas = participantes.get(dni).album.mostrarPegadas();
+			
 
 			// Mostrar coleccion figuritas por pais
 			String[] pais = participantes.get(dni).album.mostrarPaisesParticpantes();
@@ -355,11 +360,11 @@ public class AlbumDelMundial {
 				AlbumParticipante.append(pais[j].toString());
 				AlbumParticipante.append("[ ");
 
-				for (int i = 0; i < figuritas.length; i++) {
+				for (int i = 0; i < figuritas.size(); i++) {
 
-					if (pais[j].toString() == figuritas[i].mostrarPais()) {
+					if (pais[j].toString() == figuritas.get(i).mostrarPais()) {
 
-						AlbumParticipante.append(figuritas[i].codigo()).append(", ");
+						AlbumParticipante.append(figuritas.get(i).codigo()).append(", ");
 					}
 				}
 				
@@ -371,6 +376,16 @@ public class AlbumDelMundial {
 					
 					if (pais[j].toString() == repetidas.get(i).mostrarPais()) {
 						AlbumParticipante.append(repetidas.get(i).codigo()).append(", ");
+					}
+				}
+				AlbumParticipante.append("]");
+				AlbumParticipante.append("\n");
+				
+				AlbumParticipante.append("   Pegadas [ ");
+				for (int i = 0; i < pegadas.size(); i++) {
+					
+					if (pais[j].toString() == pegadas.get(i).mostrarPais()) {
+						AlbumParticipante.append(pegadas.get(i).codigo()).append(", ");
 					}
 				}
 				AlbumParticipante.append("]");
