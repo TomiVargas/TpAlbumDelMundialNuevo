@@ -180,10 +180,11 @@ public class AlbumDelMundial {
 
 	}
 
+	// En desarrollo
 	public List<String> participantesQueCompletaronElPais(String pais) {
 		List<String> participantesQueCompletaronElPais = new ArrayList<>();
 		for (Map.Entry<Integer, Participante> participante : participantes.entrySet()) {
-			if (participante.getValue().album.argentinaLleno(pais)) {
+			if (participante.getValue().album.argentinaLleno2(pais)) {
 				participantesQueCompletaronElPais.add(participante.getValue().darNombre());
 			}
 		}
@@ -215,7 +216,6 @@ public class AlbumDelMundial {
 	private void agregarFiguritas(Participante participante, List<Figurita> sobre) {
 		for (int i = 0; i < sobre.size(); i++) {
 			participante.agregarFigurita(sobre.get(i));
-			// participante.agregarFigurita2(sobre.get(i).mostrarPais(), sobre.get(i));
 		}
 	}
 
@@ -230,13 +230,13 @@ public class AlbumDelMundial {
 
 	}
 
-	public Figurita[] figuritasAsociadas3(int dni) {
+	/*public Figurita[] figuritasAsociadas3(int dni) {
 		return participantes.get(dni).figuritas2();
 	}
 
 	public List<String> figuritasAsociadas2(int dni) {
 		return participantes.get(dni).figuritas(dni);
-	}
+	}*/
 
 	private Figurita recorrerLaListaDeFigusRepetidasYVerificaSiEsta(List<Figurita> figusRepetida, int codFigurita) {
 		Figurita figu = null;

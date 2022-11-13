@@ -57,7 +57,7 @@ public class CodigoCliente {
 			sistema.comprarFiguritas(222222);
 			sistema.pegarFiguritas(222222);
 			sistema.comprarFiguritas(555555);
-			//sistema.pegar(222222);
+			sistema.pegarFiguritas(222222);
 		}
 	
 	
@@ -83,7 +83,7 @@ public class CodigoCliente {
 		
 		sistema.toString();
 		System.out.println("Llenaron album:");
-		//System.out.println(sistema.listadoDeGanadores());
+		System.out.println(sistema.listadoDeGanadores());
 		System.out.println();
 		System.out.println();
 		System.out.println("Participantes que Llenaron el Pais Argentina:" +sistema.participantesQueCompletaronElPais("Argentina"));

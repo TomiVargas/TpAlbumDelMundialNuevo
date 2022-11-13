@@ -41,7 +41,7 @@ public abstract class Album {
 		}
 	}
 
-	private boolean pegada(String mostrarPais, Integer codigo2) {
+	boolean pegada(String mostrarPais, Integer codigo2) {
 		for (int i = 0; i < pegadas.size(); i++) {
 			if(pegadas.get(i).mostrarPais() == mostrarPais) {
 				if(pegadas.get(i).codigo()== codigo2) {
@@ -52,7 +52,7 @@ public abstract class Album {
 	} 
 
 	// Nuevo metodo
-	protected boolean pegar(Figurita figurita) {
+	/*protected boolean pegar(Figurita figurita) {
 		return pegarEnPais(figurita);
 	}
 
@@ -73,7 +73,7 @@ public abstract class Album {
 			}
 		}
 		return false;
-	}
+	}*/
 
 	// Nuevo metodo
 	protected void agregarAPegadas(Figurita figurita) {
@@ -98,6 +98,7 @@ public abstract class Album {
 		return false;
 	}
 
+	// Metodo a revisar
 	protected boolean estaPegada(Figurita figu) {
 		if (figu != null) {
 			for (Map.Entry<String, Figurita[]> figus : album.entrySet()) {
@@ -137,6 +138,15 @@ public abstract class Album {
 			if (a.getKey().equals(pais)) {
 				lleno = lleno && paisLleno(a.getValue());
 			}
+		}
+		return lleno;
+	}
+	
+	// En desarrollo
+	public boolean argentinaLleno2(String pais) {
+		boolean lleno = true;
+		for (int i = 0; i < album.get(pais).length ; i++) {
+			lleno= lleno && (album.get(pais)[i]!=null);
 		}
 		return lleno;
 	}

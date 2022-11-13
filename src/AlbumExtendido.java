@@ -22,7 +22,7 @@ public class AlbumExtendido extends Album{
 		
 	}
 	
-	//Se fija si existe el pais en el map y si existe, agrega la figu.
+	//Metodo a revisar
 	@Override  
 	protected boolean pegarFigurita2(Figurita figus) {
 		boolean sePego=true;
