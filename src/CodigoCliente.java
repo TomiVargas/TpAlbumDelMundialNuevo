@@ -19,9 +19,9 @@ public class CodigoCliente {
 		sistema.comprarFiguritas(222222);
 		sistema.comprarFiguritas(222222);
 		sistema.comprarFiguritasConCodigoPromocional(555555);
-		sistema.pegar(111111);
+		sistema.pegarFiguritas(111111);
 		sistema.comprarFiguritasTop10(666666);
-		sistema.pegar(666666);
+		sistema.pegarFiguritas(666666);
 	
 		
 		
@@ -39,7 +39,7 @@ public class CodigoCliente {
 			);
 		*/
 		
-		List<String> pegadas = sistema.pegar(222222);
+		List<String> pegadas = sistema.pegarFiguritas(222222);
 
 		System.out.println(pegadas);
 		
@@ -55,7 +55,7 @@ public class CodigoCliente {
 		// Simulamos un uso prolongado del sistema.
 		for (int i =0;i<100;i++) {
 			sistema.comprarFiguritas(222222);
-			sistema.pegar(222222);
+			sistema.pegarFiguritas(222222);
 			sistema.comprarFiguritas(555555);
 			//sistema.pegar(222222);
 		}
@@ -63,7 +63,7 @@ public class CodigoCliente {
 	
 		/*for (int i =0;i<1000;i++) {
 			sistema.comprarFiguritas(666666);
-			sistema.pegar(222222);
+			sistema.pegarFiguritas(222222);
 			sistema.comprarFiguritas(777777);
 			sistema.pegarFiguritas(777777);
 		}*/

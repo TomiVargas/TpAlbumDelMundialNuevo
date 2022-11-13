@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Participante {
-	private static final boolean String = false;
 	protected Integer dni;
 	private String nombreUsuario;
 	protected Album album;
@@ -20,20 +19,21 @@ public class Participante {
 	// Nuevo metodo el participitante puede tener figuritas repetidas en su
 	// coleccion
 	void agregarFigurita(Figurita figurita) {
-		if(figus.contains(figurita)) {
+		if (figus.contains(figurita)) {
 			System.out.println("true");
 			repetidas.add(figurita);
-		}else {
-			//System.out.println("false");
-		figus.add(figurita);
+		} else {
+			// System.out.println("false");
+			figus.add(figurita);
+		}
 	}
+	
+	void agregarFigurita2(String pais, Figurita figurita) {
+		for (int i = 0; i < figus.size() ; i++) {
+			System.out.println(figus.get(i).mostrarPais()+"  "+  pais);
+			
+		}
 	}
-
-	/*
-	 * //Metodos nuevo pegar boolean pegarFigurita(Figurita figurita) {
-	 * if(!album.estaPegada(figurita)) { album.pegarFigurita2(figurita); return
-	 * true; } return false; }
-	 */
 
 	boolean estaAsociadaFigurita(Figurita figu) {
 		for (Figurita figurita : figus) {
@@ -44,11 +44,10 @@ public class Participante {
 		return false;
 	}
 
-
 	// Nuevo metodo
 	protected void quitar(Figurita figurita) {
-		//TEST
-		System.out.println("Se quita :"+ figurita.mostrarPais()+" " + figurita.codigo());
+		// TEST
+		//System.out.println("Se quita :" + figurita.mostrarPais() + " " + figurita.codigo());
 		figus.remove(figurita);
 	}
 
@@ -66,7 +65,7 @@ public class Participante {
 		return figuritas;
 	}
 
-	Figurita[] figuritas2() { 
+	Figurita[] figuritas2() {
 		Figurita[] figu = new Figurita[figus.size()];
 		for (int i = 0; i < figus.size(); i++) {
 			figu[i] = figus.get(i);
@@ -104,13 +103,11 @@ public class Participante {
 		return (figurita.codigo() == figurita2.codigo() && figurita.mostrarPais() == figurita2.mostrarPais()
 				&& (figurita != null || figurita2 != null) && !album.estaPegada(figurita)) ? true : false;
 	}
-	
-	//Nuevo metodo
-	public List<Figurita> mostrarRepetidas(){
+
+	// Nuevo metodo
+	public List<Figurita> mostrarRepetidas() {
 		return this.repetidas;
 	}
-	
-
 
 	public List<String> figuritas(int dni2) {
 		List<String> f = new ArrayList<String>();

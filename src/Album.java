@@ -49,7 +49,7 @@ public abstract class Album {
 				}
 			}
 		} return false;
-	}
+	} 
 
 	// Nuevo metodo
 	protected boolean pegar(Figurita figurita) {
@@ -98,11 +98,6 @@ public abstract class Album {
 		return false;
 	}
 
-	// NuevoMetodos
-	protected boolean pegada(Figurita figurita) {
-		return pegadas.contains(figurita);
-	}
-
 	protected boolean estaPegada(Figurita figu) {
 		if (figu != null) {
 			for (Map.Entry<String, Figurita[]> figus : album.entrySet()) {
@@ -117,7 +112,6 @@ public abstract class Album {
 			}
 		}
 		return false;
-
 	}
 
 
