@@ -8,15 +8,16 @@ public abstract class Album {
 	private int codigo;
 	private Map<String, Figurita[]> album;
 	protected String[] paisesParticipantes;
-	
+
 	private List<Figurita> pegadas;
 
 	private Figurita[] lugares;
+
 	public Album(Integer lugaresPorPais, String[] paisesParticipantes, int codigo) {
 		this.codigo = codigo;
 		this.paisesParticipantes = paisesParticipantes;
-		
-		this.pegadas= new ArrayList<>();
+
+		this.pegadas = new ArrayList<>();
 		this.album = new HashMap<String, Figurita[]>();
 
 		this.lugares = new Figurita[lugaresPorPais];
@@ -30,88 +31,96 @@ public abstract class Album {
 		return this.codigo;
 	}
 
-
 	protected boolean pegarFigurita2(Figurita figus) {
-		if(estaPegada(figus) || figus==null) {
-				return false;
-		}else {
-				album.get(figus.mostrarPais())[figus.codigo()]=figus;
-				return true;
+		if (pegada(figus.mostrarPais(), figus.codigo()) || figus == null) {
+			return false;
+		} else {
+			agregarAPegadas(figus);
+			album.get(figus.mostrarPais())[figus.codigo()] = figus;
+			return true;
 		}
 	}
-	//Nuevo metodo
-	protected boolean pegar(Figurita figurita) {
-			for(Map.Entry<String, Figurita[]> figu: album.entrySet()) {
-				if(figu.getKey().equals(figurita.mostrarPais())) {
-					return pegarEnPais(figu.getValue(),figurita);
+
+	private boolean pegada(String mostrarPais, Integer codigo2) {
+		for (int i = 0; i < pegadas.size(); i++) {
+			if(pegadas.get(i).mostrarPais() == mostrarPais) {
+				if(pegadas.get(i).codigo()== codigo2) {
+					return true;
 				}
-			}
-			return false;
-	}
-	//Nuevo metodo
-	protected boolean pegarEnPais(Figurita[] pais, Figurita figurita) {
-		for (int posicion = 0; posicion < pais.length; posicion++) {
-			System.out.println(" Se verifica para pegar: "+ figurita.mostrarPais()+ " - " + posicion+" - "+figurita.codigo());
-			System.out.println(pais[posicion]);
-			if(posicion == figurita.codigo() && pais[posicion]==null) {
-				System.out.println(pais[posicion]);
-				System.out.print(" - true" + posicion +"se pego:" + figurita.codigo());
-				pais[posicion]=figurita;
-				agregarAPegadas(pais[posicion]);
-				return true;
 			}
 		} return false;
 	}
-	
-	
-	
-	//Nuevo metodo
-	protected void agregarAPegadas(Figurita figurita) {
-		this.pegadas.add(figurita);
-	}
-	
-	//Nuevo metodo
-	protected List<Figurita> mostrarPegadas(){
-		return this.pegadas;
+
+	// Nuevo metodo
+	protected boolean pegar(Figurita figurita) {
+		return pegarEnPais(figurita);
 	}
 
-	private boolean existeFigurita(Figurita figu) {
-		for(Map.Entry<String, Figurita[]> figus : album.entrySet()) {
-			for(int i=0;i<figus.getValue().length;i++) {
-				if(figus.getValue()[i]!=null) {
-					if(figus.getValue()[i].equals(figu)) {
-						return true;
-				}
+	// Nuevo metodo
+	protected boolean pegarEnPais(Figurita figurita) {
+		for (int posicion = 0; posicion < album.get(figurita.mostrarPais()).length; posicion++) {
+			System.out.println(" Se verifica para pegar: " + figurita.mostrarPais() + " - " + posicion + " - "
+					+ figurita.codigo());
+
+			if (posicion == figurita.codigo()) {
+				System.out.print(" - true" + posicion + "se pego:" + figurita.codigo());
+				if (album.get(figurita.mostrarPais())[posicion] == null) {
+
+					album.get(figurita.mostrarPais())[figurita.codigo()] = figurita;
+					agregarAPegadas(album.get(figurita.mostrarPais())[posicion]);
+					return true;
 				}
 			}
 		}
 		return false;
 	}
-	
-	//NuevoMetodos
+
+	// Nuevo metodo
+	protected void agregarAPegadas(Figurita figurita) {
+		this.pegadas.add(figurita);
+	}
+
+	// Nuevo metodo
+	protected List<Figurita> mostrarPegadas() {
+		return this.pegadas;
+	}
+
+	private boolean existeFigurita(Figurita figu) {
+		for (Map.Entry<String, Figurita[]> figus : album.entrySet()) {
+			for (int i = 0; i < figus.getValue().length; i++) {
+				if (figus.getValue()[i] != null) {
+					if (figus.getValue()[i].equals(figu)) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	// NuevoMetodos
 	protected boolean pegada(Figurita figurita) {
 		return pegadas.contains(figurita);
 	}
 
 	protected boolean estaPegada(Figurita figu) {
-		if(figu!=null) {
-			for(Map.Entry<String, Figurita[]> figus : album.entrySet()) {
-				for(int i=0;i<figus.getValue().length;i++) {
-					if(figus.getValue()[i]!=null) {
-						if(figus.getValue()[i].equals(figu)) {
+		if (figu != null) {
+			for (Map.Entry<String, Figurita[]> figus : album.entrySet()) {
+				for (int i = 0; i < figus.getValue().length; i++) {
+					if (figus.getValue()[i] != null) {
+						if (figus.getValue()[i].equals(figu)) {
 							return true;
 						}
 					}
-				
-			
+
 				}
 			}
 		}
 		return false;
-		
+
 	}
 
-	
+
 	public boolean albumLleno() {
 		boolean lleno = true;
 		for (Map.Entry<String, Figurita[]> a : album.entrySet()) {
@@ -137,6 +146,7 @@ public abstract class Album {
 		}
 		return lleno;
 	}
+
 	public String toString(String tipoAlbum) {
 		StringBuilder resultado = new StringBuilder();
 		resultado.append("*********************").append("\n");
@@ -152,23 +162,19 @@ public abstract class Album {
 
 			for (int i = 0; i < entry.getValue().length; i++) {
 				// Mostramos valor (Lugares de cada pais)
-				resultado.append(i + " = ").append(entry.getValue()[i]).append( "; ");
-				}
+				resultado.append(i + " = ").append(entry.getValue()[i]).append("; ");
+			}
 		}
 		resultado.append("\n").append("\n").append(
 				"***************************************************************************************************************************")
 				.append("\n");
 
-	
-	
-
 		return resultado.toString();
 	}
-	
+
 	String[] mostrarPaisesParticpantes() {
 		return this.paisesParticipantes;
 	}
-
 
 	// Este metodo esta implementado en los 3 album, que devuelve el nombre de cada
 	// uno.
@@ -176,7 +182,6 @@ public abstract class Album {
 
 	protected void usarCodigo() {
 	}
-
 
 	protected boolean codigoUsado() {
 		return false;

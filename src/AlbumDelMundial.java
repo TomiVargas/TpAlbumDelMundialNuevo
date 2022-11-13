@@ -177,12 +177,12 @@ public class AlbumDelMundial {
 		//TEST
 		//System.out.println("Cantidad figuritas :"+ participantes.get(dni).figus.size());
 		for (int i = 0; i < participantes.get(dni).figus.size(); i++) {  
-			if(participantes.get(dni).album.pegar(participantes.get(dni).figus.get(i))) {
+			if(participantes.get(dni).album.pegarFigurita2(participantes.get(dni).figus.get(i))) {
 				
 				pegadas.add(" $ " + participantes.get(dni).figus.get(i).mostrarPais() + " -$ "
 						+ participantes.get(dni).figus.get(i).codigo() + " $ ");
-
-				//participantes.get(dni).quitar(participantes.get(dni).figus.get(i));
+				
+				participantes.get(dni).quitar( participantes.get(dni).figus.get(i));
 			}
 		}
 		return pegadas;

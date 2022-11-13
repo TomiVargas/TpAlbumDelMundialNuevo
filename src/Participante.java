@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Participante {
+	private static final boolean String = false;
 	protected Integer dni;
 	private String nombreUsuario;
 	protected Album album;
@@ -45,10 +46,10 @@ public class Participante {
 
 
 	// Nuevo metodo
-	protected boolean quitar(Figurita figurita) {
+	protected void quitar(Figurita figurita) {
 		//TEST
 		System.out.println("Se quita :"+ figurita.mostrarPais()+" " + figurita.codigo());
-		return figus.remove(figurita);
+		figus.remove(figurita);
 	}
 
 	// Nuevo metodo al estar en el particpante no es necesario el dni
@@ -65,7 +66,7 @@ public class Participante {
 		return figuritas;
 	}
 
-	Figurita[] figuritas2() {
+	Figurita[] figuritas2() { 
 		Figurita[] figu = new Figurita[figus.size()];
 		for (int i = 0; i < figus.size(); i++) {
 			figu[i] = figus.get(i);
@@ -108,6 +109,8 @@ public class Participante {
 	public List<Figurita> mostrarRepetidas(){
 		return this.repetidas;
 	}
+	
+
 
 	public List<String> figuritas(int dni2) {
 		List<String> f = new ArrayList<String>();
