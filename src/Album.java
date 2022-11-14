@@ -34,21 +34,21 @@ public abstract class Album {
 	protected boolean pegarFigurita2(Figurita figus) {
 		if (pegada(figus.mostrarPais(), figus.codigo()) || figus == null) {
 			return false;
-		} else {
+		} else{
 			agregarAPegadas(figus);
 			album.get(figus.mostrarPais())[figus.codigo()] = figus;
-			return true;
 		}
+			return false;
+		
 	}
-
 	boolean pegada(String mostrarPais, Integer codigo2) {
 		for (int i = 0; i < pegadas.size(); i++) {
-			if(pegadas.get(i).mostrarPais() == mostrarPais) {
-				if(pegadas.get(i).codigo()== codigo2) {
+			if(pegadas.get(i).mostrarPais() == mostrarPais && 
+					pegadas.get(i).codigo()== codigo2) {
 					return true;
 				}
 			}
-		} return false;
+		return false;
 	} 
 
 	// Nuevo metodo
@@ -85,26 +85,14 @@ public abstract class Album {
 		return this.pegadas;
 	}
 
-	private boolean existeFigurita(Figurita figu) {
-		for (Map.Entry<String, Figurita[]> figus : album.entrySet()) {
-			for (int i = 0; i < figus.getValue().length; i++) {
-				if (figus.getValue()[i] != null) {
-					if (figus.getValue()[i].equals(figu)) {
-						return true;
-					}
-				}
-			}
-		}
-		return false;
-	}
-
 	// Metodo a revisar
 	protected boolean estaPegada(Figurita figu) {
 		if (figu != null) {
 			for (Map.Entry<String, Figurita[]> figus : album.entrySet()) {
 				for (int i = 0; i < figus.getValue().length; i++) {
 					if (figus.getValue()[i] != null) {
-						if (figus.getValue()[i].equals(figu)) {
+						if (figus.getValue()[i].mostrarPais() == figu.mostrarPais() && 
+							figus.getValue()[i].codigo()== figu.codigo()) {
 							return true;
 						}
 					}
@@ -166,6 +154,9 @@ public abstract class Album {
 
 			for (int i = 0; i < entry.getValue().length; i++) {
 				// Mostramos valor (Lugares de cada pais)
+				if(entry.getValue()!=null) {
+					resultado.append(i + " = ").append(entry.getValue()[i].mostrarPais()).append("; ");
+			}else {
 				resultado.append(i + " = ").append(entry.getValue()[i]).append("; ");
 			}
 		}
@@ -173,6 +164,8 @@ public abstract class Album {
 				"***************************************************************************************************************************")
 				.append("\n");
 
+		
+	}
 		return resultado.toString();
 	}
 

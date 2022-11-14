@@ -19,7 +19,6 @@ public class CodigoCliente {
 		sistema.comprarFiguritas(222222);
 		sistema.comprarFiguritas(222222);
 		sistema.comprarFiguritasConCodigoPromocional(555555);
-		sistema.pegarFiguritas(111111);
 		sistema.comprarFiguritasTop10(666666);
 		sistema.pegarFiguritas(666666);
 	
@@ -39,7 +38,7 @@ public class CodigoCliente {
 			);
 		*/
 		
-		List<String> pegadas = sistema.pegarFiguritas(222222);
+		List<String> pegadas = sistema.pegarFiguritas(111111);
 
 		System.out.println(pegadas);
 		
@@ -82,6 +81,8 @@ public class CodigoCliente {
 		}
 		
 		sistema.toString();
+		System.out.println(sistema.mostrarAlbum(222222));
+		
 		System.out.println("Llenaron album:");
 		System.out.println(sistema.listadoDeGanadores());
 		System.out.println();

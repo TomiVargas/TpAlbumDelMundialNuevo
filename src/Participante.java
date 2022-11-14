@@ -89,19 +89,31 @@ public class Participante {
 	List<Figurita> figuritasRepetida() {
 
 		for (int i = 0; i < figus.size(); i++) {
-			for (int j = i + 1; j < figus.size(); j++) {
-				if (sonRepetidas(figus.get(i), figus.get(j))) {
-					repetidas.add(figus.get(j));
-				}
+			if(!EstaEnRepetida(figus.get(i))) {
+			for (int j = i + 1; j < figus.size();j++) { 
+					if (sonRepetidas(figus.get(i), figus.get(j))) {
+						repetidas.add(figus.get(j));
+					}
+				
+			}
 			}
 		}
 		return repetidas;
 	}
 
+	private boolean EstaEnRepetida(Figurita figurita) {
+		for(int i=0; i< repetidas.size();i++) {
+			if(repetidas.get(i).codigo()==figurita.codigo() &&
+				repetidas.get(i).mostrarPais()==figurita.mostrarPais()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	// metodo auxiliar simplifica verificacion repetida
 	private boolean sonRepetidas(Figurita figurita, Figurita figurita2) {
-		return (figurita.codigo() == figurita2.codigo() && figurita.mostrarPais() == figurita2.mostrarPais()
-				&& (figurita != null || figurita2 != null) && !album.estaPegada(figurita)) ? true : false;
+		return (figurita.codigo() == figurita2.codigo() && figurita.mostrarPais() == figurita2.mostrarPais()) ? true : false;
 	}
 
 	// Nuevo metodo
