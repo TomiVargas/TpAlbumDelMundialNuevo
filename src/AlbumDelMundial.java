@@ -84,18 +84,15 @@ public class AlbumDelMundial {
 
 	public List<String> pegarFiguritas(int dni) {
 		List<String> pegadas = new ArrayList<String>();
-		
-		for (int i = 0; i < participantes.get(dni).figus.size(); i++) {
-			if (participantes.get(dni).album.pegarFigurita2(participantes.get(dni).figus.get(i))) {
-
-				pegadas.add(" $ " + participantes.get(dni).figus.get(i).mostrarPais() + " -$ "
-						+ participantes.get(dni).figus.get(i).codigo() + " $ ");
-
-				participantes.get(dni).quitar(participantes.get(dni).figus.get(i));
-			}
+		List<Figurita> figuAPegar = participantes.get(dni).pegarFiguritas();
+		for(int i=0;i<figuAPegar.size();i++) {
+			pegadas.add(" $ " + figuAPegar.get(i).mostrarPais() + " -$ "
+				+ figuAPegar.get(i).codigo() + " $ ");
+			participantes.get(dni).quitar(figuAPegar.get(i));
 		}
 		return pegadas;
 	}
+	
 
 
 	public boolean llenoAlbum(int dni) {
@@ -160,7 +157,7 @@ public class AlbumDelMundial {
 	public String darPremio(int dni) {
 		String premio = "";
 		Participante participante = participantes.get(dni);
-		if (estaRegistrado(dni) && participante.album.albumLleno()) {
+		if (estaRegistrado(dni) && participante.albumCompleto()) {
 			premio = participante.album.darPremio();
 		} else {
 			throw new RuntimeException("Participante no registrado o album incompleto");
@@ -171,7 +168,7 @@ public class AlbumDelMundial {
 	public String listadoDeGanadores() {
 		String listaDeGanadores = "";
 		for (Map.Entry<Integer, Participante> participante : participantes.entrySet()) {
-			if (participante.getValue().album.albumLleno()) {
+			if (participante.getValue().albumCompleto()) {
 				listaDeGanadores += "-" + "(" + "$" + participante.getValue().dni + ")" + " $"
 						+ participante.getValue().darNombre() + ":" + " $" + participante.getValue().tipoAlbum();
 			}
@@ -180,11 +177,10 @@ public class AlbumDelMundial {
 
 	}
 
-	// En desarrollo
 	public List<String> participantesQueCompletaronElPais(String pais) {
 		List<String> participantesQueCompletaronElPais = new ArrayList<>();
 		for (Map.Entry<Integer, Participante> participante : participantes.entrySet()) {
-			if (participante.getValue().album.argentinaLleno2(pais)) {
+			if (participante.getValue().paisLleno(pais)) {
 				participantesQueCompletaronElPais.add(participante.getValue().darNombre());
 			}
 		}

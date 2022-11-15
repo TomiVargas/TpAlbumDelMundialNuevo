@@ -20,59 +20,33 @@ public class Participante {
 	// coleccion
 	void agregarFigurita(Figurita figurita) {
 		if (figus.contains(figurita)) {
-			System.out.println("true");
 			repetidas.add(figurita);
 		} else {
-			// System.out.println("false");
 			figus.add(figurita);
 		}
 	}
 	
-	void agregarFigurita2(String pais, Figurita figurita) {
-		for (int i = 0; i < figus.size() ; i++) {
-			System.out.println(figus.get(i).mostrarPais()+"  "+  pais);
-			
-		}
-	}
-
-	boolean estaAsociadaFigurita(Figurita figu) {
-		for (Figurita figurita : figus) {
-			if (figurita.equals(figu)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	// Nuevo metodo
 	protected void quitar(Figurita figurita) {
-		// TEST
-		//System.out.println("Se quita :" + figurita.mostrarPais() + " " + figurita.codigo());
 		figus.remove(figurita);
 	}
+	
+	public List<Figurita> pegarFiguritas() {
+		List<Figurita> figuritasPegadas = new ArrayList<>();
+		for (int i = 0; i < figus.size(); i++) {
+			if (album.pegarFigurita2(figus.get(i))) {
+				figuritasPegadas.add(figus.get(i));
+			}
+		}
+		return figuritasPegadas;
+	}
+
 
 	// Nuevo metodo al estar en el particpante no es necesario el dni
 	List<Figurita> figuritas() {
 		return this.figus;
 	}
-
-	// Nuevo metodo al estar en el particpante no es necesario el dni
-	List<String> figuritasString() {
-		List<String> figuritas = new ArrayList<>();
-		for (int i = 0; i < figus.size(); i++) {
-			figuritas.add(figus.get(i).codigo().toString());
-		}
-		return figuritas;
-	}
-
-	Figurita[] figuritas2() {
-		Figurita[] figu = new Figurita[figus.size()];
-		for (int i = 0; i < figus.size(); i++) {
-			figu[i] = figus.get(i);
-		}
-		return figu;
-	}
-
+	
 	String darNombre() {
 		return this.nombreUsuario;
 	}
@@ -100,6 +74,22 @@ public class Participante {
 		}
 		return repetidas;
 	}
+	
+	boolean albumCompleto() {
+		return this.album.albumLleno();
+	}
+	
+	public boolean paisLleno(String pais) {
+		return album.paisLleno(pais);
+	}
+
+	boolean tieneAlbumExtendido() {
+		return album.nombre() == "Extendido";
+	}
+
+	
+	
+///////////////////// METODOS AUXILIARES ///////////////////////	
 
 	private boolean EstaEnRepetida(Figurita figurita) {
 		for(int i=0; i< repetidas.size();i++) {
@@ -120,21 +110,4 @@ public class Participante {
 	public List<Figurita> mostrarRepetidas() {
 		return this.repetidas;
 	}
-
-	public List<String> figuritas(int dni2) {
-		List<String> f = new ArrayList<String>();
-		for (int i = 0; i < figus.size(); i++) {
-			f.add(figus.get(i).codigo().toString() + figus.get(i).mostrarPais());
-		}
-		return f;
-	}
-
-	boolean albumCompleto() {
-		return this.album.albumLleno();
-	}
-
-	boolean tieneAlbumExtendido() {
-		return album.nombre() == "Extendido";
-	}
-
 }
