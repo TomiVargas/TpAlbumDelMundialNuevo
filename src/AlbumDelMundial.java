@@ -7,8 +7,6 @@ import java.util.Random;
 public class AlbumDelMundial {
 
 	private Fabrica fabrica;
-	private Album album;
-	private Participante participante;
 	private Map<Integer, Participante> participantes;
 	private int cantDeVecesCodigoPromo;
 	private int cantDeSorteosEfectuados;
@@ -25,12 +23,14 @@ public class AlbumDelMundial {
 	////////////////////////////////////////// INTERFAZ PUBLICA //////////////////////////////////////////
 
 	int registrarParticipante(Integer dni, String nombre, String tipoAlbum) {
+		Album album = null;
 		if (tipoAlbum != "Tradicional" && tipoAlbum != "Web" && tipoAlbum != "Extendido") {
 			throw new RuntimeException("Tipo de Album invalido");
 		}
 		if (estaRegistrado(dni)) {
 			throw new RuntimeException("Participante ya registrado!");
 		} else {
+			
 			if (tipoAlbum == "Tradicional") {
 				album = fabrica.crearAlbumTradicional();
 			}
@@ -38,10 +38,10 @@ public class AlbumDelMundial {
 				album = fabrica.crearAlbumWeb();
 			}
 			if (tipoAlbum == "Extendido") {
-				album = fabrica.crearAlbumExtendido();
+				 album = fabrica.crearAlbumExtendido();
 			}
 			// Crea un nuevo Participante
-			participante = new Participante(dni, nombre, album);
+			Participante participante = new Participante(dni, nombre, album);
 			// Agrega Participante al Sistema
 			participantes.put(dni, participante);
 		}
@@ -69,7 +69,7 @@ public class AlbumDelMundial {
 	}
 
 	public void comprarFiguritasConCodigoPromocional(int dni) {
-		if (estaRegistrado(dni) && participantes.get(dni).album.nombre() == "Web") {
+		if (estaRegistrado(dni) && participantes.get(dni).tipoAlbum() == "Web") {
 			List<Figurita> sobre = fabrica.generarSobre(4);
 			if (!codigoUsado(dni)) {
 				agregarSobre(sobre, dni);
@@ -93,17 +93,15 @@ public class AlbumDelMundial {
 		return pegadas;
 	}
 	
-
-
 	public boolean llenoAlbum(int dni) {
-		return participantes.get(dni).album.albumLleno();
+		return participantes.get(dni).albumCompleto();
 	}
 
 	public String aplicarSorteoInstantaneo(int dni) {
 		String sorteo[] = fabrica.generarPremiosParaSorteoInstantaneo();
 		Random aleatorio = new Random(System.currentTimeMillis());
 
-		if (!estaRegistrado(dni) || participantes.get(dni).tipoAlbum() != "Tradicional") {
+		if (!estaRegistrado(dni) || participantes.get(dni).tipoAlbum() == "Web" ) {
 			throw new RuntimeException("Participante no registrado o Codigo inexistente");
 		}
 		int intAletorio = aleatorio.nextInt(3);
@@ -120,15 +118,11 @@ public class AlbumDelMundial {
 
 	public boolean intercambiar(int dni, int codFigurita) {
 
-		if (estaRegistrado(dni) && existeFigurita(dni, codFigurita)) {
+		if (estaRegistrado(dni)) {
 			for (Map.Entry<Integer, Participante> participante : participantes.entrySet()) {
 				if (participantes.get(dni).tipoAlbum() == participante.getValue().tipoAlbum()
-						&& participantes.get(dni).dni != dni) {
-					List<Figurita> figuRepetidaParticipante2 = participante.getValue().figuritasRepetida();
-					participantes.get(dni).figus.add(
-							recorrerLaListaDeFigusRepetidasYVerificaSiEsta(figuRepetidaParticipante2, codFigurita));
-					if (recorrerLaListaDeFigusRepetidasYVerificaSiEsta(figuRepetidaParticipante2,
-							codFigurita) != null) {
+						&& participantes.get(dni).saberDni() != dni) {
+					if(participantes.get(dni).intercambiar(codFigurita,participante.getValue())) {
 						return true;
 					}
 				}
@@ -138,13 +132,8 @@ public class AlbumDelMundial {
 	}
 
 	public boolean intercambiarUnaFiguritaRepetida(int dni) {
-		List<Figurita> repetidas = participantes.get(dni).figuritasRepetida();
-		for (int i = 0; i < repetidas.size(); i++) {
-			if (intercambiar(dni, repetidas.get(i).codigo())) {
-				return true;
-			}
-		}
-		return false;
+		Participante participante = participantes.get(dni);
+		return participante.intercambiarFiguritaRepetida(participante);
 	}
 
 	public String darNombre(int dni) {
@@ -158,30 +147,35 @@ public class AlbumDelMundial {
 		String premio = "";
 		Participante participante = participantes.get(dni);
 		if (estaRegistrado(dni) && participante.albumCompleto()) {
-			premio = participante.album.darPremio();
+			premio = participante.darPremio();
 		} else {
 			throw new RuntimeException("Participante no registrado o album incompleto");
 		}
 		return premio;
 	}
 
-	public String listadoDeGanadores() {
-		String listaDeGanadores = "";
+	public StringBuilder listadoDeGanadores() {
+		StringBuilder listadoDeGanadores = new StringBuilder();
 		for (Map.Entry<Integer, Participante> participante : participantes.entrySet()) {
 			if (participante.getValue().albumCompleto()) {
-				listaDeGanadores += "-" + "(" + "$" + participante.getValue().dni + ")" + " $"
-						+ participante.getValue().darNombre() + ":" + " $" + participante.getValue().tipoAlbum();
+				listadoDeGanadores.append("Listado de Ganadores :").append("\n");
+				listadoDeGanadores.append("(");
+				listadoDeGanadores.append(participante.getValue().saberDni());
+				listadoDeGanadores.append(")");
+				listadoDeGanadores.append(" ").append(participante.getValue().darNombre()).append(":");
+				listadoDeGanadores.append(participante.getValue().darPremio()).append("\n");
 			}
 		}
-		return listaDeGanadores;
+		return listadoDeGanadores;
 
 	}
 
-	public List<String> participantesQueCompletaronElPais(String pais) {
+	public List<String> participantesQueCompletaronElPais(String nombrePais) {
 		List<String> participantesQueCompletaronElPais = new ArrayList<>();
 		for (Map.Entry<Integer, Participante> participante : participantes.entrySet()) {
-			if (participante.getValue().paisLleno(pais)) {
-				participantesQueCompletaronElPais.add(participante.getValue().darNombre());
+			if (participante.getValue().paisLleno(nombrePais)) {
+				participantesQueCompletaronElPais.add("(" + participante.getValue().saberDni()+ ") " +
+				participante.getValue().darNombre() + " : " + participante.getValue().tipoAlbum());
 			}
 		}
 		return participantesQueCompletaronElPais;
@@ -194,11 +188,11 @@ public class AlbumDelMundial {
 	}
 
 	private boolean codigoUsado(int dni) {
-		return participantes.get(dni).album.codigoUsado();
+		return participantes.get(dni).codigoUsado();
 	}
 
 	private void usarCodigo(int dni) {
-		participantes.get(dni).album.usarCodigo();
+		participantes.get(dni).usarCodigo();
 	}
 
 	private void agregarSobre(List<Figurita> sobre, int dni) {
@@ -226,39 +220,6 @@ public class AlbumDelMundial {
 
 	}
 
-	/*public Figurita[] figuritasAsociadas3(int dni) {
-		return participantes.get(dni).figuritas2();
-	}
-
-	public List<String> figuritasAsociadas2(int dni) {
-		return participantes.get(dni).figuritas(dni);
-	}*/
-
-	private Figurita recorrerLaListaDeFigusRepetidasYVerificaSiEsta(List<Figurita> figusRepetida, int codFigurita) {
-		Figurita figu = null;
-		for (int i = 0; i < figusRepetida.size(); i++) {
-			if (figusRepetida.get(i).codigo() == codFigurita) {
-				figu = figusRepetida.get(i);
-			}
-		}
-		return figu;
-
-	}
-
-	private boolean existeFigurita(int dni, int codFigurita) {
-		List<Figurita> figus = figuritasAsociadas(dni);
-		for (int i = 0; i < figus.size(); i++) {
-			if (figus.get(i).codigo() == codFigurita) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public String mostrarAlbum(int dni) {
-		return participantes.get(dni).album.toString(participantes.get(dni).tipoAlbum());
-	}
-
 	public String toString() {
 		StringBuilder resultado = new StringBuilder();
 		int cantidadDeParticipantes = 0;
@@ -278,7 +239,7 @@ public class AlbumDelMundial {
 			if (participante.getValue().tipoAlbum() == "Web") {
 				cantidadDeTipoDeAlbumWeb++;
 			}
-			if (estaRegistrado(participante.getValue().dni)) {
+			if (estaRegistrado(participante.getValue().saberDni())) {
 				cantidadDeParticipantes++;
 			}
 		}
@@ -300,71 +261,5 @@ public class AlbumDelMundial {
 		return resultado.toString();
 
 	}
-
-	String mostrarEstadoAlbumParticipante(int dni) {
-		StringBuilder AlbumParticipante = new StringBuilder();
-
-		// Cabecera
-		if (participantes.containsKey(dni)) {
-			AlbumParticipante.append("***************************************");
-			AlbumParticipante.append("\n");
-			AlbumParticipante.append(
-					"Tipo Album: " + participantes.get(dni).tipoAlbum());
-			AlbumParticipante.append("\n");
-			AlbumParticipante.append("Nombre: " + participantes.get(dni).darNombre());
-			AlbumParticipante.append("\n");
-			AlbumParticipante.append("DNI: " + participantes.get(dni).dni());
-			AlbumParticipante.append("\n");
-			AlbumParticipante.append("Lleno album: "+ llenoAlbum(dni));
-			AlbumParticipante.append("\n");
-			AlbumParticipante.append("***************************************");
-			AlbumParticipante.append("\n");
-		
-			// Estructuras
-			List<Figurita> figuritas = participantes.get(dni).figus;
-			List<Figurita> repetidas = participantes.get(dni).figuritasRepetida();
-			List<Figurita> pegadas = participantes.get(dni).album.mostrarPegadas();
-
-			// Mostrar coleccion figuritas por pais
-			String[] pais = participantes.get(dni).album.mostrarPaisesParticpantes();
-			for (int j = 0; j < pais.length; j++) {
-
-				AlbumParticipante.append(pais[j].toString());
-				AlbumParticipante.append("[ ");
-
-				for (int i = 0; i < figuritas.size(); i++) {
-
-					if (pais[j].toString() == figuritas.get(i).mostrarPais()) {
-
-						AlbumParticipante.append(figuritas.get(i).codigo()).append(", ");
-					}
-				}
-
-				// Mostrar coleccion de figuritas repetidas
-				AlbumParticipante.append("]");
-				AlbumParticipante.append("\n");
-				AlbumParticipante.append("   Repetidas [ ");
-				for (int i = 0; i < repetidas.size(); i++) {
-
-					if (pais[j].toString() == repetidas.get(i).mostrarPais()) {
-						AlbumParticipante.append(repetidas.get(i).codigo()).append(", ");
-					}
-				}
-				AlbumParticipante.append("]");
-				AlbumParticipante.append("\n");
-
-				AlbumParticipante.append("   Pegadas [ ");
-				for (int i = 0; i < pegadas.size(); i++) {
-					if (pais[j].toString() == pegadas.get(i).mostrarPais()) {
-							AlbumParticipante.append(pegadas.get(i).codigo()).append(", ");
-					}
-				}
-				AlbumParticipante.append("]");
-				AlbumParticipante.append("\n");
-			}
-
-		}
-
-		return AlbumParticipante.toString();
-	}
+	
 }

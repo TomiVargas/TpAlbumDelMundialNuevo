@@ -4,7 +4,7 @@ public class CodigoCliente {
 
 	public static void main(String[] args) {
 
-		AlbumDelMundial sistema = new AlbumDelMundial();
+		IAlbumDelMundial sistema = new AlbumDelMundial();
 		
 		sistema.registrarParticipante(222222, "Christian", "Tradicional");
 		sistema.registrarParticipante(333333, "Mariana", "Extendido");

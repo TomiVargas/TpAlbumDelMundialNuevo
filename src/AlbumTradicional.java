@@ -13,10 +13,7 @@ public class AlbumTradicional extends Album{
 		return "Tradicional";
 	}
 
-	@Override
-	protected String darPremio() {
-		return "Pelota";
-	}
+	
 
 	@Override
 	protected List<Figurita> pegadas() {

@@ -1,12 +1,13 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Participante {
-	protected Integer dni;
+	private Integer dni;
 	private String nombreUsuario;
-	protected Album album;
-	protected List<Figurita> figus;
-	protected List<Figurita> repetidas;
+	private Album album;
+	private List<Figurita> figus;
+	private List<Figurita> repetidas;
 
 	public Participante(Integer dni, String nombreUsuario, Album album) {
 		this.dni = dni;
@@ -14,6 +15,9 @@ public class Participante {
 		this.figus = new ArrayList<Figurita>();
 		this.repetidas = new ArrayList<Figurita>();
 		this.album = album;
+	}
+	public Integer saberDni() {
+		return this.dni;
 	}
 
 	// Nuevo metodo el participitante puede tener figuritas repetidas en su
@@ -50,14 +54,17 @@ public class Participante {
 	String darNombre() {
 		return this.nombreUsuario;
 	}
+	void usarCodigo() {
+		album.usarCodigo();
+	}
+	boolean codigoUsado() {
+		return album.codigoUsado();
+	}
 
 	String tipoAlbum() {
 		return album.nombre();
 	}
 
-	String dni() {
-		return this.dni.toString();
-	}
 
 	// Nnuevo metodo
 	List<Figurita> figuritasRepetida() {
@@ -74,6 +81,27 @@ public class Participante {
 		}
 		return repetidas;
 	}
+	public boolean intercambiarFiguritaRepetida(Participante participante) {
+		List<Figurita> repetida = repetidas;
+		for (int i = 0; i < repetida.size(); i++) {
+			if (intercambiar(repetida.get(i).codigo(),participante)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean intercambiar(int codFigurita, Participante participante) {
+		if(existeFigurita(participante.dni,codFigurita)) {
+		List<Figurita> figuRepetidaParticipante2 = participante.repetidas;
+		figus.add(recorrerLaListaDeFigusRepetidasYVerificaSiEsta(figuRepetidaParticipante2, codFigurita));
+			if (recorrerLaListaDeFigusRepetidasYVerificaSiEsta(figuRepetidaParticipante2,
+				codFigurita) != null) {
+						return true;
+					}
+		}
+		return false;
+	}
 	
 	boolean albumCompleto() {
 		return this.album.albumLleno();
@@ -86,11 +114,43 @@ public class Participante {
 	boolean tieneAlbumExtendido() {
 		return album.nombre() == "Extendido";
 	}
+	String darPremio() {
+		if(tipoAlbum()=="Extendido") {
+			return "Una pelota y un viaje";
+		}
+		if(tipoAlbum()=="Web") {
+			return "Camiseta oficial de la seleccion";
+
+		}
+		if(tipoAlbum()=="Tradicional") {
+			return "Pelota";
+		}
+		return "";
+	}
 
 	
 	
 ///////////////////// METODOS AUXILIARES ///////////////////////	
+	private boolean existeFigurita(int dni, int codFigurita) {
+		List<Figurita> figu = figus;
+		for (int i = 0; i < figu.size(); i++) {
+			if (figu.get(i).codigo() == codFigurita) {
+				return true;
+			}
+		}
+		return false;
+	}
+	private Figurita recorrerLaListaDeFigusRepetidasYVerificaSiEsta(List<Figurita> figusRepetida, int codFigurita) {
+		Figurita figu = null;
+		for (int i = 0; i < figusRepetida.size(); i++) {
+			if (figusRepetida.get(i).codigo() == codFigurita) {
+				figu = figusRepetida.get(i);
+			}
+		}
+		return figu;
 
+	}
+	
 	private boolean EstaEnRepetida(Figurita figurita) {
 		for(int i=0; i< repetidas.size();i++) {
 			if(repetidas.get(i).codigo()==figurita.codigo() &&

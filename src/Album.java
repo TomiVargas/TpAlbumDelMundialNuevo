@@ -7,10 +7,8 @@ import java.util.Map;
 public abstract class Album {
 	private int codigo;
 	private Map<String, Figurita[]> album;
-	protected String[] paisesParticipantes;
-
+	private String[] paisesParticipantes;
 	private List<Figurita> pegadas;
-
 	private Figurita[] lugares;
 
 	public Album(Integer lugaresPorPais, String[] paisesParticipantes, int codigo) {
@@ -19,9 +17,6 @@ public abstract class Album {
 
 		this.pegadas = new ArrayList<>();
 		this.album = new HashMap<String, Figurita[]>();
-
-		this.lugares = new Figurita[lugaresPorPais];
-
 		for (int pais = 0; pais < paisesParticipantes.length; pais++) {
 			this.lugares = new Figurita[lugaresPorPais];
 			album.put(paisesParticipantes[pais], lugares);
@@ -69,17 +64,17 @@ public abstract class Album {
 
 	private boolean paisEstaLleno(Figurita[] figurita) {
 		boolean lleno = true;
-		for (int i = 0; i < figurita.length; i++) {
-			lleno = lleno && figurita[i] != null;
+		for (int posicion = 0; posicion < figurita.length; posicion++) {
+			lleno = lleno && figurita[posicion] != null;
 		}
 		return lleno;
 	}
 
 	public boolean paisLleno(String pais) {
 		boolean lleno = true;
-		for (Map.Entry<String, Figurita[]> a : album.entrySet()) {
-			if (a.getKey()==pais) {
-				lleno = lleno && paisEstaLleno(a.getValue());
+		for (Map.Entry<String, Figurita[]> album : album.entrySet()) {
+			if (album.getKey()==pais) {
+				lleno = lleno && paisEstaLleno(album.getValue());
 			}
 		}
 		return lleno;
@@ -126,12 +121,10 @@ public abstract class Album {
 
 	protected void usarCodigo() {
 	}
-
 	protected boolean codigoUsado() {
 		return false;
 	}
 
-	protected abstract String darPremio();
 
 	protected abstract List<Figurita> pegadas();
 }

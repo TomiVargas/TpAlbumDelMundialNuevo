@@ -71,10 +71,6 @@ public class AlbumExtendido extends Album{
 		return "Extendido";
 	}
 
-	@Override
-	protected String darPremio() {
-		return "Una pelota y un viaje";
-	}
 	@Override 
 	public String toString(String tipoAlbum) {
 		StringBuilder resultado = new StringBuilder();
