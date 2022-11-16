@@ -21,11 +21,7 @@ public class AlbumWeb extends Album{
 	public boolean codigoUsado() {
 		return codigoPromocional==0;
 	}
-	@Override
-	protected List<Figurita> pegadas() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 		
 	
 }

@@ -1,11 +1,9 @@
 
 
 public class FiguritaTradicional extends Figurita {
-	FiguritaTradicional figurita  ;
-	Fabrica fabrica;
-
-	FiguritaTradicional(int numeroIdentificador, String pais) {
-		super(numeroIdentificador, pais);
+	
+	FiguritaTradicional(int numeroIdentificador, String pais, String[] paisesParticipantes) {
+		super(numeroIdentificador, pais,paisesParticipantes);
 		// TODO Auto-generated constructor stub
 	}
 	

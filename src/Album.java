@@ -10,11 +10,11 @@ public abstract class Album {
 	private String[] paisesParticipantes;
 	private List<Figurita> pegadas;
 	private Figurita[] lugares;
+	
 
 	public Album(Integer lugaresPorPais, String[] paisesParticipantes, int codigo) {
-		this.codigo = codigo;
+		this.codigo=codigo;
 		this.paisesParticipantes = paisesParticipantes;
-
 		this.pegadas = new ArrayList<>();
 		this.album = new HashMap<String, Figurita[]>();
 		for (int pais = 0; pais < paisesParticipantes.length; pais++) {
@@ -26,21 +26,20 @@ public abstract class Album {
 	public int codigo() {
 		return this.codigo;
 	}
-
 	protected boolean pegarFigurita2(Figurita figus) {
-		if (pegada(figus.mostrarPais(), figus.codigo()) || figus == null ) {
+		if (pegada(figus.mostrarPais(), figus.getCodigo()) || figus == null ) {
 			return false;
 		} else{
 			agregarAPegadas(figus);
 			album.get(figus.mostrarPais())[figus.codigo()] = figus;
+			return true;
 		}
-			return false;
 		
 	}
 	boolean pegada(String mostrarPais, Integer codigo2) {
 		for (int i = 0; i < pegadas.size(); i++) {
 			if(pegadas.get(i).mostrarPais() == mostrarPais && 
-					pegadas.get(i).codigo()== codigo2) {
+					pegadas.get(i).getCodigo()== codigo2) {
 					return true;
 				}
 			}
@@ -71,13 +70,7 @@ public abstract class Album {
 	}
 
 	public boolean paisLleno(String pais) {
-		boolean lleno = true;
-		for (Map.Entry<String, Figurita[]> album : album.entrySet()) {
-			if (album.getKey()==pais) {
-				lleno = lleno && paisEstaLleno(album.getValue());
-			}
-		}
-		return lleno;
+		return paisEstaLleno(album.get(pais));
 	}
 	
 
@@ -126,5 +119,4 @@ public abstract class Album {
 	}
 
 
-	protected abstract List<Figurita> pegadas();
 }

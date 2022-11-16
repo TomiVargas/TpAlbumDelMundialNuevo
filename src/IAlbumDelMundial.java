@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public class AlbumDelMundial {
+public class IAlbumDelMundial {
 
 	private Fabrica fabrica;
 	private Map<Integer, Participante> participantes;
@@ -12,7 +12,7 @@ public class AlbumDelMundial {
 	private int cantDeSorteosEfectuados;
 	private int cantDeFiguritasCompradas;
 
-	public AlbumDelMundial() {
+	public IAlbumDelMundial() {
 		this.participantes = new HashMap<>();
 		this.fabrica = new Fabrica();
 		this.cantDeVecesCodigoPromo = 0;
@@ -33,18 +33,22 @@ public class AlbumDelMundial {
 			
 			if (tipoAlbum == "Tradicional") {
 				album = fabrica.crearAlbumTradicional();
+				
 			}
 			if (tipoAlbum == "Web") {
 				album = fabrica.crearAlbumWeb();
+				
 			}
 			if (tipoAlbum == "Extendido") {
 				 album = fabrica.crearAlbumExtendido();
+				
 			}
 			// Crea un nuevo Participante
 			Participante participante = new Participante(dni, nombre, album);
 			// Agrega Participante al Sistema
 			participantes.put(dni, participante);
 		}
+		 
 		return album.codigo();
 	}
 
@@ -86,15 +90,19 @@ public class AlbumDelMundial {
 		List<String> pegadas = new ArrayList<String>();
 		List<Figurita> figuAPegar = participantes.get(dni).pegarFiguritas();
 		for(int i=0;i<figuAPegar.size();i++) {
-			pegadas.add(" $ " + figuAPegar.get(i).mostrarPais() + " -$ "
-				+ figuAPegar.get(i).codigo() + " $ ");
+			pegadas.add(figuAPegar.get(i).mostrarPais() + "-"
+				+ figuAPegar.get(i).getCodigo());
 			participantes.get(dni).quitar(figuAPegar.get(i));
 		}
 		return pegadas;
 	}
 	
 	public boolean llenoAlbum(int dni) {
+		if(estaRegistrado(dni)) {
 		return participantes.get(dni).albumCompleto();
+		}else {
+			throw new RuntimeException("Participante no registrado");
+		}
 	}
 
 	public String aplicarSorteoInstantaneo(int dni) {
@@ -110,18 +118,23 @@ public class AlbumDelMundial {
 	}
 
 	public int buscarFiguritaRepetida(int dni) {
-		if (estaRegistrado(dni) && participantes.get(dni).figuritasRepetida().size() >= 1) {
-			return participantes.get(dni).figuritasRepetida().get(0).codigo();
+		if(!estaRegistrado(dni)) {
+			throw new RuntimeException("Participante no registrado");
 		}
-		return -1;
-	};
+		else if (estaRegistrado(dni) && participantes.get(dni).figuritasRepetida().size() >= 1) {
+			return participantes.get(dni).figuritasRepetida().get(0).getCodigo();
+		}else {
+			return -1;	
+		}
+	}
 
 	public boolean intercambiar(int dni, int codFigurita) {
-
-		if (estaRegistrado(dni)) {
+		if(!estaRegistrado(dni) || participantes.get(dni).existeFigurita(codFigurita)) {
+			throw new RuntimeException("Participante no registrado o no tiene figurita");
+		}
+			else if (estaRegistrado(dni)) {
 			for (Map.Entry<Integer, Participante> participante : participantes.entrySet()) {
-				if (participantes.get(dni).tipoAlbum() == participante.getValue().tipoAlbum()
-						&& participantes.get(dni).saberDni() != dni) {
+				if (verificaSiSePuedeIntercambiar(dni,participante.getValue(),codFigurita)) {
 					if(participantes.get(dni).intercambiar(codFigurita,participante.getValue())) {
 						return true;
 					}
@@ -154,16 +167,12 @@ public class AlbumDelMundial {
 		return premio;
 	}
 
-	public StringBuilder listadoDeGanadores() {
-		StringBuilder listadoDeGanadores = new StringBuilder();
+	public String listadoDeGanadores() {
+		String listadoDeGanadores = "";
 		for (Map.Entry<Integer, Participante> participante : participantes.entrySet()) {
 			if (participante.getValue().albumCompleto()) {
-				listadoDeGanadores.append("Listado de Ganadores :").append("\n");
-				listadoDeGanadores.append("(");
-				listadoDeGanadores.append(participante.getValue().saberDni());
-				listadoDeGanadores.append(")");
-				listadoDeGanadores.append(" ").append(participante.getValue().darNombre()).append(":");
-				listadoDeGanadores.append(participante.getValue().darPremio()).append("\n");
+				listadoDeGanadores+=("("+participante.getValue().saberDni()+") "+participante.getValue().darNombre()
+					+	":"	+participante.getValue().darPremio()+"\n");
 			}
 		}
 		return listadoDeGanadores;
@@ -180,8 +189,17 @@ public class AlbumDelMundial {
 		}
 		return participantesQueCompletaronElPais;
 	}
+	public int saberCodigo(int dni) {
+		return participantes.get(dni).saberCodigo();
+	}
+	
 
 	////////////////////////////////////////// METODOS AUXILIARES //////////////////////////////////////////
+	
+	private boolean verificaSiSePuedeIntercambiar(int dni, Participante participante,int codFigurita) {
+		return participantes.get(dni).tipoAlbum() == participante.tipoAlbum()
+				&& participantes.get(dni).saberDni() != dni && participantes.get(dni).existeFigurita(codFigurita);
+	}
 
 	private boolean estaRegistrado(int dni) {
 		return participantes.containsKey(dni);

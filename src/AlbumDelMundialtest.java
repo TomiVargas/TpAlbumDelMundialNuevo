@@ -1,4 +1,3 @@
-
 import static org.junit.Assert.*;
 
 import java.util.List;
@@ -16,13 +15,13 @@ public class AlbumDelMundialtest {
 	private static final String TIPO_WEB = "Web";
 	
 	
-	AlbumDelMundial sistema;
+	IAlbumDelMundial sistema;
 	private int dniConAlbumTradicional;
 	private int dniConAlbumWeb;
 
 	@Before
 	public void setUp() throws Exception {
-		sistema = new AlbumDelMundial();
+		sistema = new IAlbumDelMundial();
 		sistema.registrarParticipante(1111, "Andres", TIPO_TRADICIONAL);
 		dniConAlbumTradicional = 1111;
 		
@@ -119,11 +118,11 @@ public class AlbumDelMundialtest {
 	}
 	
 	// Lleno Album
+	
 	@Test
 	public void t14_llenoAlbumConParticipanteNuevo_DevuelveFalse() {
 		assertFalse(sistema.llenoAlbum(dniConAlbumWeb));
 	}
-	
 	
 	// Consultar por participante puntual
 	

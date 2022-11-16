@@ -39,7 +39,7 @@ public class AlbumExtendido extends Album{
 		boolean sePego=true;
 		
 		if(figus==null) {
-				sePego=sePego&&false;
+				return false;
 		}else {
 			for(Map.Entry<String, Figurita[]> mundial : seccionTop10.entrySet()) {
 				if( buscarPaisDeLaFigurita(figus)!=-1){
@@ -102,9 +102,4 @@ public class AlbumExtendido extends Album{
 		return resultado.toString();
 	}
 
-	@Override
-	protected List<Figurita> pegadas() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

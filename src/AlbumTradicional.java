@@ -15,10 +15,4 @@ public class AlbumTradicional extends Album{
 
 	
 
-	@Override
-	protected List<Figurita> pegadas() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

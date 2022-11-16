@@ -4,7 +4,7 @@ public class CodigoCliente {
 
 	public static void main(String[] args) {
 
-		AlbumDelMundial sistema = new AlbumDelMundial();
+		IAlbumDelMundial sistema = new IAlbumDelMundial();
 		
 		sistema.registrarParticipante(222222, "Christian", "Tradicional");
 		sistema.registrarParticipante(333333, "Mariana", "Extendido");
@@ -14,6 +14,7 @@ public class CodigoCliente {
 		sistema.registrarParticipante(777777, "Dante", "Tradicional");
 		
 		sistema.comprarFiguritas(222222);
+		
 		// El participante 111111 tiene album Web entonces tiene un codigo 
 		// promocional para solicitar 4 figuritas sin consto.
 		sistema.comprarFiguritasConCodigoPromocional(111111);
@@ -50,6 +51,7 @@ public class CodigoCliente {
 		}
 		for (int i =0;i<500;i++) {
 			sistema.comprarFiguritas(666666);
+			//sistema.comprarFiguritasTop10(666666);
 			sistema.pegarFiguritas(666666);
 			sistema.comprarFiguritas(777777);
 			sistema.pegarFiguritas(777777);

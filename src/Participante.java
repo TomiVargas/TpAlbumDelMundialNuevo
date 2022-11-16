@@ -19,6 +19,9 @@ public class Participante {
 	public Integer saberDni() {
 		return this.dni;
 	}
+	public Album saberAlbum() {
+		return this.album;
+	}
 
 	// Nuevo metodo el participitante puede tener figuritas repetidas en su
 	// coleccion
@@ -84,22 +87,20 @@ public class Participante {
 	public boolean intercambiarFiguritaRepetida(Participante participante) {
 		List<Figurita> repetida = repetidas;
 		for (int i = 0; i < repetida.size(); i++) {
-			if (intercambiar(repetida.get(i).codigo(),participante)) {
+			if (intercambiar(repetida.get(i).getCodigo(),participante)) {
 				return true;
 			}
 		}
 		return false;
 	}
 	
-	public boolean intercambiar(int codFigurita, Participante participante) {
-		if(existeFigurita(participante.dni,codFigurita)) {
+	public boolean intercambiar(int codFigurita,Participante participante) {
 		List<Figurita> figuRepetidaParticipante2 = participante.repetidas;
-		figus.add(recorrerLaListaDeFigusRepetidasYVerificaSiEsta(figuRepetidaParticipante2, codFigurita));
-			if (recorrerLaListaDeFigusRepetidasYVerificaSiEsta(figuRepetidaParticipante2,
-				codFigurita) != null) {
+				if (recorrerLaListaDeFigusRepetidasYVerificaSiEsta(figuRepetidaParticipante2,
+						codFigurita) != null) {
+						figus.add(recorrerLaListaDeFigusRepetidasYVerificaSiEsta(figuRepetidaParticipante2, codFigurita));
 						return true;
-					}
-		}
+				}
 		return false;
 	}
 	
@@ -131,10 +132,9 @@ public class Participante {
 	
 	
 ///////////////////// METODOS AUXILIARES ///////////////////////	
-	private boolean existeFigurita(int dni, int codFigurita) {
-		List<Figurita> figu = figus;
-		for (int i = 0; i < figu.size(); i++) {
-			if (figu.get(i).codigo() == codFigurita) {
+	protected boolean existeFigurita(int codFigurita) {
+		for (int i = 0; i < figus.size(); i++) {
+			if (figus.get(i).getCodigo() == codFigurita) {
 				return true;
 			}
 		}
@@ -143,7 +143,7 @@ public class Participante {
 	private Figurita recorrerLaListaDeFigusRepetidasYVerificaSiEsta(List<Figurita> figusRepetida, int codFigurita) {
 		Figurita figu = null;
 		for (int i = 0; i < figusRepetida.size(); i++) {
-			if (figusRepetida.get(i).codigo() == codFigurita) {
+			if (figusRepetida.get(i).getCodigo() == codFigurita) {
 				figu = figusRepetida.get(i);
 			}
 		}
@@ -153,7 +153,7 @@ public class Participante {
 	
 	private boolean EstaEnRepetida(Figurita figurita) {
 		for(int i=0; i< repetidas.size();i++) {
-			if(repetidas.get(i).codigo()==figurita.codigo() &&
+			if(repetidas.get(i).getCodigo()==figurita.getCodigo() &&
 				repetidas.get(i).mostrarPais()==figurita.mostrarPais()) {
 				return true;
 			}
@@ -163,11 +163,15 @@ public class Participante {
 
 	// metodo auxiliar simplifica verificacion repetida
 	private boolean sonRepetidas(Figurita figurita, Figurita figurita2) {
-		return (figurita.codigo() == figurita2.codigo() && figurita.mostrarPais() == figurita2.mostrarPais()) ? true : false;
+		return (figurita.getCodigo() == figurita2.getCodigo() && figurita.mostrarPais() == figurita2.mostrarPais()) ? true : false;
 	}
 
 	// Nuevo metodo
 	public List<Figurita> mostrarRepetidas() {
 		return this.repetidas;
 	}
+	public int saberCodigo() {
+		return album.codigo();
+	}
+	
 }
