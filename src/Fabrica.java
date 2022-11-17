@@ -76,7 +76,7 @@ public class Fabrica {
 			int sedeAleatoria=random.nextInt(listadoDeMundialesTop10.length);
 			int paisAleatorio=random.nextInt(paisesParticipantes.length);
 			//Modificar este para que tenga solo los paises por mundial. 
-			FiguritaTOP10 figu= new FiguritaTOP10(aleatorio,paisesParticipantes[paisAleatorio],listadoDeMundialesTop10[sedeAleatoria],generarPaisesPorMundial());
+			FiguritaTOP10 figu= new FiguritaTOP10(aleatorio,paisesParticipantes[paisAleatorio],paisesParticipantes,listadoDeMundialesTop10[sedeAleatoria],generarPaisesPorMundial());
 			sobre.add(figu);
 			
 		}

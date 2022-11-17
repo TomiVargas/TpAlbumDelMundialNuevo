@@ -51,7 +51,7 @@ public class CodigoCliente {
 		}
 		for (int i =0;i<500;i++) {
 			sistema.comprarFiguritas(666666);
-			//sistema.comprarFiguritasTop10(666666);
+			sistema.comprarFiguritasTop10(666666);
 			sistema.pegarFiguritas(666666);
 			sistema.comprarFiguritas(777777);
 			sistema.pegarFiguritas(777777);
