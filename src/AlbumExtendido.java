@@ -5,7 +5,12 @@ import java.util.Map;
 public class AlbumExtendido extends Album {
 	private String[] generarListadoDeMundiales;
 	private Map<String, Figurita[]> seccionTop10;
+	// Verificar estructura //
 	private Map<String, String> paisesBalones;
+	// OPCION2
+	private List<String> balonOro;
+	private List<String> balonPlata;
+
 	private Figurita[] lugaresTOP10;
 
 	// Se modifica Contructor para que contenga los lugares top10 <Pais ,
@@ -29,17 +34,30 @@ public class AlbumExtendido extends Album {
 				}
 			}
 
-			// OPCION 2
-			for (int i = 0; i < generarListadoDeMundiales.length; i++) {
-				this.lugaresTOP10 = new Figurita[2];
-				this.seccionTop10.put(generarListadoDeMundiales[i], lugaresTOP10);
-				if (balonYPaisPorMundialTop10.containsKey(generarListadoDeMundiales[i])) {
-
-				}
-			}
-
 			paisesBalones.put(albumSeccionTop10.getKey(), albumSeccionTop10.getValue()[0]);
 			paisesBalones.put(albumSeccionTop10.getKey(), albumSeccionTop10.getValue()[1]);
+		}
+
+		// OPCION 2
+		for (int i = 0; i < generarListadoDeMundiales.length; i++) {
+			this.lugaresTOP10 = new Figurita[2];
+			// Crea el el Pais Sede con 2 lugares
+			this.seccionTop10.put(generarListadoDeMundiales[i], lugaresTOP10);
+
+			if (balonYPaisPorMundialTop10.containsKey(generarListadoDeMundiales[i])) {
+				// 0 --> ORO
+				// 1 --> PLATA
+				String[] paises = balonYPaisPorMundialTop10.get(generarListadoDeMundiales[i]);
+				for (int pais = 0; pais < paises.length; pais++) {
+					if (pais == 0) {
+						// Agrega a la coleccion de balonOro
+						this.balonOro.add(paises[pais]);
+					} else {
+						// Agrega a la coleccion de balonPlata
+						this.balonPlata.add(paises[pais]);
+					}
+				}
+			}
 		}
 	}
 
