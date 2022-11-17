@@ -279,5 +279,71 @@ public class IAlbumDelMundial {
 		return resultado.toString();
 
 	}
+	String mostrarEstadoAlbumParticipante(int dni) {
+		StringBuilder AlbumParticipante = new StringBuilder();
+
+		// Cabecera
+		if (participantes.containsKey(dni)) {
+			AlbumParticipante.append("***************************************");
+			AlbumParticipante.append("\n");
+			AlbumParticipante.append(
+					"Tipo Album: " + participantes.get(dni).tipoAlbum());
+			AlbumParticipante.append("\n");
+			AlbumParticipante.append("Nombre: " + participantes.get(dni).darNombre());
+			AlbumParticipante.append("\n");
+			AlbumParticipante.append("DNI: " + participantes.get(dni).saberDni());
+			AlbumParticipante.append("\n");
+			AlbumParticipante.append("Lleno album: "+ llenoAlbum(dni));
+			AlbumParticipante.append("\n");
+			AlbumParticipante.append("***************************************");
+			AlbumParticipante.append("\n");
+		
+			// Estructuras
+			List<Figurita> figuritas = participantes.get(dni).figuritas();
+			List<Figurita> repetidas = participantes.get(dni).figuritasRepetida();
+			List<Figurita> pegadas = participantes.get(dni).saberAlbum().mostrarPegadas();
+
+			// Mostrar coleccion figuritas por pais
+			String[] pais = participantes.get(dni).saberAlbum().mostrarPaisesParticpantes();
+			for (int j = 0; j < pais.length; j++) {
+
+				AlbumParticipante.append(pais[j].toString());
+				AlbumParticipante.append("[ ");
+
+				for (int i = 0; i < figuritas.size(); i++) {
+
+					if (pais[j].toString() == figuritas.get(i).mostrarPais()) {
+
+						AlbumParticipante.append(figuritas.get(i).codigo()).append(", ");
+					}
+				}
+
+				// Mostrar coleccion de figuritas repetidas
+				AlbumParticipante.append("]");
+				AlbumParticipante.append("\n");
+				AlbumParticipante.append("   Repetidas [ ");
+				for (int i = 0; i < repetidas.size(); i++) {
+
+					if (pais[j].toString() == repetidas.get(i).mostrarPais()) {
+						AlbumParticipante.append(repetidas.get(i).codigo()).append(", ");
+					}
+				}
+				AlbumParticipante.append("]");
+				AlbumParticipante.append("\n");
+
+				AlbumParticipante.append("   Pegadas [ ");
+				for (int i = 0; i < pegadas.size(); i++) {
+					if (pais[j].toString() == pegadas.get(i).mostrarPais()) {
+							AlbumParticipante.append(pegadas.get(i).codigo()).append(", ");
+					}
+				}
+				AlbumParticipante.append("]");
+				AlbumParticipante.append("\n");
+			}
+
+		}
+
+		return AlbumParticipante.toString();
+	}
 	
 }

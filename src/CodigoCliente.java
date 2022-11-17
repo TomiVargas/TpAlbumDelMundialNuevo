@@ -75,7 +75,7 @@ public class CodigoCliente {
 		for (String item: sistema.participantesQueCompletaronElPais("Argentina"))
 			System.out.println(item);
 		
-		
+		System.out.println(sistema.mostrarEstadoAlbumParticipante(333333));
 		System.out.println();
 		System.out.println("=================================================");
 		System.out.println(sistema);

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,20 +24,8 @@ public class AlbumExtendido extends Album {
 		// this.paisesBalones=balonYPaisPorMundialTop102;
 		this.paisesBalones = new HashMap<>();
 		this.seccionTop10 = new HashMap<>();
-		// this.lugaresTOP10 = new Figurita[2];
-		for (Map.Entry<String, String[]> albumSeccionTop10 : balonYPaisPorMundialTop10.entrySet()) {
-			for (int i = 0; i < generarListadoDeMundiales.length; i++) {
-				this.lugaresTOP10 = new Figurita[2];
-				if (albumSeccionTop10.getKey() == generarListadoDeMundiales[i]) {
-
-					seccionTop10.put(albumSeccionTop10.getKey(), lugaresTOP10);
-
-				}
-			}
-
-			paisesBalones.put(albumSeccionTop10.getKey(), albumSeccionTop10.getValue()[0]);
-			paisesBalones.put(albumSeccionTop10.getKey(), albumSeccionTop10.getValue()[1]);
-		}
+		this.balonOro= new ArrayList<String>();
+		this.balonPlata= new ArrayList<String>();
 
 		// OPCION 2
 		for (int i = 0; i < generarListadoDeMundiales.length; i++) {
