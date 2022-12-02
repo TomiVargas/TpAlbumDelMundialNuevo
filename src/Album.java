@@ -5,63 +5,69 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class Album {
-	private int codigo;
+	private static int codigo;
 	private Map<String, Figurita[]> album;
-	private String[] paisesParticipantes;
-	private List<Figurita> pegadas;
+	private List<Figurita> pegadas; //Deberia ser un conjunto.
 	private Figurita[] lugares;
 	
 
 	public Album(Integer lugaresPorPais, String[] paisesParticipantes, int codigo) {
-		this.codigo=codigo;
-		this.paisesParticipantes = paisesParticipantes;
+		codigo++;
 		this.pegadas = new ArrayList<>();
 		this.album = new HashMap<String, Figurita[]>();
 		for (int pais = 0; pais < paisesParticipantes.length; pais++) {
 			this.lugares = new Figurita[lugaresPorPais];
 			album.put(paisesParticipantes[pais], lugares);
 		}
-	}
-
-	public int codigo() {
-		return this.codigo;
-	}
-	protected boolean pegarFigurita2(Figurita figus) {
-		if (pegada(figus.mostrarPais(), figus.getCodigo()) || figus == null ) {
-			return false;
-		} else{
-			agregarAPegadas(figus);
-			album.get(figus.mostrarPais())[figus.codigo()] = figus;
-			return true;
-		}
 		
 	}
-	boolean pegada(String mostrarPais, Integer codigo2) {
+	
+	
+
+	public int codigo() {
+		return codigo;
+	}
+	protected boolean pegarFigurita(Figurita figus) {
+		if(figus == null ) {
+			return false;
+		}
+		if (pegada(figus)) {
+			return false;
+		}
+		agregarAPegadas(figus);
+		album.get(figus.mostrarPais())[figus.numeroIdentificador()] = figus;
+		return true;
+		}
+	
+	boolean pegada(Figurita figu) {
 		for (int i = 0; i < pegadas.size(); i++) {
-			if(pegadas.get(i).mostrarPais() == mostrarPais && 
-					pegadas.get(i).getCodigo()== codigo2) {
+			if(pegadas.get(i).mostrarPais() == figu.mostrarPais() && 
+					pegadas.get(i).numeroIdentificador()== figu.numeroIdentificador()) {
 					return true;
 				}
 			}
 		return false;
-	} 	// Nuevo metodo
+	} 	
+	
 	protected void agregarAPegadas(Figurita figurita) {
-		this.pegadas.add(figurita);
+		pegadas.add(figurita);
 	}
-	// Nuevo metodo
+	
+	
 	protected List<Figurita> mostrarPegadas() {
 		return this.pegadas;
 	}
 
 	public boolean albumLleno() {
 		boolean lleno = true;
-		for (Map.Entry<String, Figurita[]> a : album.entrySet()) {
-			lleno = lleno && paisEstaLleno(a.getValue());
+		for (Figurita[] figuritas : album.values()) {
+			lleno = lleno && paisEstaLleno(figuritas);
+			
 		}
 		return lleno;
 	}
 
-	private boolean paisEstaLleno(Figurita[] figurita) {
+	protected boolean paisEstaLleno(Figurita[] figurita) {
 		boolean lleno = true;
 		for (int posicion = 0; posicion < figurita.length; posicion++) {
 			lleno = lleno && figurita[posicion] != null;
@@ -72,41 +78,7 @@ public abstract class Album {
 	public boolean paisLleno(String pais) {
 		return paisEstaLleno(album.get(pais));
 	}
-	
 
-	public String toString(String tipoAlbum) {
-		StringBuilder resultado = new StringBuilder();
-		resultado.append("*********************").append("\n");
-		resultado.append("* ALBUM ").append(tipoAlbum.toUpperCase()).append(" *").append("\n");
-		resultado.append("*********************").append("\n").append("\n");
-		// Recorremos en Album
-		for (Map.Entry<String, Figurita[]> entry : album.entrySet()) {
-
-			// Mostramos la clave (Nombre del pais participante)
-			resultado.append(entry.getKey());
-			resultado.append("\n");
-			resultado.append("   Figuritas : ").append("\n");
-
-			for (int i = 0; i < entry.getValue().length; i++) {
-				// Mostramos valor (Lugares de cada pais)
-				if(entry.getValue()[i]!=null) {
-					resultado.append(i + " = ").append(entry.getValue()[i].mostrarPais()).append("; ");
-			}else {
-				resultado.append(i + " = ").append(entry.getValue()[i]).append("; ");
-			}
-		}
-		resultado.append("\n").append("\n").append(
-				"***************************************************************************************************************************")
-				.append("\n");
-
-		
-	}
-		return resultado.toString();
-	}
-
-	String[] mostrarPaisesParticpantes() {
-		return this.paisesParticipantes;
-	}
 
 	// Este metodo esta implementado en los 3 album, que devuelve el nombre de cada
 	// uno.

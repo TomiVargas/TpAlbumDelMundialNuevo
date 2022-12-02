@@ -21,7 +21,7 @@ public class AlbumDelMundialtest {
 
 	@Before
 	public void setUp() throws Exception {
-		sistema = new IAlbumDelMundial();
+		sistema = new AlbumDelMundial();
 		sistema.registrarParticipante(1111, "Andres", TIPO_TRADICIONAL);
 		dniConAlbumTradicional = 1111;
 		

@@ -7,8 +7,6 @@ import java.util.Random;
 
 public class Fabrica {
 	
-
-
 	private Random random;
 
 	private String[] premiosInstantaneos;
@@ -59,9 +57,11 @@ public class Fabrica {
 	List<Figurita> generarSobre(int cantFigus) {
 		List<Figurita> sobre = new ArrayList<Figurita>(cantFigus);
 		for(int i=0;i<4;i++) {
-			int aleatorio=random.nextInt(12);
+			int numero=random.nextInt(12);
 			int paisAleatorio=random.nextInt(paisesParticipantes.length);
-			Figurita figu= new FiguritaTradicional(aleatorio,paisesParticipantes[paisAleatorio],paisesParticipantes);
+			String pais=paisesParticipantes[paisAleatorio];
+			int valorBase= calcularValorBase(pais,numero); 
+			Figurita figu= new Figurita(numero,pais,valorBase);
 			sobre.add(figu);
 			
 		}
@@ -69,14 +69,16 @@ public class Fabrica {
 		return sobre;
 	}		
 
-	List<FiguritaTOP10> generarSobreTop10(int cantFigus) {
-		List<FiguritaTOP10> sobre = new ArrayList<FiguritaTOP10>(cantFigus);
+	List<Figurita> generarSobreTop10(int cantFigus) {
+		List<Figurita> sobre = new ArrayList<Figurita>(cantFigus);
 		for(int i=0;i<4;i++) {
-			int aleatorio=random.nextInt(2);
+			int numero=random.nextInt(2);
 			int sedeAleatoria=random.nextInt(listadoDeMundialesTop10.length);
 			int paisAleatorio=random.nextInt(paisesParticipantes.length);
-			//Modificar este para que tenga solo los paises por mundial. 
-			FiguritaTOP10 figu= new FiguritaTOP10(aleatorio,paisesParticipantes[paisAleatorio],paisesParticipantes,listadoDeMundialesTop10[sedeAleatoria],generarPaisesPorMundial());
+			String pais=paisesParticipantes[paisAleatorio];
+			String sede=listadoDeMundialesTop10[sedeAleatoria];
+			int valorBase= calcularValorBase(pais,numero);  
+			FiguritaTOP10 figu= new FiguritaTOP10(numero,pais,sede,generarPaisesPorMundial(),valorBase);
 			sobre.add(figu);
 			
 		}
@@ -105,7 +107,7 @@ public class Fabrica {
 				"Alemania",   "Arabia Saudita",   "Argentina",          "Australia", 
 				"Brasil",     "Belgica",        "Camerun",            "Canada", 
 				"Costa Rica", "Croacia",        "Dinamarca",          "Ecuador",
-				"España",     "Estados Unidos", "Francia",            "Gales",
+				"Espania",     "Estados Unidos", "Francia",            "Gales",
 				"Ghana",      "Inglaterra",     "Iran",               "Japon", 
 				"Marruecos",  "Mexico",         "Paises Bajos",       "Polonia",
 				"Portugal",   "Qatar",          "Republica de Corea", "Senegal", 

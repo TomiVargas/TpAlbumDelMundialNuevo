@@ -1,14 +1,17 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 public class Participante {
+	
 	private Integer dni;
 	private String nombreUsuario;
 	private Album album;
 	private List<Figurita> figus;
 	private List<Figurita> repetidas;
-
+	private boolean albumLleno;
+	
+	
 	public Participante(Integer dni, String nombreUsuario, Album album) {
 		this.dni = dni;
 		this.nombreUsuario = nombreUsuario;
@@ -16,39 +19,42 @@ public class Participante {
 		this.repetidas = new ArrayList<Figurita>();
 		this.album = album;
 	}
+	
 	public Integer saberDni() {
 		return this.dni;
 	}
+	
 	public Album saberAlbum() {
 		return this.album;
 	}
 
-	// Nuevo metodo el participitante puede tener figuritas repetidas en su
-	// coleccion
 	void agregarFigurita(Figurita figurita) {
-		if (figus.contains(figurita)) {
-			repetidas.add(figurita);
-		} else {
 			figus.add(figurita);
-		}
 	}
-	
-	// Nuevo metodo
+		
 	protected void quitar(Figurita figurita) {
 		figus.remove(figurita);
 	}
 	
-	public List<Figurita> pegarFiguritas() {
-		List<Figurita> figuritasPegadas = new ArrayList<>();
-		for (int i = 0; i < figus.size(); i++) {
-			if (album.pegarFigurita2(figus.get(i))) {
-				figuritasPegadas.add(figus.get(i));
-			}
-		}
+	public List<String> pegarFiguritas() {
+		List<String> figuritasPegadas = buscarFiguritasPegadas();
+		this.albumLleno=album.albumLleno();
 		return figuritasPegadas;
 	}
 
-
+	private List<String> buscarFiguritasPegadas() {
+		List<String> figuritasPegadas= new ArrayList<>();
+		Iterator<Figurita> it= figus.iterator();
+		while(it.hasNext()) {
+		Figurita figu=it.next();
+			if(album.pegarFigurita(figu)) {
+				figuritasPegadas.add(figu.mostrarPais() + "-"
+				+ figu.getCodigo());
+				it.remove();
+			}
+		}
+		return figuritasPegadas;	
+	}
 	// Nuevo metodo al estar en el particpante no es necesario el dni
 	List<Figurita> figuritas() {
 		return this.figus;
@@ -57,9 +63,11 @@ public class Participante {
 	String darNombre() {
 		return this.nombreUsuario;
 	}
+	
 	void usarCodigo() {
 		album.usarCodigo();
 	}
+	
 	boolean codigoUsado() {
 		return album.codigoUsado();
 	}
@@ -68,8 +76,6 @@ public class Participante {
 		return album.nombre();
 	}
 
-
-	// Nnuevo metodo
 	List<Figurita> figuritasRepetida() {
 
 		for (int i = 0; i < figus.size(); i++) {
@@ -84,6 +90,7 @@ public class Participante {
 		}
 		return repetidas;
 	}
+	
 	public boolean intercambiarFiguritaRepetida(Participante participante) {
 		List<Figurita> repetida = repetidas;
 		for (int i = 0; i < repetida.size(); i++) {
@@ -94,18 +101,21 @@ public class Participante {
 		return false;
 	}
 	
-	public boolean intercambiar(int codFigurita,Participante participante) {
+	public boolean intercambiar(int codFigurita,Participante participante) { //arreglar
 		List<Figurita> figuRepetidaParticipante2 = participante.repetidas;
-				if (recorrerLaListaDeFigusRepetidasYVerificaSiEsta(figuRepetidaParticipante2,
-						codFigurita) != null) {
-						figus.add(recorrerLaListaDeFigusRepetidasYVerificaSiEsta(figuRepetidaParticipante2, codFigurita));
-						return true;
-				}
+		if(this.dni==participante.saberDni()) {
+			return false;
+		}
+		Figurita figu= buscarFiguritaRepetida(figuRepetidaParticipante2,codFigurita);
+		if (figu != null) {
+			figus.add(figu);
+			return true;
+		}
 		return false;
 	}
 	
 	boolean albumCompleto() {
-		return this.album.albumLleno();
+		return this.albumLleno;
 	}
 	
 	public boolean paisLleno(String pais) {
@@ -132,22 +142,13 @@ public class Participante {
 	
 	
 ///////////////////// METODOS AUXILIARES ///////////////////////	
-	protected boolean existeFigurita(int codFigurita) {
-		for (int i = 0; i < figus.size(); i++) {
-			if (figus.get(i).getCodigo() == codFigurita) {
-				return true;
-			}
-		}
-		return false;
-	}
-	private Figurita recorrerLaListaDeFigusRepetidasYVerificaSiEsta(List<Figurita> figusRepetida, int codFigurita) {
-		Figurita figu = null;
+	private Figurita buscarFiguritaRepetida(List<Figurita> figusRepetida, int codFigurita) {
 		for (int i = 0; i < figusRepetida.size(); i++) {
 			if (figusRepetida.get(i).getCodigo() == codFigurita) {
-				figu = figusRepetida.get(i);
+				return figusRepetida.get(i);
 			}
 		}
-		return figu;
+		return null;
 
 	}
 	
@@ -161,17 +162,20 @@ public class Participante {
 		return false;
 	}
 
-	// metodo auxiliar simplifica verificacion repetida
 	private boolean sonRepetidas(Figurita figurita, Figurita figurita2) {
 		return (figurita.getCodigo() == figurita2.getCodigo() && figurita.mostrarPais() == figurita2.mostrarPais()) ? true : false;
 	}
-
-	// Nuevo metodo
+	
 	public List<Figurita> mostrarRepetidas() {
 		return this.repetidas;
 	}
-	public int saberCodigo() {
-		return album.codigo();
+	
+	public void agregarSobre(List<Figurita> sobre) {
+			figus.addAll(sobre);
+	}
+	
+	public boolean tieneAlbumLleno() {
+		return album.albumLleno();
 	}
 	
 }

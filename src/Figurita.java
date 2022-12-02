@@ -1,48 +1,42 @@
 
 
-public abstract class  Figurita {
+public class  Figurita {
 	private int numeroIdentificador;
 	private String pais;
-	private int codigo;
+	private static int codigo; 
+	private int valorBase;
+	//codigo unico se tiene que definir internamente con static.
 	
-	Figurita(int numeroIdentificador, String pais, String[] paisesParticipantes){
+	Figurita(int numeroIdentificador, String pais,int valorBase){
 		this.numeroIdentificador=numeroIdentificador;
 		this.pais=pais;
-		for(int i=0;i<paisesParticipantes.length;i++) {
-			if(paisesParticipantes[i]==pais && i==0) {
-				this.setCodigo(numeroIdentificador);
-			}else if(paisesParticipantes[i]==pais && i==1) {
-				this.setCodigo(numeroIdentificador+12);
-			}else if(paisesParticipantes[i]==pais){
-				this.setCodigo((12*(i+1))+numeroIdentificador);
-			}
-		}
+		codigo++;
+		this.valorBase=valorBase;
 		
 	}
 
-	
 
 
 	protected String mostrarPais() {
 		return this.pais;
 	}
 	
-	protected Integer codigo() {
+	protected Integer numeroIdentificador() {
 		return this.numeroIdentificador;
 	}
-
-
+	
+	public String mostrarSede() {
+		return null;
+	}
 
 
 	public int getCodigo() {
 		return codigo;
 	}
+	
 
-
-
-
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
+	public int getValorBase() {
+		return valorBase;
 	}
 
 

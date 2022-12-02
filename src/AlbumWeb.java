@@ -1,4 +1,3 @@
-import java.util.List;
 
 public class AlbumWeb extends Album{
 	private int codigoPromocional;

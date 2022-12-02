@@ -4,7 +4,7 @@ public class CodigoCliente {
 
 	public static void main(String[] args) {
 
-		IAlbumDelMundial sistema = new IAlbumDelMundial();
+		IAlbumDelMundial sistema = new AlbumDelMundial();
 		
 		sistema.registrarParticipante(222222, "Christian", "Tradicional");
 		sistema.registrarParticipante(333333, "Mariana", "Extendido");
@@ -28,6 +28,7 @@ public class CodigoCliente {
 				" recibio por sorteo instantaneo: " + 
 				sistema.aplicarSorteoInstantaneo(333333)
 			);
+		
 		System.out.println();
 		
 		List<String> pegadas = sistema.pegarFiguritas(222222);
@@ -49,9 +50,9 @@ public class CodigoCliente {
 			sistema.comprarFiguritas(555555);
 			sistema.pegarFiguritas(555555);
 		}
+		
 		for (int i =0;i<500;i++) {
 			sistema.comprarFiguritas(666666);
-			sistema.comprarFiguritasTop10(666666);
 			sistema.pegarFiguritas(666666);
 			sistema.comprarFiguritas(777777);
 			sistema.pegarFiguritas(777777);
@@ -65,17 +66,16 @@ public class CodigoCliente {
 				);
 			System.out.println();
 		}
-		
-		
+				
 		System.out.println("Llenaron album:");
 		System.out.println(sistema.listadoDeGanadores());
 		System.out.println();
 		
 		System.out.println("Participantes que Llenaron el Pais Argentina:");
+		
 		for (String item: sistema.participantesQueCompletaronElPais("Argentina"))
 			System.out.println(item);
 		
-		System.out.println(sistema.mostrarEstadoAlbumParticipante(333333));
 		System.out.println();
 		System.out.println("=================================================");
 		System.out.println(sistema);
